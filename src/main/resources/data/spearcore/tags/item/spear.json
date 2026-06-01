@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "spearcore:wooden_spear",
+    "spearcore:stone_spear",
+    "spearcore:copper_spear",
+    "spearcore:iron_spear",
+    "spearcore:golden_spear",
+    "spearcore:diamond_spear",
+    "spearcore:netherite_spear"
+  ]
+}

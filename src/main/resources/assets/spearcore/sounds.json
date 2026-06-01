@@ -1,0 +1,106 @@
+{
+  "item.spear.attack": {
+    "sounds": [
+      {
+        "name": "spearcore:spear_attack1",
+        "stream": false
+      },
+      {
+        "name": "spearcore:spear_attack2",
+        "stream": false
+      },
+      {
+        "name": "spearcore:spear_attack3",
+        "stream": false
+      }
+    ]
+  },
+  "item.spear.hit": {
+    "sounds": [
+      {
+        "name": "spearcore:spear_hit1",
+        "stream": false
+      },
+      {
+        "name": "spearcore:spear_hit2",
+        "stream": false
+      },
+      {
+        "name": "spearcore:spear_hit3",
+        "stream": false
+      }
+    ]
+  },
+  "item.spear.use": {
+    "sounds": [
+      {
+        "name": "spearcore:spear_use",
+        "stream": false
+      }
+    ]
+  },
+  "item.spear_wood.attack": {
+    "sounds": [
+      {
+        "name": "spearcore:wood_spear_attack1",
+        "stream": false
+      },
+      {
+        "name": "spearcore:wood_spear_attack2",
+        "stream": false
+      },
+      {
+        "name": "spearcore:wood_spear_attack3",
+        "stream": false
+      }
+    ]
+  },
+  "item.spear_wood.use": {
+    "sounds": [
+      {
+        "name": "spearcore:wood_spear_use",
+        "stream": false
+      }
+    ]
+  },
+  "item.spear_wood.hit": {
+    "sounds": [
+      {
+        "name": "spearcore:wood_spear_hit1",
+        "stream": false
+      },
+      {
+        "name": "spearcore:wood_spear_hit2",
+        "stream": false
+      },
+      {
+        "name": "spearcore:wood_spear_hit3",
+        "stream": false
+      }
+    ]
+  },
+  "item.spear.lunge_1": {
+    "sounds": [
+      {
+        "name": "spearcore:spear_lunge1",
+        "stream": false
+      }
+    ]
+  },
+  "item.spear.lunge_2": {
+    "sounds": [
+      {
+        "name": "spearcore:spear_lunge2",
+        "stream": false
+      }
+    ]
+  },
+  "item.spear.lunge_3": {
+    "sounds": [
+      {
+        "name": "spearcore:spear_lunge3",
+        "stream": false
+      }
+    ]
+  }
+}

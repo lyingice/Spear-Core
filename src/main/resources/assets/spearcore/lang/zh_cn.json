@@ -1,0 +1,11 @@
+{
+  "item.spearcore.wooden_spear": "木矛",
+  "item.spearcore.stone_spear": "石矛",
+  "item.spearcore.copper_spear": "铜矛",
+  "item.spearcore.iron_spear": "铁矛",
+  "item.spearcore.golden_spear": "金矛",
+  "item.spearcore.diamond_spear": "钻石矛",
+  "item.spearcore.netherite_spear": "下界合金矛",
+  "enchantment.spearcore.lunge": "突进",
+  "enchantment.spearcore.lunge.description": "戳刺攻击时将攻击者向前推进。"
+}

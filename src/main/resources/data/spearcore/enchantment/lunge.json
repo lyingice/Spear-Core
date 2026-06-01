@@ -1,0 +1,19 @@
+{
+  "description": {
+    "translate": "enchantment.spearcore.lunge"
+  },
+  "supported_items": "#spearcore:spear",
+  "weight": 10,
+  "max_level": 3,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 10
+  },
+  "max_cost": {
+    "base": 6,
+    "per_level_above_first": 10
+  },
+  "anvil_cost": 1,
+  "slots": ["any"],
+  "exclusive_set": []
+}

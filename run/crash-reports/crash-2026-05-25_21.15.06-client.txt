@@ -1,0 +1,225 @@
+---- Minecraft Crash Report ----
+// Who set us up the TNT?
+
+Time: 2026-05-25 21:15:06
+Description: Unexpected error
+
+net.neoforged.fml.ModLoadingException: Loading errors encountered:
+	- Spear Core (spearcore) encountered an error while dispatching the net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent event
+	  java.lang.NullPointerException: Trying to access unbound value: ResourceKey[minecraft:item / spearcore:netherite_spear]
+
+	at MC-BOOTSTRAP/fml_loader@4.0.41/net.neoforged.fml.ModContainer.acceptEvent(ModContainer.java:181) ~[loader-4.0.41.jar%23146!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.41/net.neoforged.fml.ModLoader.lambda$postEvent$13(ModLoader.java:358) ~[loader-4.0.41.jar%23146!/:4.0] {}
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[?:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.41/net.neoforged.fml.ModList.forEachModInOrder(ModList.java:174) ~[loader-4.0.41.jar%23146!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.41/net.neoforged.fml.ModLoader.postEvent(ModLoader.java:358) ~[loader-4.0.41.jar%23146!/:4.0] {}
+	at TRANSFORMER/neoforge@21.1.190/net.neoforged.neoforge.event.EventHooks.onCreativeModeTabBuildContents(EventHooks.java:1121) ~[neoforge-21.1.190.jar%23190!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.CreativeModeTab.buildContents(CreativeModeTab.java:145) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:accesstransformer:B}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.CreativeModeTabs.lambda$buildAllTabContents$48(CreativeModeTabs.java:1957) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:accesstransformer:B}
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184) ~[?:?] {}
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179) ~[?:?] {}
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133) ~[?:?] {}
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1939) ~[?:?] {}
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[?:?] {}
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[?:?] {}
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151) ~[?:?] {}
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174) ~[?:?] {}
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:?] {}
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596) ~[?:?] {}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.CreativeModeTabs.buildAllTabContents(CreativeModeTabs.java:1957) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:accesstransformer:B}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.CreativeModeTabs.tryRebuildTabContents(CreativeModeTabs.java:1966) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:accesstransformer:B}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen.tryRebuildTabContents(CreativeModeInventoryScreen.java:148) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen.<init>(CreativeModeInventoryScreen.java:124) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.inventory.InventoryScreen.init(InventoryScreen.java:57) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.Screen.init(Screen.java:317) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.setScreen(Minecraft.java:1057) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A,re:mixin,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.handleKeybinds(Minecraft.java:1974) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A,re:mixin,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.tick(Minecraft.java:1837) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A,re:mixin,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.runTick(Minecraft.java:1161) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A,re:mixin,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.run(Minecraft.java:807) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A,re:mixin,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:230) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.41/net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-4.0.41.jar%23146!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.41/net.neoforged.fml.loading.targets.CommonLaunchHandler.clientService(CommonLaunchHandler.java:124) ~[loader-4.0.41.jar%23146!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.41/net.neoforged.fml.loading.targets.NeoForgeClientDevLaunchHandler.runService(NeoForgeClientDevLaunchHandler.java:23) ~[loader-4.0.41.jar%23146!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.41/net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-4.0.41.jar%23146!/:4.0] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-11.0.5.jar%23128!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-11.0.5.jar%23128!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-11.0.5.jar%23128!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.run(Launcher.java:103) [modlauncher-11.0.5.jar%23128!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.main(Launcher.java:74) [modlauncher-11.0.5.jar%23128!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-11.0.5.jar%23128!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-11.0.5.jar%23128!/:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.run(BootstrapLauncher.java:210) [bootstraplauncher-2.0.2.jar:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:69) [bootstraplauncher-2.0.2.jar:?] {}
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
+	at net.neoforged.devlaunch.Main.main(Main.java:57) [DevLaunch-1.0.2.jar:?] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at MC-BOOTSTRAP/fml_loader@4.0.41/net.neoforged.fml.ModContainer.acceptEvent(ModContainer.java:181) ~[loader-4.0.41.jar%23146!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.41/net.neoforged.fml.ModLoader.lambda$postEvent$13(ModLoader.java:358) ~[loader-4.0.41.jar%23146!/:4.0] {}
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[?:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.41/net.neoforged.fml.ModList.forEachModInOrder(ModList.java:174) ~[loader-4.0.41.jar%23146!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.41/net.neoforged.fml.ModLoader.postEvent(ModLoader.java:358) ~[loader-4.0.41.jar%23146!/:4.0] {}
+	at TRANSFORMER/neoforge@21.1.190/net.neoforged.neoforge.event.EventHooks.onCreativeModeTabBuildContents(EventHooks.java:1121) ~[neoforge-21.1.190.jar%23190!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.CreativeModeTab.buildContents(CreativeModeTab.java:145) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:accesstransformer:B}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.CreativeModeTabs.lambda$buildAllTabContents$48(CreativeModeTabs.java:1957) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:accesstransformer:B}
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184) ~[?:?] {}
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179) ~[?:?] {}
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133) ~[?:?] {}
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1939) ~[?:?] {}
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[?:?] {}
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[?:?] {}
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151) ~[?:?] {}
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174) ~[?:?] {}
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:?] {}
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596) ~[?:?] {}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.CreativeModeTabs.buildAllTabContents(CreativeModeTabs.java:1957) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:accesstransformer:B}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.CreativeModeTabs.tryRebuildTabContents(CreativeModeTabs.java:1966) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:accesstransformer:B}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen.tryRebuildTabContents(CreativeModeInventoryScreen.java:148) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen.<init>(CreativeModeInventoryScreen.java:124) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.inventory.InventoryScreen.init(InventoryScreen.java:57) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.Screen.init(Screen.java:317) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.setScreen(Minecraft.java:1057) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A,re:mixin,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.handleKeybinds(Minecraft.java:1974) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A,re:mixin,pl:runtimedistcleaner:A}
+-- Uptime --
+Details:
+	JVM uptime: 78.493s
+	Wall uptime: 66.005s
+	High-res time: 76.555s
+	Client ticks: 1274 ticks / 63.700s
+Stacktrace:
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.fillReport(Minecraft.java:2394) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A,re:mixin,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.emergencySaveAndCrash(Minecraft.java:868) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A,re:mixin,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.run(Minecraft.java:828) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A,re:mixin,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:230) ~[neoforge-21.1.190.jar%23189!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.41/net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-4.0.41.jar%23146!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.41/net.neoforged.fml.loading.targets.CommonLaunchHandler.clientService(CommonLaunchHandler.java:124) ~[loader-4.0.41.jar%23146!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.41/net.neoforged.fml.loading.targets.NeoForgeClientDevLaunchHandler.runService(NeoForgeClientDevLaunchHandler.java:23) ~[loader-4.0.41.jar%23146!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.41/net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-4.0.41.jar%23146!/:4.0] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-11.0.5.jar%23128!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-11.0.5.jar%23128!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-11.0.5.jar%23128!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.run(Launcher.java:103) [modlauncher-11.0.5.jar%23128!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.main(Launcher.java:74) [modlauncher-11.0.5.jar%23128!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-11.0.5.jar%23128!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-11.0.5.jar%23128!/:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.run(BootstrapLauncher.java:210) [bootstraplauncher-2.0.2.jar:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:69) [bootstraplauncher-2.0.2.jar:?] {}
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
+	at net.neoforged.devlaunch.Main.main(Main.java:57) [DevLaunch-1.0.2.jar:?] {}
+
+
+-- Affected level --
+Details:
+	All players: 1 total; [LocalPlayer['Dev'/45, l='ClientLevel', x=17.50, y=71.00, z=0.50]]
+	Chunk stats: 289, 145
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (16,71,0), Section: (at 0,7,0 in 1,4,0; chunk contains blocks 16,-64,0 to 31,319,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,-64,0 to 511,319,511)
+	Level time: 183 game time, 183 day time
+	Server brand: neoforge
+	Server type: Integrated singleplayer server
+	Tracked entity count: 94
+
+-- Last reload --
+Details:
+	Reload number: 1
+	Reload reason: initial
+	Finished: Yes
+	Packs: vanilla, mod_resources, mod/neoforge, mod/spearcore
+
+-- System Details --
+Details:
+	Minecraft Version: 1.21.1
+	Minecraft Version ID: 1.21.1
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 21.0.10, Microsoft
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Microsoft
+	Memory: 347580816 bytes (331 MiB) / 855638016 bytes (816 MiB) up to 12842958848 bytes (12248 MiB)
+	CPUs: 20
+	Processor Vendor: GenuineIntel
+	Processor Name: Intel(R) Core(TM) i5-14600KF
+	Identifier: Intel64 Family 6 Model 183 Stepping 1
+	Microarchitecture: Raptor Lake
+	Frequency (GHz): 3.49
+	Number of physical packages: 1
+	Number of physical CPUs: 14
+	Number of logical CPUs: 20
+	Graphics card #0 name: AMD Radeon RX 7900 XT
+	Graphics card #0 vendor: Advanced Micro Devices, Inc.
+	Graphics card #0 VRAM (MiB): 20464.00
+	Graphics card #0 deviceId: VideoController1
+	Graphics card #0 versionInfo: 32.0.23027.2005
+	Memory slot #0 capacity (MiB): 24576.00
+	Memory slot #0 clockSpeed (GHz): 6.40
+	Memory slot #0 type: Unknown
+	Memory slot #1 capacity (MiB): 24576.00
+	Memory slot #1 clockSpeed (GHz): 6.40
+	Memory slot #1 type: Unknown
+	Virtual memory max (MiB): 52059.11
+	Virtual memory used (MiB): 45720.23
+	Swap memory total (MiB): 3072.00
+	Swap memory used (MiB): 71.17
+	Space in storage for jna.tmpdir (MiB): <path not set>
+	Space in storage for org.lwjgl.system.SharedLibraryExtractPath (MiB): <path not set>
+	Space in storage for io.netty.native.workdir (MiB): <path not set>
+	Space in storage for java.io.tmpdir (MiB): available: 85705.90, total: 307028.56
+	Space in storage for workdir (MiB): available: 85705.90, total: 307028.56
+	JVM Flags: 0 total; 
+	Launched Version: 21.1.190
+	Backend library: LWJGL version 3.3.3+5
+	Backend API: AMD Radeon RX 7900 XT GL version 4.6.0 Core Profile Context 26.2.2.260209, ATI Technologies Inc.
+	Window size: 854x480
+	GFLW Platform: win32
+	GL Caps: Using framebuffer using OpenGL 3.2
+	GL debug messages: 
+	Is Modded: Definitely; Client brand changed to 'neoforge'; Server brand changed to 'neoforge'
+	Universe: 400921fb54442d18
+	Type: Integrated Server (map_client.txt)
+	Graphics mode: fast
+	Render Distance: 5/5 chunks
+	Resource Packs: vanilla, mod_resources, mod/neoforge, mod/spearcore (incompatible)
+	Current Language: zh_cn
+	Locale: zh_CN
+	System encoding: UTF-8
+	File encoding: UTF-8
+	CPU: 20x Intel(R) Core(TM) i5-14600KF
+	Server Running: true
+	Player Count: 1 / 8; [ServerPlayer['Dev'/45, l='ServerLevel[新的世界]', x=17.50, y=71.00, z=0.50]]
+	Active Data Packs: vanilla, mod_data, mod/neoforge, mod/spearcore
+	Available Data Packs: bundle, trade_rebalance, vanilla, mod/neoforge, mod/spearcore, mod_data
+	Enabled Feature Flags: minecraft:vanilla
+	World Generation: Stable
+	World Seed: 5698858094344589153
+	ModLauncher: 11.0.5+main.901c6ea8
+	ModLauncher launch target: forgeclientdev
+	ModLauncher services: 
+		sponge-mixin-0.15.2+mixin.0.8.7.jar mixin PLUGINSERVICE 
+		loader-4.0.41.jar slf4jfixer PLUGINSERVICE 
+		loader-4.0.41.jar runtime_enum_extender PLUGINSERVICE 
+		at-modlauncher-10.0.1.jar accesstransformer PLUGINSERVICE 
+		loader-4.0.41.jar runtimedistcleaner PLUGINSERVICE 
+		modlauncher-11.0.5.jar mixin TRANSFORMATIONSERVICE 
+		modlauncher-11.0.5.jar fml TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		javafml@4.0
+		lowcodefml@4.0
+		minecraft@4.0
+	Mod List: 
+		neoforge-21.1.190.jar                             |Minecraft                     |minecraft                     |1.21.1              |Manifest: NOSIGNATURE
+		neoforge-21.1.190.jar                             |NeoForge                      |neoforge                      |21.1.190            |Manifest: NOSIGNATURE
+		main                                              |Spear Core                    |spearcore                     |1.0.0               |Manifest: NOSIGNATURE
+	Crash Report UUID: ad828e3e-1c7c-4f06-a197-0aa8523f8bfd
+	FML: 4.0.41
+	NeoForge: 21.1.190

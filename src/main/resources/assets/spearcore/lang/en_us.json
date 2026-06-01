@@ -1,0 +1,11 @@
+{
+  "item.spearcore.wooden_spear": "Wooden Spear",
+  "item.spearcore.stone_spear": "Stone Spear",
+  "item.spearcore.copper_spear": "Copper Spear",
+  "item.spearcore.iron_spear": "Iron Spear",
+  "item.spearcore.golden_spear": "Golden Spear",
+  "item.spearcore.diamond_spear": "Diamond Spear",
+  "item.spearcore.netherite_spear": "Netherite Spear",
+  "enchantment.spearcore.lunge": "Lunge",
+  "enchantment.spearcore.lunge.description": "Push the attacker forward during a stabbing attack."
+}

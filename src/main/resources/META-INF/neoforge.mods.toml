@@ -1,0 +1,40 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT License"
+
+[[mods]]
+modId="spearcore"
+version="1.0.0"
+displayName="Spear Core"
+displayURL="https://center.mcmod.cn/863182/"
+credits="Lyingice's Spear Core"
+authors="Lyingice"
+
+# Start of user code block mod configuration
+# End of user code block mod configuration
+
+[[mixins]]
+    config = "spearcore.mixins.json"
+
+# Start of user code block custom mixins
+# End of user code block custom mixins
+
+[[dependencies.spearcore]]
+    modId="neoforge"
+    type="required"
+    versionRange="[21.1.190,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.spearcore]]
+    modId="minecraft"
+    type="required"
+    versionRange="[1.21.1]"
+    ordering="AFTER"
+    side="BOTH"
+
+
+
+
+# Start of user code block dependencies configuration
+# End of user code block dependencies configuration

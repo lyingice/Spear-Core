@@ -1,0 +1,27 @@
+{
+  "workspacePanelIconSize": "TILES",
+  "workspacePanelSortType": "CREATED",
+  "workspacePanelSortAscending": true,
+  "projectBrowserState": {
+    "expandedPaths": [
+      "[, Spear Core]",
+      "[, Spear Core, Source (Gradle)]",
+      "[, Spear Core, Source (Gradle), C:\\Users\\12501\\MCreatorWorkspaces\\spearcore\\src\\main\\java\\net]",
+      "[, Spear Core, Source (Gradle), C:\\Users\\12501\\MCreatorWorkspaces\\spearcore\\src\\main\\java\\net, C:\\Users\\12501\\MCreatorWorkspaces\\spearcore\\src\\main\\java\\net\\minecraft]",
+      "[, Spear Core, Source (Gradle), C:\\Users\\12501\\MCreatorWorkspaces\\spearcore\\src\\main\\java\\net, C:\\Users\\12501\\MCreatorWorkspaces\\spearcore\\src\\main\\java\\net\\minecraft, C:\\Users\\12501\\MCreatorWorkspaces\\spearcore\\src\\main\\java\\net\\minecraft\\spearcore]"
+    ]
+  },
+  "leftDockState": {
+    "expandedDock": "project_browser",
+    "dockSizes": {
+      "project_browser": 280
+    }
+  },
+  "bottomDockState": {
+    "dockSizes": {
+      "console": 300,
+      "code_viewer": 300,
+      "debugger": 300
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "package": "net.minecraft.spearcore.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ItemInitializeClientMixin",
+    "ItemStackMixin",
+    "ServerPlayerMotionMixin",
+    "LivingEntitySpearMixin"
+  ],
+  "client": [
+    "LocalPlayerFovMixin",
+    "LocalPlayerInputMixin",
+    "ItemInHandRendererMixin",
+    "ItemInHandLayerMixin",
+    "HumanoidModelMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8.4"
+}
