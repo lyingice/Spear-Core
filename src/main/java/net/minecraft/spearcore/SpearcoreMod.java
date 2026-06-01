@@ -47,12 +47,12 @@ public class SpearcoreMod {
 	public SpearcoreMod(IEventBus modEventBus, ModContainer modContainer) {
 		// Start of user code block mod constructor
 		// End of user code block mod constructor
-		NeoForge.EVENT_BUS.register(this);
 		modEventBus.addListener(this::registerNetworking);
 		// Start of user code block mod init
         SpearSounds.REGISTRY.register(modEventBus);
-        SpearCoreItems.REGISTRY.register(modEventBus);
+        modEventBus.register(SpearCoreItems.class);
         SpearConfig.register(modContainer);
+        SpearCoreItems.REGISTRY.register(modEventBus);
         // End of user code block mod init
 	}
 
