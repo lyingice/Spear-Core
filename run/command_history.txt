@@ -6,3 +6,7 @@
 /enchant @s lunge 1
 /enchant @s L
 /enchant @s spearcore:lunge
+/gamerule doDaylightCycle false
+/enchant @a minecraft:sweeping_edge 1
+/kill @e
+/gamerule doMobSpawning false

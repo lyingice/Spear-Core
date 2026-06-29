@@ -1,5 +1,6 @@
 package net.minecraft.spearcore.item;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -15,6 +16,8 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.InteractionHand;
@@ -124,50 +127,93 @@ public abstract class SpearItem extends Item {
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity user, int remainingTicks) {
     }
+    // ========== 生物左键戳刺（带蓄力伤害乘算） ==========
 
-    // ========== 蓄力 tick ==========
+    public void attack(LivingEntity attacker, EquipmentSlot slot) {
+        if (attacker.level().isClientSide) return;
+
+        // 计算速度加成伤害（与蓄力攻击保持一致）
+        Vec3 look = attacker.getLookAngle();
+        double attackerSpeed = Math.max(0.0, look.dot(SpearItem.getMotion(attacker)));
+        double relSpeed = attackerSpeed; // 左键没有目标，只考虑自身速度
+
+        float baseDamage = (float) attacker.getAttributeValue(Attributes.ATTACK_DAMAGE);
+        // 应用 damageMultiplier 和速度加成，与蓄力逻辑一致
+        float damage = baseDamage + (float) Mth.floor(relSpeed * getDamageMultiplier());
+
+        boolean hitSomething = false;
+
+        List<EntityHitResult> hits = SpearCollision.getHitEntitiesAlong(
+                attacker, this, getHitboxMargin2(),
+                entity -> entity instanceof LivingEntity
+                        && entity.isAlive()
+                        && entity != attacker
+        );
+
+        for (EntityHitResult hit : hits) {
+            Entity target = hit.getEntity();
+            if (target.hurt(attacker.damageSources().mobAttack(attacker), damage)) {
+                hitSomething = true;
+                causeKnockbackToTarget(attacker, target, 0.4F);
+            }
+        }
+
+        if (hitSomething) {
+            attacker.level().playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(),
+                    getHitSound(), SoundSource.PLAYERS, 1.0F, 1.0F);
+        }
+    }
+
+    // ========== 蓄力 tick（支持生物 + 玩家） ==========
 
     @Override
     public void onUseTick(Level level, LivingEntity user, ItemStack stack, int remainingTicks) {
 
         if (level.isClientSide) return;
-        if (!(user instanceof Player player)) return;
 
-        if (player.getCooldowns().isOnCooldown(this)) {
-            player.stopUsingItem();
-            return;
+        // 玩家独有：检查冷却
+        if (user instanceof Player player) {
+            if (player.getCooldowns().isOnCooldown(this)) {
+                player.stopUsingItem();
+                return;
+            }
         }
 
-        int usedTicks = stack.getUseDuration(player) - remainingTicks;
+        int usedTicks = stack.getUseDuration(user) - remainingTicks;
 
         if (usedTicks < getDelayTicks()) return;
 
         int effectiveTicks = usedTicks - getDelayTicks();
-        Vec3 look = player.getLookAngle();
-        double attackerSpeed = look.dot(SpearItem.getMotion(player));
-        double needSpeed = 1.0F; // 玩家固定 1.0
+        Vec3 look = user.getLookAngle();
+
+        // 计算攻击者速度（对所有 LivingEntity 通用）
+        double attackerSpeed = Math.max(0.0, look.dot(SpearItem.getMotion(user)));
+
+        // needSpeed 统一为 1.0（SpearCondition 预设值以此为基础）
+        double needSpeed = 1.0F;
 
         // 脱离阶段
         if (usedTicks >= getDamageEndTick()) {
-            player.stopUsingItem();
+            user.stopUsingItem();
             return;
         }
 
         boolean hitSomething = false;
 
         List<EntityHitResult> hits = SpearCollision.getHitEntitiesAlong(
-                player, this, getHitboxMargin(),
+                user, this, getHitboxMargin(),
                 entity -> entity instanceof LivingEntity
                         && entity.isAlive()
-                        && entity != player
-                        && entity != player.getVehicle()  // 排除坐骑
+                        && entity != user
+                        && entity != user.getVehicle()  // 排除坐骑
         );
 
         for (EntityHitResult hit : hits) {
             Entity target = hit.getEntity();
             if (!(target instanceof LivingEntity)) continue;
 
-            if (player instanceof SpearCooldownAccessor accessor) {
+            // LivingEntityMixin 让所有 LivingEntity 都实现了 SpearCooldownAccessor
+            if (user instanceof SpearCooldownAccessor accessor) {
                 if (accessor.WasRecentlyStabbed(target, getContactCooldownTicks())) {
                     continue;
                 }
@@ -185,47 +231,49 @@ public abstract class SpearItem extends Item {
                     && getDamageConditions().get().test(effectiveTicks, attackerSpeed, relSpeed, needSpeed);
 
             if (canDismount || canKnockback || canDamage) {
-                float baseDamage = (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
+                float baseDamage = (float) user.getAttributeValue(Attributes.ATTACK_DAMAGE);
                 float damage = baseDamage + (float) Mth.floor(relSpeed * getDamageMultiplier());
 
-                if (canDamage && target.hurt(player.damageSources().mobAttack(player), damage)) {
+                if (canDamage && target.hurt(user.damageSources().mobAttack(user), damage)) {
                     hitSomething = true;
-                    stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
-                    player.setLastHurtMob(target);
+                    stack.hurtAndBreak(1, user, EquipmentSlot.MAINHAND);
+                    if (user instanceof Player player) {
+                        player.setLastHurtMob(target);
+                    }
                 }
                 if (canKnockback || (canDamage && hitSomething)) {
-                    causeKnockback(player, target, 0.4F);
+                    causeKnockbackToTarget(user, target, 0.4F);
                 }
                 if (canDismount && target.isPassenger()) {
                     target.stopRiding();
                     hitSomething = true;
                 }
 
-                if (player instanceof SpearCooldownAccessor accessor) {
+                if (user instanceof SpearCooldownAccessor accessor) {
                     accessor.RememberStabbedEntity(target);
                 }
             }
         }
 
         if (hitSomething) {
-            player.level().broadcastEntityEvent(player, (byte) 2);
-            player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
+            user.level().broadcastEntityEvent(user, (byte) 2);
+            user.level().playSound(null, user.getX(), user.getY(), user.getZ(),
                     getHitSound(), SoundSource.PLAYERS, 1.0F, 1.0F);
         }
     }
 
-    // ========== 击退 ==========
+    // ========== 通用击退工具（攻击者 + 目标） ==========
 
-    private void causeKnockback(Player player, Entity target, float strength) {
+    private static void causeKnockbackToTarget(LivingEntity attacker, Entity target, float strength) {
         if (strength <= 0.0F) return;
-        float yRotRad = player.getYRot() * ((float) Math.PI / 180);
+        float yRotRad = attacker.getYRot() * ((float) Math.PI / 180);
         if (target instanceof LivingEntity living) {
             living.knockback(strength, Mth.sin(yRotRad), -Mth.cos(yRotRad));
         } else {
             target.push(-Mth.sin(yRotRad) * strength, 0.1, Mth.cos(yRotRad) * strength);
         }
-        player.setDeltaMovement(player.getDeltaMovement().multiply(0.6, 1.0, 0.6));
-        player.hurtMarked = false;
+        attacker.setDeltaMovement(attacker.getDeltaMovement().multiply(0.6, 1.0, 0.6));
+        attacker.hurtMarked = false;
     }
     // ========== 重写原版行为 ==========
 
@@ -240,6 +288,11 @@ public abstract class SpearItem extends Item {
         return !player.isCreative();
     }
     // ========== 附魔/修复 ==========
+    @Override
+    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+        if (enchantment.is(Enchantments.SWEEPING_EDGE)) return false;
+        return super.supportsEnchantment(stack, enchantment);
+    }
 
     @Override
     public boolean isEnchantable(ItemStack stack) {
