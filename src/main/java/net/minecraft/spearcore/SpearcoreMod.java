@@ -49,11 +49,10 @@ public class SpearcoreMod {
 		// End of user code block mod constructor
 		modEventBus.addListener(this::registerNetworking);
 		// Start of user code block mod init
-        SpearSounds.REGISTRY.register(modEventBus);
-        modEventBus.register(SpearCoreItems.class);
-        SpearConfig.register(modContainer);
-        SpearCoreItems.REGISTRY.register(modEventBus);
-        // End of user code block mod init
+	       SpearSounds.REGISTRY.register(modEventBus);
+	       SpearConfig.register(modContainer);
+	       SpearCoreItems.REGISTRY.register(modEventBus);
+	       // End of user code block mod init
 	}
 
 	// Start of user code block mod methods

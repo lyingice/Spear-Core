@@ -1,9 +1,6 @@
 {
   "replace": false,
   "values": [
-    {
-      "id": "#spearcore:spear",
-      "required": false
-    }
+    "#spearcore:spear"
   ]
 }
