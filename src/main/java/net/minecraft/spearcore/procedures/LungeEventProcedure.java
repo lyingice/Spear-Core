@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 public class LungeEventProcedure {
 	@SubscribeEvent
 	public static void onLeftClick(PlayerInteractEvent.LeftClickEmpty event) {
-		// Lunge is applied from the spear attack path, matching Jerotes' behavior.
+		// The active client entry point is SpearClientStabHandler.
 	}
 
 	@EventBusSubscriber

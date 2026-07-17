@@ -3,10 +3,12 @@ package net.minecraft.spearcore.client;
 import net.minecraft.spearcore.SpearcoreMod;
 import net.minecraft.spearcore.item.SpearItem;
 import net.minecraft.spearcore.network.SpearStabAttackPacket;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -14,9 +16,27 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public class SpearClientStabHandler {
     @SubscribeEvent
     public static void onLeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event) {
+        Player player = event.getEntity();
         ItemStack stack = event.getEntity().getMainHandItem();
-        if (stack.getItem() instanceof SpearItem) {
-            PacketDistributor.sendToServer(new SpearStabAttackPacket());
+        if (!(stack.getItem() instanceof SpearItem)) {
+            return;
         }
+        PacketDistributor.sendToServer(new SpearStabAttackPacket());
+        SpearItem.jerotesLungeForwardMaybe(player);
+        player.resetAttackStrengthTicker();
+    }
+
+    @SubscribeEvent
+    public static void onAttackEntity(AttackEntityEvent event) {
+        Player player = event.getEntity();
+        if (!player.level().isClientSide()) {
+            return;
+        }
+        ItemStack stack = player.getMainHandItem();
+        if (!(stack.getItem() instanceof SpearItem)) {
+            return;
+        }
+        SpearItem.jerotesLungeForwardMaybe(player);
+        player.resetAttackStrengthTicker();
     }
 }

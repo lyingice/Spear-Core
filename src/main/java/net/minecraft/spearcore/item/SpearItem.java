@@ -496,7 +496,9 @@ public abstract class SpearItem extends Item {
     // ========== Lunge ==========
 
     public static void jerotesLungeForwardMaybe(LivingEntity user) {
-        if (!(user.getMainHandItem().getItem() instanceof SpearItem)) return;
+        if (!(user.getMainHandItem().getItem() instanceof SpearItem)) {
+            return;
+        }
         ItemStack stack = user.getMainHandItem();
         int lungeLevel = stack.getEnchantmentLevel(
                 user.level().registryAccess()
@@ -505,9 +507,15 @@ public abstract class SpearItem extends Item {
                                 ResourceLocation.fromNamespaceAndPath("spearcore", "lunge")))
         );
 
-        if (lungeLevel <= 0) return;
-        if (user instanceof Player player && player.getFoodData().getFoodLevel() <= 7.0f) return;
-        if (user.isPassenger() || user.isFallFlying() || user.isInWater()) return;
+        if (lungeLevel <= 0) {
+            return;
+        }
+        if (user instanceof Player player && player.getFoodData().getFoodLevel() <= 7.0f) {
+            return;
+        }
+        if (user.isPassenger() || user.isFallFlying() || user.isInWater()) {
+            return;
+        }
 
         if (stack.isDamageableItem() && user instanceof Player) {
             stack.hurtAndBreak(1, user, EquipmentSlot.MAINHAND);
@@ -516,7 +524,7 @@ public abstract class SpearItem extends Item {
             player.causeFoodExhaustion(4.0f * lungeLevel);
         }
 
-        rushAttack(user, 0.458f * lungeLevel);
+        rushAttack(user, 0.65f * lungeLevel);
 
         SoundEvent sound = SpearSounds.ITEM_SPEAR_LUNGE_1.get();
         if (lungeLevel > 1) {
