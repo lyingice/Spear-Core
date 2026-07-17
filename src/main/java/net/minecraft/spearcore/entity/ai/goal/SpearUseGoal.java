@@ -3,246 +3,276 @@ package net.minecraft.spearcore.entity.ai.goal;
 import net.minecraft.spearcore.item.SpearItem;
 import net.minecraft.spearcore.util.SpearCollision;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.ai.util.LandRandomPos;
-import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 
 import java.util.EnumSet;
 import java.util.List;
 
 /**
- *
- * 状态机（由 phase 字段驱动）：
- *   APPROACH  → 距离 > attackRadius → 接近目标
- *   CHARGING  → 距离 ≤ attackRadius → 蓄力冲锋（engageTime 递减）
- *   STRIKE    → engageTime == 0     → 停止蓄力，进入撤退
- *   RETREAT   → fleeingTime > 0     → 边撤退边攻击
- *   COOLDOWN  → 撤退完成             → 强制冷却 RECHARGE_COOLDOWN tick，冷却结束后 phase=APPROACH
- *
- * 保留旧文件不变。
+ * 复刻 JerotesSpearUseGoal 的长矛生物 AI：
+ * 1. 进入攻击半径前接近目标；
+ * 2. 进入半径后举矛蓄力并继续向目标冲锋；
+ * 3. 蓄力结束后停止使用物品并向远离目标的位置撤退；
+ * 4. 撤退阶段可以穿插普通戳刺；
+ * 5. 撤退完成/超时后结束本次 Goal，让选择器重新评估下一轮攻击。
  */
-public class SpearUseGoal<T extends Monster> extends Goal {
+public class SpearUseGoal<T extends PathfinderMob> extends Goal {
 
     private static final int MAX_FLEEING_TIME = 100;
-    private static final int RECHARGE_COOLDOWN = 40; // 撤退后 2 秒冷却
-
-    private enum Phase {
-        APPROACH, CHARGING, RETREAT, COOLDOWN
-    }
 
     private final T mob;
     private final double speedModifierWhenCharging;
     private final double speedModifierWhenRepositioning;
     private final double attackRadiusSqr;
+    private final double targetInRangeSqr;
+    private final boolean canNormalAttack;
+    private final boolean canChargeAttack;
 
-    private Phase phase;
-    private int engageTime;               // 蓄力剩余 tick
-    private int fleeingTime;              // 撤退已用 tick
-    private Vec3 awayPos;                  // 撤退目标位置
-    private int ticksUntilNextAttack;      // 攻击冷却
-    private int cooldownRemaining;         // 循环冷却
+    private int engageTime = -1;
+    private int fleeingTime = -1;
+    private Vec3 awayPos;
+    private boolean done;
+    public int ticksUntilNextAttack;
 
     public SpearUseGoal(T mob, double chargeSpeed, double repositionSpeed, float attackRadius) {
+        this(mob, chargeSpeed, repositionSpeed, attackRadius, 2.0F, true, true);
+    }
+
+    public SpearUseGoal(T mob, double chargeSpeed, double repositionSpeed, float attackRadius, float targetInRange) {
+        this(mob, chargeSpeed, repositionSpeed, attackRadius, targetInRange, true, true);
+    }
+
+    public SpearUseGoal(T mob, double chargeSpeed, double repositionSpeed, float attackRadius, float targetInRange, boolean canNormalAttack) {
+        this(mob, chargeSpeed, repositionSpeed, attackRadius, targetInRange, canNormalAttack, true);
+    }
+
+    public SpearUseGoal(T mob, double chargeSpeed, double repositionSpeed, float attackRadius, float targetInRange,
+                        boolean canNormalAttack, boolean canChargeAttack) {
         this.mob = mob;
         this.speedModifierWhenCharging = chargeSpeed;
         this.speedModifierWhenRepositioning = repositionSpeed;
         this.attackRadiusSqr = attackRadius * attackRadius;
+        this.targetInRangeSqr = targetInRange * targetInRange;
+        this.canNormalAttack = canNormalAttack;
+        this.canChargeAttack = canChargeAttack;
         this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
     }
 
-    // ==================== 条件检查 ====================
-
     @Override
     public boolean canUse() {
-        return mob.getTarget() != null
-                && mob.getMainHandItem().getItem() instanceof SpearItem;
+        return ableToAttack() && (!mob.isUsingItem() || mob.getUseItem().getItem() instanceof ShieldItem);
+    }
+
+    private boolean ableToAttack() {
+        return mob.getTarget() != null && mob.getMainHandItem().getItem() instanceof SpearItem;
     }
 
     @Override
     public boolean canContinueToUse() {
-        return mob.getTarget() != null && mob.getTarget().isAlive()
-                && mob.getMainHandItem().getItem() instanceof SpearItem;
+        return !done && ableToAttack();
     }
-
-    // ==================== 生命周期 ====================
 
     @Override
     public void start() {
+        super.start();
         mob.setAggressive(true);
-        phase = Phase.APPROACH;
-        engageTime = -1;
-        fleeingTime = 0;
-        awayPos = null;
         ticksUntilNextAttack = 0;
-        cooldownRemaining = 0;
     }
 
     @Override
     public void stop() {
+        super.stop();
         mob.getNavigation().stop();
-        mob.stopUsingItem();
         mob.setAggressive(false);
+        engageTime = -1;
+        fleeingTime = -1;
+        awayPos = null;
+        done = false;
+        mob.stopUsingItem();
     }
-
-    // ==================== 核心 tick ====================
 
     @Override
     public void tick() {
         LivingEntity target = mob.getTarget();
         if (target == null) return;
 
-        double distSq = mob.distanceToSqr(target);
-        mob.lookAt(target, 30, 30);
-        mob.getLookControl().setLookAt(target, 30, 30);
+        double distSq = mob.distanceToSqr(target.getX(), target.getY(), target.getZ());
+        double movementFactor = currentMovementFactor();
+        int ridingBonus = mob.isPassenger() ? 2 : 0;
 
-        switch (phase) {
-            case APPROACH -> tickApproach(target, distSq);
-            case CHARGING -> tickCharging(target, distSq);
-            case RETREAT -> tickRetreat(target, distSq);
-            case COOLDOWN -> tickCooldown(target, distSq);
+        mob.lookAt(target, 30.0F, 30.0F);
+        mob.getLookControl().setLookAt(target, 30.0F, 30.0F);
+
+        if (canNormalAttack && !canChargeAttack) {
+            tickAttackCooldown();
+            checkAndPerformAttack(target, mob.getMainHandItem().getItem() instanceof SpearItem spear ? spear : null);
         }
-    }
 
-    // ==================== 阶段: 接近 ====================
-
-    private void tickApproach(LivingEntity target, double distSq) {
-        if (distSq > attackRadiusSqr) {
-            // 太远 → 接近
-            mob.getNavigation().moveTo(target, speedModifierWhenRepositioning);
-        } else {
-            // 进入半径 → 开始蓄力
-            if (mob.isUsingItem()) return;
-            SpearItem spear = (SpearItem) mob.getMainHandItem().getItem();
-            engageTime = spear.getDamageEndTick();
-            mob.startUsingItem(InteractionHand.MAIN_HAND);
-            phase = Phase.CHARGING;
-        }
-    }
-
-    // ==================== 阶段: 蓄力冲锋 ====================
-
-    private void tickCharging(LivingEntity target, double distSq) {
-        // 向目标冲锋
-        mob.getNavigation().moveTo(target, speedModifierWhenCharging);
-        engageTime--;
-
-        if (engageTime <= 0) {
-            // 蓄力完成
-            mob.stopUsingItem();
-
-            // 计算撤退位置（至少是攻击半径的 1.5 倍）
-            double dist = mob.distanceTo(target);
-            double minAwayDist = Math.min(14.0, Math.sqrt(attackRadiusSqr) * 1.5 + 2.0);
-            awayPos = LandRandomPos.getPosAway(mob,
-                    Math.max(2, (int) (minAwayDist - dist)),
-                    Math.max(3, (int) (minAwayDist + 2 - dist)),
-                    target.position());
-
-            // 找不到撤退位置 → 朝反方向
-            if (awayPos == null) {
-                Vec3 awayDir = mob.position().subtract(target.position()).normalize().scale(minAwayDist);
-                awayPos = mob.position().add(awayDir);
+        if (engageTime < 0) {
+            if (distSq > attackRadiusSqr) {
+                mob.getNavigation().moveTo(target, movementFactor * speedModifierWhenRepositioning);
+                return;
             }
 
-            fleeingTime = 0;
-            ticksUntilNextAttack = 0;
-            phase = Phase.RETREAT;
-        }
-    }
-
-    // ==================== 阶段: 撤退+攻击 ====================
-
-    private void tickRetreat(LivingEntity target, double distSq) {
-        fleeingTime++;
-
-        // 攻击冷却
-        if (ticksUntilNextAttack > 0) {
-            ticksUntilNextAttack--;
+            engageTime = getSpearUseDuration();
+            if (mob.getUseItem().getItem() instanceof ShieldItem) {
+                mob.stopUsingItem();
+            }
+            if (canChargeAttack) {
+                mob.startUsingItem(InteractionHand.MAIN_HAND);
+                playUseSound();
+            }
         }
 
-        // 边撤退边攻击
-        if (ticksUntilNextAttack <= 0
-                && mob.getSensing().hasLineOfSight(target)
-                && !mob.isUsingItem()) {
-            performSpearAttack(target);
+        if (engageTime > 0) {
+            engageTime--;
+            if (engageTime == 0) {
+                mob.stopUsingItem();
+                double dist = Math.sqrt(distSq);
+                awayPos = getPosAway(mob,
+                        Math.max(0.0D, 9.0D + ridingBonus - dist),
+                        Math.max(1.0D, 11.0D + ridingBonus - dist),
+                        7,
+                        target.position());
+                fleeingTime = 1;
+            }
         }
 
-        // 向撤退点移动
+        if (fleeingTime > 0) {
+            fleeingTime++;
+            if (canNormalAttack && canChargeAttack) {
+                tickAttackCooldown();
+                checkAndPerformAttack(target, mob.getMainHandItem().getItem() instanceof SpearItem spear ? spear : null);
+            }
+            if (fleeingTime > getMaxFleeingTime()) {
+                done = true;
+                return;
+            }
+        }
+
         if (awayPos != null) {
-            mob.getNavigation().moveTo(awayPos.x, awayPos.y, awayPos.z, speedModifierWhenRepositioning);
-        }
-
-        // 撤退完成条件：超时 或 到达撤退点 或 已经远离目标到足够远
-        boolean timeUp = fleeingTime > MAX_FLEEING_TIME;
-        boolean arrived = awayPos != null && mob.getNavigation().isDone();
-        boolean farEnough = distSq > attackRadiusSqr * 1.5;
-
-        if (timeUp || arrived || farEnough) {
-            awayPos = null;
-            cooldownRemaining = RECHARGE_COOLDOWN;
-            phase = Phase.COOLDOWN;
-        }
-    }
-
-    // ==================== 阶段: 冷却 ====================
-
-    private void tickCooldown(LivingEntity target, double distSq) {
-        cooldownRemaining--;
-
-        // 冷却期间不攻击，但可以移动
-        if (distSq <= attackRadiusSqr) {
-            // 还在攻击半径内 → 远离目标
-            if (awayPos == null) {
-                Vec3 awayDir = mob.position().subtract(target.position()).normalize().scale(10.0);
-                awayPos = mob.position().add(awayDir);
-            }
-            mob.getNavigation().moveTo(awayPos.x, awayPos.y, awayPos.z, speedModifierWhenRepositioning);
-
+            mob.getNavigation().moveTo(awayPos.x, awayPos.y, awayPos.z, movementFactor * speedModifierWhenRepositioning);
             if (mob.getNavigation().isDone()) {
+                if (fleeingTime > 0) {
+                    done = true;
+                    return;
+                }
                 awayPos = null;
             }
         } else {
-            // 已在攻击半径外 → 可以重新接近
-            awayPos = null;
-        }
-
-        // 冷却结束 → 回到 APPROACH
-        if (cooldownRemaining <= 0) {
-            phase = Phase.APPROACH;
+            mob.getNavigation().moveTo(target, movementFactor * speedModifierWhenCharging);
+            if (distSq < targetInRangeSqr || mob.getNavigation().isDone()) {
+                double dist = Math.sqrt(distSq);
+                awayPos = getPosAway(mob,
+                        6.0D + ridingBonus - dist,
+                        7.0D + ridingBonus - dist,
+                        7,
+                        target.position());
+            }
         }
     }
 
-    // ==================== 攻击执行 ====================
+    protected void checkAndPerformAttack(LivingEntity target, SpearItem spear) {
+        if (spear == null || !canPerformAttack(target, spear)) return;
 
-    private void performSpearAttack(LivingEntity target) {
-        SpearItem spear = (SpearItem) mob.getMainHandItem().getItem();
-
-        // 精确碰撞检测
-        List<EntityHitResult> hits = SpearCollision.getHitEntitiesAlong(
-                mob, spear, spear.getHitboxMargin(),
-                entity -> entity == target
-                        && entity.isAlive()
-                        && entity != mob
-        );
-
-        if (hits.isEmpty()) {
-            // 放宽判定
-            hits = SpearCollision.getHitEntitiesAlong(
-                    mob, spear, spear.getHitboxMargin2(),
-                    entity -> entity instanceof LivingEntity
-                            && entity.isAlive()
-                            && entity != mob
-            );
+        resetAttackCooldown(spear);
+        if (canNormalAttack && !canChargeAttack) {
+            mob.lookAt(target, 120.0F, 120.0F);
+            mob.getLookControl().setLookAt(target, 120.0F, 120.0F);
         }
-
-        if (hits.isEmpty()) return;
-
+        mob.stopUsingItem();
         spear.attack(mob, EquipmentSlot.MAINHAND);
-        ticksUntilNextAttack = (int) (spear.getSwingTimes() * 20.0F);
-        if (ticksUntilNextAttack <= 0) ticksUntilNextAttack = 20;
+    }
+
+    protected boolean canPerformAttack(LivingEntity target, SpearItem spear) {
+        List<EntityHitResult> hits = SpearCollision.getHitEntitiesAlong(
+                mob,
+                spear,
+                spear.getHitboxMargin(),
+                entity -> mob == entity ? false : entity == target
+                        && entity.isAlive()
+                        && entity != mob.getVehicle()
+                        && !mob.isPassengerOfSameVehicle(entity)
+        );
+        return !hits.isEmpty()
+                && isTimeToAttack()
+                && mob.getSensing().hasLineOfSight(target)
+                && !mob.isUsingItem();
+    }
+
+    protected void resetAttackCooldown(SpearItem spear) {
+        int multiplier = canChargeAttack ? 2 : 1;
+        ticksUntilNextAttack = adjustedTickDelay(Math.max(1, Math.round(spear.getSwingTimes() * 20.0F)) * multiplier);
+    }
+
+    protected boolean isTimeToAttack() {
+        return ticksUntilNextAttack <= 0;
+    }
+
+    private void tickAttackCooldown() {
+        ticksUntilNextAttack = Math.max(ticksUntilNextAttack - 1, 0);
+    }
+
+    @Override
+    protected int adjustedTickDelay(int ticks) {
+        return this.requiresUpdateEveryTick() ? ticks : reducedTickDelay(ticks);
+    }
+
+    private int getMaxFleeingTime() {
+        return adjustedTickDelay(MAX_FLEEING_TIME);
+    }
+
+    private int getSpearUseDuration() {
+        if (mob.getMainHandItem().getItem() instanceof SpearItem spear) {
+            return adjustedTickDelay(Math.max(1, spear.getDamageEndTick()));
+        }
+        return adjustedTickDelay(200);
+    }
+
+    private void playUseSound() {
+        if (mob.getMainHandItem().getItem() instanceof SpearItem spear) {
+            mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), spear.getUseSound(), mob.getSoundSource(), 1.0F, 1.0F);
+        }
+    }
+
+    private double currentMovementFactor() {
+        return 1.0D;
+    }
+
+    // ========== getPosAway ==========
+
+    public static Vec3 getPosAway(PathfinderMob mob, int horizontalRange, int verticalRange, Vec3 awayFrom) {
+        return getPosAway(mob, 0.0D, horizontalRange, verticalRange, awayFrom);
+    }
+
+    public static Vec3 getPosAway(PathfinderMob mob, double minHorizontalRange, double maxHorizontalRange, int verticalRange, Vec3 awayFrom) {
+        Vec3 directAway = mob.position().subtract(awayFrom);
+        Vec3 pos = LandRandomPos.getPosAway(mob,
+                Math.max(1, (int) Math.ceil(maxHorizontalRange)),
+                Math.max(1, verticalRange),
+                awayFrom);
+        if (pos == null && directAway.lengthSqr() > 1.0E-4D) {
+            pos = DefaultRandomPos.getPosTowards(mob,
+                    Math.max(1, (int) Math.ceil(maxHorizontalRange)),
+                    Math.max(1, verticalRange),
+                    mob.position().add(directAway.normalize().scale(Math.max(minHorizontalRange, maxHorizontalRange))),
+                    Math.PI / 2.0D);
+        }
+        if (pos == null && directAway.lengthSqr() > 1.0E-4D) {
+            pos = mob.position().add(directAway.normalize().scale(Math.max(1.0D, maxHorizontalRange)));
+        }
+        return pos;
     }
 }

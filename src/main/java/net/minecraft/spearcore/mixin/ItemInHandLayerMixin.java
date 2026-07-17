@@ -48,13 +48,14 @@ public abstract class ItemInHandLayerMixin<T extends LivingEntity, M extends Ent
         boolean flag = humanoidArm == HumanoidArm.LEFT;
         poseStack.translate((float)(flag ? -1 : 1) / 16.0F, 0.125F, -0.625F);
 
-        // 应用第三人称动画
-        if (livingEntity.attackAnim > 0.0F && livingEntity.getMainArm() == humanoidArm) {
-            SpearAnimations.thirdPersonAttackItem(livingEntity.attackAnim, poseStack, livingEntity);
+        float attackTime = this.getParentModel().attackTime;
+        if (attackTime > 0.0F && livingEntity.getMainArm() == humanoidArm) {
+            SpearAnimations.thirdPersonAttackItem(attackTime, poseStack, livingEntity);
         }
+
         float useTicks = livingEntity.getTicksUsingItem();
-        if (useTicks != 0.0f) {
-            SpearAnimations.thirdPersonUseItem(livingEntity.attackAnim, poseStack, useTicks,
+        if (useTicks != 0.0f && isUsedArm(livingEntity, humanoidArm)) {
+            SpearAnimations.thirdPersonUseItem(attackTime, poseStack, useTicks,
                     humanoidArm, itemStack, livingEntity, Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false));
         }
 
@@ -64,5 +65,13 @@ public abstract class ItemInHandLayerMixin<T extends LivingEntity, M extends Ent
 
         poseStack.popPose();
         ci.cancel();
+    }
+
+    private static boolean isUsedArm(LivingEntity livingEntity, HumanoidArm humanoidArm) {
+        InteractionHand usedHand = livingEntity.getUsedItemHand();
+        HumanoidArm usedArm = usedHand == InteractionHand.MAIN_HAND
+                ? livingEntity.getMainArm()
+                : livingEntity.getMainArm().getOpposite();
+        return usedArm == humanoidArm;
     }
 }

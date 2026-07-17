@@ -44,7 +44,7 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> {
 
         // 攻击动画 — 手臂
         float attackAnim = entity.attackAnim;
-        if (attackAnim > 0.0F) {
+        if (attackAnim > 0.0F && isSpearInHand(entity, entity.swingingArm)) {
             HumanoidArm attackArm = entity.swingingArm == InteractionHand.MAIN_HAND
                     ? mainArm : mainArm.getOpposite();
             ModelPart arm = getArm((HumanoidModel<T>) (Object) this, attackArm);
@@ -55,18 +55,22 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> {
         float useTicks = entity.getTicksUsingItem();
         if (useTicks > 0.0F) {
             if (mainIsSpear) {
-                ModelPart arm = getArm((HumanoidModel<T>) (Object) this, mainArm);
-                SpearAnimations.thirdPersonHandUse(arm, head,
-                        entity.getUsedItemHand() == InteractionHand.MAIN_HAND,
+                HumanoidArm armSide = mainArm;
+                ModelPart arm = getArm((HumanoidModel<T>) (Object) this, armSide);
+                SpearAnimations.thirdPersonHandUse(arm, head, armSide == HumanoidArm.RIGHT,
                         mainHand, (HumanoidModel<?>) (Object) this, entity);
             }
             if (offIsSpear) {
-                ModelPart arm = getArm((HumanoidModel<T>) (Object) this, mainArm.getOpposite());
-                SpearAnimations.thirdPersonHandUse(arm, head,
-                        entity.getUsedItemHand() == InteractionHand.OFF_HAND,
+                HumanoidArm armSide = mainArm.getOpposite();
+                ModelPart arm = getArm((HumanoidModel<T>) (Object) this, armSide);
+                SpearAnimations.thirdPersonHandUse(arm, head, armSide == HumanoidArm.RIGHT,
                         offHand, (HumanoidModel<?>) (Object) this, entity);
             }
         }
+    }
+
+    private static boolean isSpearInHand(LivingEntity entity, InteractionHand hand) {
+        return entity.getItemInHand(hand).getItem() instanceof SpearItem;
     }
 
     private static ModelPart getArm(HumanoidModel<?> model, HumanoidArm arm) {

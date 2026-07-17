@@ -10,3 +10,4 @@
 /enchant @a minecraft:sweeping_edge 1
 /kill @e
 /gamerule doMobSpawning false
+/item replace entity @e weapon.mainhand with spearcore:netherite_spear 1

@@ -55,15 +55,6 @@ public abstract class LivingEntitySpearMixin extends Entity implements SpearCool
             this.RecentStabbedEntities.put(target, this.level().getGameTime());
         }
     }
-    @Inject(method = "handleEntityEvent", at = @At("HEAD"))
-    private void onHandleEntityEvent(byte eventId, CallbackInfo ci) {
-        if (eventId == 2) {
-            // 命中反馈，触发动画
-            if (this.level().isClientSide) {
-                SpearAnimations.triggerHitFeedback();
-            }
-        }
-    }
     @Inject(method = "getCurrentSwingDuration", at = @At("HEAD"), cancellable = true)
     private void onGetCurrentSwingDuration(CallbackInfoReturnable<Integer> cir) {
         LivingEntity self = (LivingEntity) (Object) this;

@@ -6,6 +6,10 @@
   "item.spearcore.golden_spear": "金矛",
   "item.spearcore.diamond_spear": "钻石矛",
   "item.spearcore.netherite_spear": "下界合金矛",
+  "item.spearcore.spear.desc": "可蓄力戳刺，移动越快伤害越高。",
   "enchantment.spearcore.lunge": "突进",
-  "enchantment.spearcore.lunge.description": "戳刺攻击时将攻击者向前推进。"
+  "enchantment.spearcore.lunge.description": "戳刺攻击时将攻击者向前推进。",
+  "death.attack.spear": "%1$s 被矛刺穿了",
+  "death.attack.spear.item": "%1$s 被 %2$s 用 %3$s 刺穿了",
+  "death.attack.spear.player": "%1$s 被 %2$s 刺穿了"
 }

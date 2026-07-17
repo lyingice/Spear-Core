@@ -30,8 +30,7 @@ public class SpearClientExtensions implements IClientItemExtensions {
 
         // 处理使用物品的情况（如持矛准备攻击）
         if (player.isUsingItem() && player.getUseItem() == itemInHand) {
-            // 应用基础位置偏移
-            poseStack.translate(dir * 0.56F, -0.52F, -0.72F);
+            applyItemArmTransform(poseStack, arm, 0.0F);
             // 计算使用物品的持续时间
             float useTicks = itemInHand.getUseDuration(player) - (player.getUseItemRemainingTicks() - partialTick + 1.0F);
             if (useTicks < 0) useTicks = 0;
@@ -39,12 +38,16 @@ public class SpearClientExtensions implements IClientItemExtensions {
             SpearAnimations.firstPersonUse(SpearAnimations.spearHitTicks + partialTick, poseStack, useTicks, arm, itemInHand);
             return true;
         } else if (swingProcess > 0.0F) {
-            poseStack.translate(dir * 0.56F, -0.52F, -0.72F);
+            applyItemArmTransform(poseStack, arm, 0.0F);
             SpearAnimations.firstPersonAttack(swingProcess, poseStack, dir, arm);
             return true;
         }
-        // 闲置：固定位置，不走 equipProcess 渐变
-        poseStack.translate(dir * 0.56F, -0.52F, -0.72F);
+        applyItemArmTransform(poseStack, arm, equipProcess);
         return true;
+    }
+
+    private static void applyItemArmTransform(PoseStack poseStack, HumanoidArm arm, float equipProcess) {
+        int dir = arm == HumanoidArm.RIGHT ? 1 : -1;
+        poseStack.translate(dir * 0.56F, -0.52F + equipProcess * -0.6F, -0.72F);
     }
 }

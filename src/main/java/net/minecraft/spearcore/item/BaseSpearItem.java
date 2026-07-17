@@ -238,6 +238,21 @@ public abstract class BaseSpearItem extends SpearItem {
     @Override
     public float getSwingTimes() { return swingTimes; }
 
+    @Override
+    public float getMinCreativeRange() { return minCreativeRange; }
+
+    @Override
+    public float getMaxCreativeRange() { return maxCreativeRange; }
+
+    @Override
+    public float getMobFactor() { return mobFactor; }
+
+    @Override
+    public boolean dealsKnockback() { return dealsKnockback; }
+
+    @Override
+    public boolean dismounts() { return dismounts; }
+
     // ========== 内置子类 ==========
 
     public static class WoodenSpearItem extends BaseSpearItem {

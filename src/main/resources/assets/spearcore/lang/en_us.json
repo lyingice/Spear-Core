@@ -6,6 +6,10 @@
   "item.spearcore.golden_spear": "Golden Spear",
   "item.spearcore.diamond_spear": "Diamond Spear",
   "item.spearcore.netherite_spear": "Netherite Spear",
+  "item.spearcore.spear.desc": "Charge and stab. Faster movement increases damage.",
   "enchantment.spearcore.lunge": "Lunge",
-  "enchantment.spearcore.lunge.description": "Push the attacker forward during a stabbing attack."
+  "enchantment.spearcore.lunge.description": "Push the attacker forward during a stabbing attack.",
+  "death.attack.spear": "%1$s was pierced by a spear",
+  "death.attack.spear.item": "%1$s was pierced by %2$s using %3$s",
+  "death.attack.spear.player": "%1$s was pierced by %2$s"
 }

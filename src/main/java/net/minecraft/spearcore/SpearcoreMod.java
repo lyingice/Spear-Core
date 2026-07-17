@@ -3,6 +3,7 @@ package net.minecraft.spearcore;
 import net.minecraft.spearcore.config.SpearConfig;
 import net.minecraft.spearcore.init.SpearCoreItems;
 import net.minecraft.spearcore.init.SpearSounds;
+import net.minecraft.spearcore.network.SpearStabAttackPacket;
 import net.neoforged.fml.ModContainer;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -47,6 +48,7 @@ public class SpearcoreMod {
 	public SpearcoreMod(IEventBus modEventBus, ModContainer modContainer) {
 		// Start of user code block mod constructor
 		// End of user code block mod constructor
+		SpearStabAttackPacket.register();
 		modEventBus.addListener(this::registerNetworking);
 		// Start of user code block mod init
 	       SpearSounds.REGISTRY.register(modEventBus);

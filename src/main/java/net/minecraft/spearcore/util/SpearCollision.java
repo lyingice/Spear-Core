@@ -30,8 +30,8 @@ public class SpearCollision {
         Vec3 look = getHeadLookAngle(attacker);
 
         boolean creative = attacker instanceof Player player && player.getAbilities().instabuild;
-        double minRange = creative ? 0.0 : spear.getMinRange();
-        double maxRange = creative ? spear.getMaxRange() : spear.getMaxRange();
+        double minRange = creative ? spear.getMinCreativeRange() : spear.getMinRange();
+        double maxRange = creative ? spear.getMaxCreativeRange() : spear.getMaxRange();
         double speedBonus = Math.max(0.0, look.dot(SpearItem.getMotion(attacker)));
         speedBonus = Math.min(speedBonus, 4.0); // 最多加 4 格
         maxRange += speedBonus;
