@@ -1,13 +1,13 @@
-[177月2026 14:17:42.122] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientdev, --version, 21.1.190, --assetIndex, 17, --assetsDir, C:\\Users\\12501\\.mcreator\\gradle\\caches\\neoformruntime\\assets, --gameDir, ., --fml.fmlVersion, 4.0.41, --fml.mcVersion, 1.21.1, --fml.neoForgeVersion, 21.1.190, --fml.neoFormVersion, 20240808.144430]
-[177月2026 14:17:42.124] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: JVM identified as Microsoft OpenJDK 64-Bit Server VM 21.0.10+7-LTS
-[177月2026 14:17:42.125] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 11.0.5+main.901c6ea8 starting: java version 21.0.10 by Microsoft; OS Windows 11 arch amd64 version 10.0
-[177月2026 14:17:42.199] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
-[177月2026 14:17:42.272] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
-[177月2026 14:17:42.527] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.6 got version 4.6
-[177月2026 14:17:42.851] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/C:/Users/12501/.mcreator/gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.15.2+mixin.0.8.7/2af2f021d8e02a0220dc27a7a72b4666d66d44ca/sponge-mixin-0.15.2+mixin.0.8.7.jar%23138!/ Service=ModLauncher Env=CLIENT
-[177月2026 14:17:42.945] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: AMD Radeon RX 7900 XT GL version 4.6.0 Core Profile Context 26.2.2.260209, ATI Technologies Inc.
-[177月2026 14:17:43.189] [main/INFO] [net.neoforged.fml.loading.moddiscovery.locators.JarInJarDependencyLocator/]: Found 2 dependencies adding them to mods collection
-[177月2026 14:17:43.190] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/]: 
+[287月2026 19:35:17.107] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientdev, --version, 21.1.190, --assetIndex, 17, --assetsDir, C:\\Users\\12501\\.mcreator\\gradle\\caches\\neoformruntime\\assets, --gameDir, ., --fml.fmlVersion, 4.0.41, --fml.mcVersion, 1.21.1, --fml.neoForgeVersion, 21.1.190, --fml.neoFormVersion, 20240808.144430]
+[287月2026 19:35:17.110] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: JVM identified as Microsoft OpenJDK 64-Bit Server VM 21.0.10+7-LTS
+[287月2026 19:35:17.111] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 11.0.5+main.901c6ea8 starting: java version 21.0.10 by Microsoft; OS Windows 11 arch amd64 version 10.0
+[287月2026 19:35:17.189] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[287月2026 19:35:17.273] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
+[287月2026 19:35:17.558] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.6 got version 4.6
+[287月2026 19:35:17.637] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/C:/Users/12501/.mcreator/gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.15.2+mixin.0.8.7/2af2f021d8e02a0220dc27a7a72b4666d66d44ca/sponge-mixin-0.15.2+mixin.0.8.7.jar%23138!/ Service=ModLauncher Env=CLIENT
+[287月2026 19:35:17.722] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: AMD Radeon RX 7900 XT GL version 4.6.0 Core Profile Context 26.2.2.260209, ATI Technologies Inc.
+[287月2026 19:35:17.975] [main/INFO] [net.neoforged.fml.loading.moddiscovery.locators.JarInJarDependencyLocator/]: Found 2 dependencies adding them to mods collection
+[287月2026 19:35:17.976] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/]: 
      Mod List:
 		Name Version (Mod Id)
 
@@ -15,333 +15,137 @@
 		Just Enough Items 19.27.0.340 (jei)
 		Minecraft 1.21.1 (minecraft)
 		NeoForge 21.1.190 (neoforge)
-		Spear Core 2.0.0 (spearcore)
-[177月2026 14:17:43.928] [main/INFO] [mixin/]: Compatibility level set to JAVA_21
-[177月2026 14:17:43.935] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientdev' with arguments [--version, 21.1.190, --gameDir, ., --assetsDir, C:\Users\12501\.mcreator\gradle\caches\neoformruntime\assets, --assetIndex, 17]
-[177月2026 14:17:44.158] [main/WARN] [mixin/]: Error loading class: net/minecraft/client/gui/components/AbstractScrollArea (java.lang.ClassNotFoundException: net.minecraft.client.gui.components.AbstractScrollArea)
-[177月2026 14:17:44.158] [main/WARN] [mixin/]: @Mixin target net.minecraft.client.gui.components.AbstractScrollArea was not found imblocker-neoforge.mixins.json:AbstractScrollWidgetMixin from mod imblocker
-[177月2026 14:17:44.170] [main/WARN] [mixin/]: Error loading class: net/minecraft/client/gui/components/AbstractScrollArea (java.lang.ClassNotFoundException: net.minecraft.client.gui.components.AbstractScrollArea)
-[177月2026 14:17:44.170] [main/WARN] [mixin/]: Error loading class: net/minecraft/client/gui/components/AbstractScrollArea (java.lang.ClassNotFoundException: net.minecraft.client.gui.components.AbstractScrollArea)
-[177月2026 14:17:44.210] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.4.1).
-[177月2026 14:17:45.178] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 229 Datafixer optimizations took 151 milliseconds
-[177月2026 14:17:45.425] [main/WARN] [oshi.driver.windows.perfmon.PerfmonDisabled/]: Invalid registry value type detected for PerfOS counters. Should be REG_DWORD. Ignoring: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PerfOS\Performance\Disable Performance Counters.
-[177月2026 14:17:48.430] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[177月2026 14:17:48.432] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
-[177月2026 14:17:48.433] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[177月2026 14:17:48.434] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[177月2026 14:17:48.434] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[177月2026 14:17:48.532] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/12501/MCreatorWorkspaces/spearcore/build/moddev/artifacts/neoforge-21.1.190.jar%23189!/assets/.mcassetsroot' uses unexpected schema
-[177月2026 14:17:48.532] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/12501/MCreatorWorkspaces/spearcore/build/moddev/artifacts/neoforge-21.1.190.jar%23189!/data/.mcassetsroot' uses unexpected schema
-[177月2026 14:17:48.548] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
-[177月2026 14:17:48.552] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
-[177月2026 14:17:48.612] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.3+5
-[177月2026 14:17:48.777] [modloading-worker-0/WARN] [io.github.reserveword.imblocker.common.IMBlockerCore/]: [IMBlocker] Class com.simibubi.create.content.equipment.clipboard.ClipboardScreen not found, ignored.
-[177月2026 14:17:48.777] [modloading-worker-0/WARN] [io.github.reserveword.imblocker.common.IMBlockerCore/]: [IMBlocker] Class net.mehvahdjukaar.supplementaries.client.screens.TextHolderEditScreen not found, ignored.
-[177月2026 14:17:48.781] [modloading-worker-0/INFO] [io.github.reserveword.imblocker.common.IMBlockerCore/]: [IMBlocker] bakelist screenWhitelist result [class net.minecraft.client.gui.screens.inventory.BookEditScreen, class net.minecraft.client.gui.screens.inventory.AbstractSignEditScreen]
-[177月2026 14:17:48.782] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.190, for MC 1.21.1
-[177月2026 14:17:48.834] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
-[177月2026 14:17:48.838] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 2.672 milliseconds
-[177月2026 14:17:49.268] [Render thread/INFO] [net.neoforged.neoforge.gametest.GameTestHooks/]: Enabled Gametest Namespaces: []
-[177月2026 14:17:49.376] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: vanilla, mod_resources, mod/imblocker, mod/neoforge, mod/spearcore, mod/jei
-[177月2026 14:17:49.461] [Worker-Main-12/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.1.05.hex, loading
-[177月2026 14:17:49.482] [Worker-Main-13/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_jp_patch-15.1.05.hex, loading
-[177月2026 14:17:50.345] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
-[177月2026 14:17:50.345] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
-[177月2026 14:17:50.390] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on 扬声器 (HECATE G5无线版)
-[177月2026 14:17:50.390] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
-[177月2026 14:17:50.445] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x2 minecraft:textures/atlas/blocks.png-atlas
-[177月2026 14:17:50.450] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x2 minecraft:textures/atlas/signs.png-atlas
-[177月2026 14:17:50.450] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x2 minecraft:textures/atlas/shield_patterns.png-atlas
-[177月2026 14:17:50.450] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x2 minecraft:textures/atlas/banner_patterns.png-atlas
-[177月2026 14:17:50.450] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x1024x2 minecraft:textures/atlas/armor_trims.png-atlas
-[177月2026 14:17:50.452] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x2 minecraft:textures/atlas/chest.png-atlas
-[177月2026 14:17:50.452] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x2 minecraft:textures/atlas/decorated_pot.png-atlas
-[177月2026 14:17:50.452] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x2 minecraft:textures/atlas/beds.png-atlas
-[177月2026 14:17:50.452] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x2 minecraft:textures/atlas/shulker_boxes.png-atlas
-[177月2026 14:17:50.577] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
-[177月2026 14:17:50.577] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
-[177月2026 14:17:50.578] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
-[177月2026 14:17:50.578] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 64x64x0 minecraft:textures/atlas/map_decorations.png-atlas
-[177月2026 14:17:50.578] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x0 minecraft:textures/atlas/gui.png-atlas
-[177月2026 14:17:50.599] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
-[177月2026 14:17:50.638] [Render thread/INFO] [net.neoforged.neoforge.client.entity.animation.json.AnimationLoader/]: Loaded 0 entity animations
-[177月2026 14:17:50.638] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 jei:textures/atlas/gui.png-atlas
-[177月2026 14:18:38.668] [Render thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 1297 recipes
-[177月2026 14:18:38.753] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 1399 advancements
-[177月2026 14:18:39.000] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Starting integrated minecraft server version 1.21.1
-[177月2026 14:18:39.000] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
-[177月2026 14:18:39.589] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
-[177月2026 14:18:39.735] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: 准备生成区域中：0%
-[177月2026 14:18:39.773] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
-[177月2026 14:18:39.774] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 176 ms
-[177月2026 14:18:39.830] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing view distance to 5, from 10
-[177月2026 14:18:39.830] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing simulation distance to 12, from 0
-[177月2026 14:18:40.319] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[local:E:e099053d] logged in with entity id 3 at (78.63116253012075, 79.0, -28.696073490275158)
-[177月2026 14:18:40.390] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev加入了游戏
-[177月2026 14:18:40.435] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
-[177月2026 14:18:40.442] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
-[177月2026 14:18:40.450] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 6.858 milliseconds
-[177月2026 14:18:40.450] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
-[177月2026 14:18:40.452] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 2.112 milliseconds
-[177月2026 14:18:40.455] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
-[177月2026 14:18:40.547] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering ingredients: jei:minecraft took 91.64 milliseconds
-[177月2026 14:18:40.548] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 92.28 milliseconds
-[177月2026 14:18:40.548] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients...
-[177月2026 14:18:40.548] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients took 325.3 microseconds
-[177月2026 14:18:40.549] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases...
-[177月2026 14:18:40.549] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases took 403.7 microseconds
-[177月2026 14:18:40.567] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info...
-[177月2026 14:18:40.567] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info took 329.3 microseconds
-[177月2026 14:18:40.580] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
-[177月2026 14:18:40.596] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering categories: jei:minecraft took 15.16 milliseconds
-[177月2026 14:18:40.602] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 20.64 milliseconds
-[177月2026 14:18:40.603] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
-[177月2026 14:18:40.606] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 3.176 milliseconds
-[177月2026 14:18:40.607] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
-[177月2026 14:18:40.608] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 680.0 microseconds
-[177月2026 14:18:40.608] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
-[177月2026 14:18:40.619] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 10.97 milliseconds
-[177月2026 14:18:40.620] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
-[177月2026 14:18:40.622] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 247.9 microseconds
-[177月2026 14:18:40.622] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
-[177月2026 14:18:40.739] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 117.3 milliseconds
-[177月2026 14:18:40.753] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:internal took 13.25 milliseconds
-[177月2026 14:18:40.753] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 131.0 milliseconds
-[177月2026 14:18:40.762] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
-[177月2026 14:18:40.766] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 4.322 milliseconds
-[177月2026 14:18:40.774] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
-[177月2026 14:18:40.780] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
-[177月2026 14:18:40.793] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 12.10 milliseconds
-[177月2026 14:18:40.799] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
-[177月2026 14:18:40.800] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
-[177月2026 14:18:40.801] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
-[177月2026 14:18:40.816] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 14.01 milliseconds
-[177月2026 14:18:40.816] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
-[177月2026 14:18:40.858] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 1697 ingredients
-[177月2026 14:18:40.939] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 1697 ingredients
-[177月2026 14:18:40.940] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 124.5 milliseconds
-[177月2026 14:18:41.048] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:neoforge_gui took 249.3 milliseconds
-[177月2026 14:18:41.048] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 249.8 milliseconds
-[177月2026 14:18:41.049] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 275.8 milliseconds
-[177月2026 14:18:41.051] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
-[177月2026 14:18:41.051] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 206.3 microseconds
-[177月2026 14:18:41.051] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 615.4 milliseconds
-[177月2026 14:18:41.061] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 152 advancements
-[177月2026 14:18:41.984] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client LeftClickEmpty player=Dev item=spearcore:netherite_spear attackScale=0.0 cooldown=false
-[177月2026 14:18:41.984] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client LeftClickEmpty sending SpearStabAttackPacket and predicting lunge
-[177月2026 14:18:41.984] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server packet received player=Dev pos=(78.63116253012075, 79.0, -28.696073490275158) attackScale=1.0
-[177月2026 14:18:41.985] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, -0.0784000015258789, 0.0)
-[177月2026 14:18:41.985] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server packet performing stab item=spearcore:netherite_spear
-[177月2026 14:18:41.985] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(-0.1840272694826126, -0.1330605298280716, 0.9738554954528809) beforeMotion=(0.0, -0.0784000015258789, 0.0)
-[177月2026 14:18:41.985] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=-0.25285348160726784 z=1.3380775213365723 strength=1.3740001
-[177月2026 14:18:41.985] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(-0.25285348160726784, -0.0784000015258789, 1.3380775213365723)
-[177月2026 14:18:41.986] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, -0.0784000015258789, 0.0)
-[177月2026 14:18:41.986] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(-0.1840272694826126, -0.1330605298280716, 0.9738554954528809) beforeMotion=(0.0, -0.0784000015258789, 0.0)
-[177月2026 14:18:41.986] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=-0.25285348160726784 z=1.3380775213365723 strength=1.3740001
-[177月2026 14:18:41.986] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(-0.25285348160726784, -0.0784000015258789, 1.3380775213365723)
-[177月2026 14:18:43.332] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity player=Dev item=spearcore:netherite_spear target=entity.minecraft.iron_golem attackScale=1.0 cooldown=false
-[177月2026 14:18:43.332] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity predicting lunge
-[177月2026 14:18:43.332] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, -0.0784000015258789, 0.0)
-[177月2026 14:18:43.332] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(-0.5645170211791992, -0.1382848173379898, -0.8137553930282593) beforeMotion=(0.0, -0.0784000015258789, 0.0)
-[177月2026 14:18:43.332] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=-0.7756464280159889 z=-1.1180999690012072 strength=1.3740001
-[177月2026 14:18:43.332] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(-0.7756464280159889, -0.0784000015258789, -1.1180999690012072)
-[177月2026 14:18:43.337] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, -0.0784000015258789, 0.0)
-[177月2026 14:18:43.337] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(-0.5645170211791992, -0.1382848173379898, -0.8137553930282593) beforeMotion=(0.0, -0.0784000015258789, 0.0)
-[177月2026 14:18:43.338] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=-0.7756464280159889 z=-1.1180999690012072 strength=1.3740001
-[177月2026 14:18:43.338] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(-0.7756464280159889, -0.0784000015258789, -1.1180999690012072)
-[177月2026 14:18:45.382] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity player=Dev item=spearcore:netherite_spear target=entity.minecraft.iron_golem attackScale=1.0 cooldown=false
-[177月2026 14:18:45.382] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity predicting lunge
-[177月2026 14:18:45.382] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.03920274433494471, 0.0, -0.06426548093197891)
-[177月2026 14:18:45.382] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(-0.8250418305397034, -0.45627835392951965, 0.33326148986816406) beforeMotion=(0.03920274433494471, 0.0, -0.06426548093197891)
-[177月2026 14:18:45.382] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, 0.0, 0.0)
-[177月2026 14:18:45.382] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=-1.133607534959964 z=0.4579013112333996 strength=1.3740001
-[177月2026 14:18:45.382] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(-0.8250418305397034, -0.45627835392951965, 0.33326148986816406) beforeMotion=(0.0, 0.0, 0.0)
-[177月2026 14:18:45.382] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(-1.0944047906250192, 0.0, 0.3936358303014207)
-[177月2026 14:18:45.382] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=-1.133607534959964 z=0.4579013112333996 strength=1.3740001
-[177月2026 14:18:45.384] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(-1.133607534959964, 0.0, 0.4579013112333996)
-[177月2026 14:18:47.283] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client LeftClickEmpty player=Dev item=spearcore:netherite_spear attackScale=0.0 cooldown=false
-[177月2026 14:18:47.283] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client LeftClickEmpty sending SpearStabAttackPacket and predicting lunge
-[177月2026 14:18:47.283] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.09654437483715465, 0.16477328182606651, -0.03211830549392643)
-[177月2026 14:18:47.283] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(0.939878523349762, -0.1435052752494812, -0.3098943829536438) beforeMotion=(0.09654437483715465, 0.16477328182606651, -0.03211830549392643)
-[177月2026 14:18:47.283] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server packet received player=Dev pos=(69.39078054197772, 80.00133597911214, -26.940668153416528) attackScale=1.0
-[177月2026 14:18:47.283] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=1.2913931592042616 z=-0.42579490463921843 strength=1.3740001
-[177月2026 14:18:47.283] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server packet performing stab item=spearcore:netherite_spear
-[177月2026 14:18:47.283] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(1.3879375340414162, 0.16477328182606651, -0.45791321013314484)
-[177月2026 14:18:47.283] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, 0.16477328182606651, 0.0)
-[177月2026 14:18:47.283] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(0.9399082660675049, -0.1435052752494812, -0.3098042607307434) beforeMotion=(0.0, 0.16477328182606651, 0.0)
-[177月2026 14:18:47.284] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=1.291434025700596 z=-0.4256710766984213 strength=1.3740001
-[177月2026 14:18:47.284] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(1.291434025700596, 0.16477328182606651, -0.4256710766984213)
-[177月2026 14:18:49.683] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity player=Dev item=spearcore:netherite_spear target=entity.minecraft.iron_golem attackScale=1.0 cooldown=false
-[177月2026 14:18:49.683] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity predicting lunge
-[177月2026 14:18:49.683] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(-0.10749391717288084, -0.0784000015258789, 0.11287155159059664)
-[177月2026 14:18:49.683] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(-0.9973141551017761, -0.0653393492102623, 0.032999761402606964) beforeMotion=(-0.10749391717288084, -0.0784000015258789, 0.11287155159059664)
-[177月2026 14:18:49.683] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=-1.3703097213944204 z=0.04534167455897986 strength=1.3740001
-[177月2026 14:18:49.683] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(-1.4778036385673012, -0.0784000015258789, 0.1582132261495765)
-[177月2026 14:18:49.683] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, -0.0784000015258789, 0.0)
-[177月2026 14:18:49.683] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(-0.9973141551017761, -0.0653393492102623, 0.032999761402606964) beforeMotion=(0.0, -0.0784000015258789, 0.0)
-[177月2026 14:18:49.683] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=-1.3703097213944204 z=0.04534167455897986 strength=1.3740001
-[177月2026 14:18:49.683] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(-1.3703097213944204, -0.0784000015258789, 0.04534167455897986)
-[177月2026 14:18:50.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity player=Dev item=spearcore:netherite_spear target=entity.minecraft.iron_golem attackScale=1.0 cooldown=false
-[177月2026 14:18:50.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity predicting lunge
-[177月2026 14:18:50.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.00174092395641837, -0.0784000015258789, -0.0036169664787914432)
-[177月2026 14:18:50.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(0.30741509795188904, -0.1252647489309311, -0.9432946443557739) beforeMotion=(0.00174092395641837, -0.0784000015258789, -0.0036169664787914432)
-[177月2026 14:18:50.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=0.4223883668671107 z=-1.2960869097141199 strength=1.3740001
-[177月2026 14:18:50.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(0.42412929082352907, -0.0784000015258789, -1.2997038761929114)
-[177月2026 14:18:50.983] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, -0.0784000015258789, 0.0)
-[177月2026 14:18:50.983] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(0.3075055480003357, -0.1252647489309311, -0.9432651400566101) beforeMotion=(0.0, -0.0784000015258789, 0.0)
-[177月2026 14:18:50.983] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=0.42251264524023213 z=-1.2960463708049303 strength=1.3740001
-[177月2026 14:18:50.983] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(0.42251264524023213, -0.0784000015258789, -1.2960463708049303)
-[177月2026 14:18:53.933] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity player=Dev item=spearcore:netherite_spear target=entity.minecraft.iron_golem attackScale=1.0 cooldown=false
-[177月2026 14:18:53.933] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity predicting lunge
-[177月2026 14:18:53.933] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(-0.06620789885724628, -0.3739040364667221, 0.2323946426309665)
-[177月2026 14:18:53.933] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(-0.6336640119552612, -0.23599891364574432, 0.736671507358551) beforeMotion=(-0.06620789885724628, -0.3739040364667221, 0.2323946426309665)
-[177月2026 14:18:53.933] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(-0.03804507989827048, -0.3739040364667221, 0.026128373066962873)
-[177月2026 14:18:53.933] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=-0.87065439835402 z=1.012186704504046 strength=1.3740001
-[177月2026 14:18:53.933] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(-0.6328588128089905, -0.24102666974067688, 0.7357354164123535) beforeMotion=(-0.03804507989827048, -0.3739040364667221, 0.026128373066962873)
-[177月2026 14:18:53.933] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(-0.9368622972112663, -0.3739040364667221, 1.2445813471350125)
-[177月2026 14:18:53.933] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=-0.8695480546686838 z=1.0109005154761235 strength=1.3740001
-[177月2026 14:18:53.933] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(-0.9075931345669542, -0.3739040364667221, 1.0370288885430863)
-[177月2026 14:18:55.783] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity player=Dev item=spearcore:netherite_spear target=entity.minecraft.iron_golem attackScale=1.0 cooldown=false
-[177月2026 14:18:55.783] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity predicting lunge
-[177月2026 14:18:55.783] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.03524144210309167, -0.15233518685055708, -0.11082776690565968)
-[177月2026 14:18:55.783] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(0.2578088641166687, -0.5336199402809143, -0.8054715394973755) beforeMotion=(0.03524144210309167, -0.15233518685055708, -0.11082776690565968)
-[177月2026 14:18:55.783] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=0.3542293979820954 z=-1.1067179536493654 strength=1.3740001
-[177月2026 14:18:55.783] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(0.38947084008518706, -0.15233518685055708, -1.217545720555025)
-[177月2026 14:18:55.783] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, -0.15233518685055708, 0.0)
-[177月2026 14:18:55.783] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(0.25958773493766785, -0.5246713161468506, -0.8107615113258362) beforeMotion=(0.0, -0.15233518685055708, 0.0)
-[177月2026 14:18:55.783] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=0.35667356661907945 z=-1.1139863753250836 strength=1.3740001
-[177月2026 14:18:55.784] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(0.35667356661907945, -0.15233518685055708, -1.1139863753250836)
-[177月2026 14:18:57.333] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity player=Dev item=spearcore:netherite_spear target=entity.minecraft.iron_golem attackScale=1.0 cooldown=false
-[177月2026 14:18:57.333] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity predicting lunge
-[177月2026 14:18:57.333] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, 0.0030162615090425808, 0.0)
-[177月2026 14:18:57.333] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(-0.002713460522084419, 0.0030162615090425808, 0.12901251618154927)
-[177月2026 14:18:57.333] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(-0.14889240264892578, -0.20532892644405365, 0.9672866463661194) beforeMotion=(0.0, 0.0030162615090425808, 0.0)
-[177月2026 14:18:57.333] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(-0.14881104230880737, -0.20786167681217194, 0.9667723178863525) beforeMotion=(-0.002713460522084419, 0.0030162615090425808, 0.12901251618154927)
-[177月2026 14:18:57.333] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=-0.2045781720312334 z=1.3290519222152568 strength=1.3740001
-[177月2026 14:18:57.333] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=-0.20446638291801378 z=1.328345234846779 strength=1.3740001
-[177月2026 14:18:57.333] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(-0.2045781720312334, 0.0030162615090425808, 1.3290519222152568)
-[177月2026 14:18:57.333] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(-0.2071798434400982, 0.0030162615090425808, 1.4573577510283282)
-[177月2026 14:18:58.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity player=Dev item=spearcore:netherite_spear target=entity.minecraft.iron_golem attackScale=1.0 cooldown=false
-[177月2026 14:18:58.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity predicting lunge
-[177月2026 14:18:58.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(-0.034585148778886125, -0.15233518685055708, -0.1316912252277309)
-[177月2026 14:18:58.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(-0.06336737424135208, -0.1848304122686386, -0.9807254076004028) beforeMotion=(-0.034585148778886125, -0.15233518685055708, -0.1316912252277309)
-[177月2026 14:18:58.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=-0.0870667768004374 z=-1.3475167811251936 strength=1.3740001
-[177月2026 14:18:58.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(-0.12165192557932353, -0.15233518685055708, -1.4792080063529245)
-[177月2026 14:18:58.993] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, -0.15233518685055708, 0.0)
-[177月2026 14:18:58.993] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(-0.06348953396081924, -0.1744559109210968, -0.9826159477233887) beforeMotion=(0.0, -0.15233518685055708, 0.0)
-[177月2026 14:18:58.994] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=-0.08723462426383932 z=-1.350114383391201 strength=1.3740001
-[177月2026 14:18:58.994] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(-0.08723462426383932, -0.15233518685055708, -1.350114383391201)
-[177月2026 14:19:03.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity player=Dev item=spearcore:netherite_spear target=entity.minecraft.iron_golem attackScale=1.0 cooldown=false
-[177月2026 14:19:03.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity predicting lunge
-[177月2026 14:19:03.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0027742878679600847, 0.08307781780646721, 0.03365861351722352)
-[177月2026 14:19:03.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(0.15188804268836975, -0.21554511785507202, 0.964608907699585) beforeMotion=(0.0027742878679600847, 0.08307781780646721, 0.03365861351722352)
-[177月2026 14:19:03.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=0.20869418166255116 z=1.325372709093358 strength=1.3740001
-[177月2026 14:19:03.983] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(0.21146846953051124, 0.08307781780646721, 1.3590313226105815)
-[177月2026 14:19:03.983] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, 0.08307781780646721, 0.0)
-[177月2026 14:19:03.983] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(0.15179555118083954, -0.21554511785507202, 0.9646234512329102) beforeMotion=(0.0, 0.08307781780646721, 0.0)
-[177月2026 14:19:03.984] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=0.20856709832450093 z=1.325392691909201 strength=1.3740001
-[177月2026 14:19:03.984] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(0.20856709832450093, 0.08307781780646721, 1.325392691909201)
-[177月2026 14:19:05.383] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity player=Dev item=spearcore:netherite_spear target=entity.minecraft.iron_golem attackScale=1.0 cooldown=false
-[177月2026 14:19:05.383] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity predicting lunge
-[177月2026 14:19:05.383] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(-0.006677205423130998, 0.0030162615090425808, -0.13793755359055634)
-[177月2026 14:19:05.383] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(0.003461874322965741, -0.21816569566726685, -0.9759055972099304) beforeMotion=(-0.006677205423130998, 0.0030162615090425808, -0.13793755359055634)
-[177月2026 14:19:05.383] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, 0.0030162615090425808, 0.0)
-[177月2026 14:19:05.383] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=0.004756615570668976 z=-1.3408943612993482 strength=1.3740001
-[177月2026 14:19:05.383] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(-0.0019205898524620223, 0.0030162615090425808, -1.4788319148899045)
-[177月2026 14:19:05.383] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(-0.019755898043513298, -0.1667095124721527, -0.9858081340789795) beforeMotion=(0.0, 0.0030162615090425808, 0.0)
-[177月2026 14:19:05.383] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=-0.027144605343679906 z=-1.35450044767515 strength=1.3740001
-[177月2026 14:19:05.383] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(-0.027144605343679906, 0.0030162615090425808, -1.35450044767515)
-[177月2026 14:19:07.083] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client LeftClickEmpty player=Dev item=spearcore:netherite_spear attackScale=0.0 cooldown=false
-[177月2026 14:19:07.083] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client LeftClickEmpty sending SpearStabAttackPacket and predicting lunge
-[177月2026 14:19:07.083] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.035364942950197445, -0.15233518685055708, 0.22565128087568376)
-[177月2026 14:19:07.083] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(-0.06540331244468689, -0.17190642654895782, 0.9829397201538086) beforeMotion=(0.035364942950197445, -0.15233518685055708, 0.22565128087568376)
-[177月2026 14:19:07.083] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=-0.08986415603938269 z=1.3505592467340648 strength=1.3740001
-[177月2026 14:19:07.083] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(-0.05449921308918525, -0.15233518685055708, 1.5762105276097484)
-[177月2026 14:19:07.083] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server packet received player=Dev pos=(78.82957494619619, 79.17675927506424, -40.648868031530775) attackScale=1.0
-[177月2026 14:19:07.083] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server packet performing stab item=spearcore:netherite_spear
-[177月2026 14:19:07.083] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(-0.05995579600295319, -0.15233518685055708, 0.08418422838464429)
-[177月2026 14:19:07.083] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(-0.06540331244468689, -0.17190642654895782, 0.982933521270752) beforeMotion=(-0.05995579600295319, -0.15233518685055708, 0.08418422838464429)
-[177月2026 14:19:07.083] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=-0.08986415603938269 z=1.3505507294682957 strength=1.3740001
-[177月2026 14:19:07.084] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(-0.1498199520423359, -0.15233518685055708, 1.43473495785294)
-[177月2026 14:19:08.682] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity player=Dev item=spearcore:netherite_spear target=entity.minecraft.iron_golem attackScale=1.0 cooldown=false
-[177月2026 14:19:08.682] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity predicting lunge
-[177月2026 14:19:08.682] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.004878928336770903, 0.08307781780646721, -0.25953587453236)
-[177月2026 14:19:08.682] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(-0.016973281279206276, -0.20786167681217194, -0.9780109524726868) beforeMotion=(0.004878928336770903, 0.08307781780646721, -0.25953587453236)
-[177月2026 14:19:08.682] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=-0.023321289707840087 z=-1.34378711958297 strength=1.3740001
-[177月2026 14:19:08.682] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(-0.018442361371069183, 0.08307781780646721, -1.60332299411533)
-[177月2026 14:19:08.686] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.002248213846359461, 0.08307781780646721, -0.08225924352313213)
-[177月2026 14:19:08.686] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(0.013964565470814705, -0.1770985722541809, -0.9840940833091736) beforeMotion=(0.002248213846359461, 0.08307781780646721, -0.08225924352313213)
-[177月2026 14:19:08.686] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=0.01918731396904061 z=-1.3521453417932037 strength=1.3740001
-[177月2026 14:19:08.686] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(0.02143552781540007, 0.08307781780646721, -1.4344045853163359)
-[177月2026 14:19:10.882] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity player=Dev item=spearcore:netherite_spear target=entity.minecraft.iron_golem attackScale=1.0 cooldown=false
-[177月2026 14:19:10.882] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity predicting lunge
-[177月2026 14:19:10.882] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(-0.010210028876324455, 0.0030162615090425808, 0.25972998403815367)
-[177月2026 14:19:10.882] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(0.006693059112876654, -0.18219153583049774, 0.9832403063774109) beforeMotion=(-0.010210028876324455, 0.0030162615090425808, 0.25972998403815367)
-[177月2026 14:19:10.883] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=0.009196263706200414 z=1.3509722522270806 strength=1.3740001
-[177月2026 14:19:10.883] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(-0.0010137651701240414, 0.0030162615090425808, 1.6107022362652343)
-[177月2026 14:19:10.883] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(-0.003997025926080495, 0.0030162615090425808, 0.07477712089778761)
-[177月2026 14:19:10.883] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(0.004061190411448479, -0.17190642654895782, 0.9851048588752747) beforeMotion=(-0.003997025926080495, 0.0030162615090425808, 0.07477712089778761)
-[177月2026 14:19:10.883] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=0.005580075919682237 z=1.3535341474942868 strength=1.3740001
-[177月2026 14:19:10.883] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(0.0015830499936017421, 0.0030162615090425808, 1.4283112683920745)
-[177月2026 14:19:12.133] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity player=Dev item=spearcore:netherite_spear target=entity.minecraft.iron_golem attackScale=1.0 cooldown=false
-[177月2026 14:19:12.133] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity predicting lunge
-[177月2026 14:19:12.133] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.011834293529112687, 0.08307781780646721, -0.1344733434970871)
-[177月2026 14:19:12.133] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(0.07038309425115585, -0.1873737871646881, -0.9797638654708862) beforeMotion=(0.011834293529112687, 0.08307781780646721, -0.1344733434970871)
-[177月2026 14:19:12.133] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=0.09670637660240189 z=-1.346195622169546 strength=1.3740001
-[177月2026 14:19:12.133] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(0.10854067013151458, 0.08307781780646721, -1.480668965666633)
-[177月2026 14:19:12.133] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, 0.08307781780646721, 0.0)
-[177月2026 14:19:12.133] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(0.0705115869641304, -0.1848304122686386, -0.9802376627922058) beforeMotion=(0.0, 0.08307781780646721, 0.0)
-[177月2026 14:19:12.133] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=0.09688292559934197 z=-1.3468466197233795 strength=1.3740001
-[177月2026 14:19:12.133] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(0.09688292559934197, 0.08307781780646721, -1.3468466197233795)
-[177月2026 14:19:15.033] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity player=Dev item=spearcore:netherite_spear target=entity.minecraft.iron_golem attackScale=1.0 cooldown=false
-[177月2026 14:19:15.033] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity predicting lunge
-[177月2026 14:19:15.033] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, -0.0784000015258789, 0.0)
-[177月2026 14:19:15.033] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(-0.06098778173327446, -0.06801784038543701, 0.9958183169364929) beforeMotion=(0.0, -0.0784000015258789, 0.0)
-[177月2026 14:19:15.033] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=-0.08379721652186767 z=1.368254439646904 strength=1.3740001
-[177月2026 14:19:15.033] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(-0.08379721652186767, -0.0784000015258789, 1.368254439646904)
-[177月2026 14:19:15.033] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, -0.0784000015258789, 0.0)
-[177月2026 14:19:15.033] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(-0.06098778173327446, -0.06801784038543701, 0.9958124756813049) beforeMotion=(0.0, -0.0784000015258789, 0.0)
-[177月2026 14:19:15.033] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=-0.08379721652186767 z=1.3682464137618524 strength=1.3740001
-[177月2026 14:19:15.033] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(-0.08379721652186767, -0.0784000015258789, 1.3682464137618524)
-[177月2026 14:19:16.582] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity player=Dev item=spearcore:netherite_spear target=entity.minecraft.iron_golem attackScale=1.0 cooldown=false
-[177月2026 14:19:16.583] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity predicting lunge
-[177月2026 14:19:16.583] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, 0.08307781780646721, 0.0)
-[177月2026 14:19:16.583] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(-0.041324324905872345, -0.26384714245796204, 0.9636788964271545) beforeMotion=(0.0, 0.08307781780646721, 0.0)
-[177月2026 14:19:16.583] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=-0.0567796254158246 z=1.3240948735376321 strength=1.3740001
-[177月2026 14:19:16.583] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, 0.08307781780646721, 0.0)
-[177月2026 14:19:16.583] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(-0.0567796254158246, 0.08307781780646721, 1.3240948735376321)
-[177月2026 14:19:16.583] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(-0.041324324905872345, -0.26384714245796204, 0.9636749029159546) beforeMotion=(0.0, 0.08307781780646721, 0.0)
-[177月2026 14:19:16.583] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=-0.0567796254158246 z=1.324089386452954 strength=1.3740001
-[177月2026 14:19:16.583] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(-0.0567796254158246, 0.08307781780646721, 1.324089386452954)
-[177月2026 14:19:17.933] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity player=Dev item=spearcore:netherite_spear target=entity.minecraft.iron_golem attackScale=1.0 cooldown=false
-[177月2026 14:19:17.933] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client AttackEntity predicting lunge
-[177月2026 14:19:17.933] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.017471516311958896, 0.08307781780646721, -0.12855284459494534)
-[177月2026 14:19:17.933] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applying strength=1.3740001 look=(0.06633637845516205, -0.2739124894142151, -0.9594641327857971) beforeMotion=(0.017471516311958896, 0.08307781780646721, -0.12855284459494534)
-[177月2026 14:19:17.933] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge check entity=Dev item=spearcore:netherite_spear lungeLevel=3 food=19 passenger=false fallFlying=false inWater=false motion=(0.0, 0.08307781780646721, 0.0)
-[177月2026 14:19:17.933] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client rushAttack push x=0.09114618880540348 z=-1.3183037879889241 strength=1.3740001
-[177月2026 14:19:17.933] [Render thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] client lunge applied afterMotion=(0.10861770511736238, 0.08307781780646721, -1.4468566325838694)
-[177月2026 14:19:17.933] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applying strength=1.3740001 look=(0.09065357595682144, -0.20279480516910553, -0.9750159978866577) beforeMotion=(0.0, 0.08307781780646721, 0.0)
-[177月2026 14:19:17.933] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server rushAttack push x=0.12455801993517568 z=-1.339672051764694 strength=1.3740001
-[177月2026 14:19:17.933] [Server thread/INFO] [net.minecraft.spearcore.SpearcoreMod/]: [SpearLunge] server lunge applied afterMotion=(0.12455801993517568, 0.08307781780646721, -1.339672051764694)
-[177月2026 14:19:19.625] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
-[177月2026 14:19:19.661] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:overworld
-[177月2026 14:19:19.700] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_end
-[177月2026 14:19:19.700] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_nether
-[177月2026 14:19:20.026] [Render thread/INFO] [mezz.jei.library.startup.JeiStarter/]: Stopping JEI
-[177月2026 14:19:20.027] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable...
-[177月2026 14:19:20.027] [Render thread/INFO] [mezz.jei.neoforge.plugins.neoforge.NeoForgeGuiPlugin/]: Stopping JEI GUI
-[177月2026 14:19:20.030] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable took 2.918 milliseconds
-[177月2026 14:19:20.078] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Dev lost connection: 连接中断
-[177月2026 14:19:20.078] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev退出了游戏
-[177月2026 14:19:20.094] [Server thread/INFO] [net.minecraft.server.network.ServerCommonPacketListenerImpl/]: Stopping singleplayer server as player logged out
-[177月2026 14:19:20.126] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
-[177月2026 14:19:20.127] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
-[177月2026 14:19:20.127] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
-[177月2026 14:19:20.150] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:overworld
-[177月2026 14:19:20.176] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_end
-[177月2026 14:19:20.180] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_nether
-[177月2026 14:19:20.192] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (新的世界): All chunks are saved
-[177月2026 14:19:20.192] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
-[177月2026 14:19:20.192] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
-[177月2026 14:19:20.192] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
-[177月2026 14:19:20.549] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!
+		Spear Core 2.0.3 (spearcore)
+[287月2026 19:35:18.867] [main/INFO] [mixin/]: Compatibility level set to JAVA_21
+[287月2026 19:35:18.876] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientdev' with arguments [--version, 21.1.190, --gameDir, ., --assetsDir, C:\Users\12501\.mcreator\gradle\caches\neoformruntime\assets, --assetIndex, 17]
+[287月2026 19:35:19.155] [main/WARN] [mixin/]: Error loading class: net/minecraft/client/gui/components/AbstractScrollArea (java.lang.ClassNotFoundException: net.minecraft.client.gui.components.AbstractScrollArea)
+[287月2026 19:35:19.155] [main/WARN] [mixin/]: @Mixin target net.minecraft.client.gui.components.AbstractScrollArea was not found imblocker-neoforge.mixins.json:AbstractScrollWidgetMixin from mod imblocker
+[287月2026 19:35:19.171] [main/WARN] [mixin/]: Error loading class: net/minecraft/client/gui/components/AbstractScrollArea (java.lang.ClassNotFoundException: net.minecraft.client.gui.components.AbstractScrollArea)
+[287月2026 19:35:19.171] [main/WARN] [mixin/]: Error loading class: net/minecraft/client/gui/components/AbstractScrollArea (java.lang.ClassNotFoundException: net.minecraft.client.gui.components.AbstractScrollArea)
+[287月2026 19:35:19.212] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.4.1).
+[287月2026 19:35:20.395] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 229 Datafixer optimizations took 134 milliseconds
+[287月2026 19:35:20.731] [main/WARN] [oshi.driver.windows.perfmon.PerfmonDisabled/]: Invalid registry value type detected for PerfOS counters. Should be REG_DWORD. Ignoring: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PerfOS\Performance\Disable Performance Counters.
+[287月2026 19:35:23.709] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[287月2026 19:35:23.709] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[287月2026 19:35:23.711] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[287月2026 19:35:23.712] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[287月2026 19:35:23.712] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[287月2026 19:35:23.822] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/12501/MCreatorWorkspaces/spearcore/build/moddev/artifacts/neoforge-21.1.190.jar%23189!/assets/.mcassetsroot' uses unexpected schema
+[287月2026 19:35:23.823] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/12501/MCreatorWorkspaces/spearcore/build/moddev/artifacts/neoforge-21.1.190.jar%23189!/data/.mcassetsroot' uses unexpected schema
+[287月2026 19:35:23.840] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[287月2026 19:35:23.846] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
+[287月2026 19:35:23.904] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.3+5
+[287月2026 19:35:24.057] [modloading-worker-0/WARN] [io.github.reserveword.imblocker.common.IMBlockerCore/]: [IMBlocker] Class com.simibubi.create.content.equipment.clipboard.ClipboardScreen not found, ignored.
+[287月2026 19:35:24.058] [modloading-worker-0/WARN] [io.github.reserveword.imblocker.common.IMBlockerCore/]: [IMBlocker] Class net.mehvahdjukaar.supplementaries.client.screens.TextHolderEditScreen not found, ignored.
+[287月2026 19:35:24.061] [modloading-worker-0/INFO] [io.github.reserveword.imblocker.common.IMBlockerCore/]: [IMBlocker] bakelist screenWhitelist result [class net.minecraft.client.gui.screens.inventory.BookEditScreen, class net.minecraft.client.gui.screens.inventory.AbstractSignEditScreen]
+[287月2026 19:35:24.062] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.190, for MC 1.21.1
+[287月2026 19:35:24.098] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
+[287月2026 19:35:24.099] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 886.0 microseconds
+[287月2026 19:35:24.545] [Render thread/INFO] [net.neoforged.neoforge.gametest.GameTestHooks/]: Enabled Gametest Namespaces: []
+[287月2026 19:35:24.646] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: vanilla, mod_resources, mod/imblocker, mod/neoforge, mod/spearcore, mod/jei
+[287月2026 19:35:24.745] [Worker-Main-11/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.1.05.hex, loading
+[287月2026 19:35:24.765] [Worker-Main-17/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_jp_patch-15.1.05.hex, loading
+[287月2026 19:35:25.569] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
+[287月2026 19:35:25.570] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[287月2026 19:35:25.659] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on 扬声器 (HECATE G5无线版)
+[287月2026 19:35:25.659] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
+[287月2026 19:35:25.720] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x2 minecraft:textures/atlas/blocks.png-atlas
+[287月2026 19:35:25.724] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x2 minecraft:textures/atlas/signs.png-atlas
+[287月2026 19:35:25.725] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x2 minecraft:textures/atlas/shield_patterns.png-atlas
+[287月2026 19:35:25.725] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x2 minecraft:textures/atlas/banner_patterns.png-atlas
+[287月2026 19:35:25.725] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x1024x2 minecraft:textures/atlas/armor_trims.png-atlas
+[287月2026 19:35:25.728] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x2 minecraft:textures/atlas/chest.png-atlas
+[287月2026 19:35:25.728] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x2 minecraft:textures/atlas/decorated_pot.png-atlas
+[287月2026 19:35:25.728] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x2 minecraft:textures/atlas/beds.png-atlas
+[287月2026 19:35:25.728] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x2 minecraft:textures/atlas/shulker_boxes.png-atlas
+[287月2026 19:35:25.843] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[287月2026 19:35:25.843] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
+[287月2026 19:35:25.844] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[287月2026 19:35:25.844] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 64x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[287月2026 19:35:25.844] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x0 minecraft:textures/atlas/gui.png-atlas
+[287月2026 19:35:25.865] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[287月2026 19:35:25.907] [Render thread/INFO] [net.neoforged.neoforge.client.entity.animation.json.AnimationLoader/]: Loaded 0 entity animations
+[287月2026 19:35:25.908] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 jei:textures/atlas/gui.png-atlas
+[287月2026 19:35:32.011] [Render thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 1297 recipes
+[287月2026 19:35:32.079] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 1399 advancements
+[287月2026 19:35:32.323] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Starting integrated minecraft server version 1.21.1
+[287月2026 19:35:32.323] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[287月2026 19:35:32.799] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[287月2026 19:35:32.963] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: 准备生成区域中：0%
+[287月2026 19:35:33.017] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 211 ms
+[287月2026 19:35:33.017] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[287月2026 19:35:33.067] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing view distance to 5, from 10
+[287月2026 19:35:33.067] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing simulation distance to 12, from 0
+[287月2026 19:35:33.531] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[local:E:99b9322a] logged in with entity id 1 at (68.19568175937435, 79.0, -22.515688029754465)
+[287月2026 19:35:33.606] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev加入了游戏
+[287月2026 19:35:33.645] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
+[287月2026 19:35:33.655] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
+[287月2026 19:35:33.663] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 7.902 milliseconds
+[287月2026 19:35:33.664] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
+[287月2026 19:35:33.667] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 2.023 milliseconds
+[287月2026 19:35:33.670] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
+[287月2026 19:35:33.762] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering ingredients: jei:minecraft took 91.55 milliseconds
+[287月2026 19:35:33.763] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 92.12 milliseconds
+[287月2026 19:35:33.763] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients...
+[287月2026 19:35:33.763] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients took 315.2 microseconds
+[287月2026 19:35:33.763] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases...
+[287月2026 19:35:33.764] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases took 430.9 microseconds
+[287月2026 19:35:33.785] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info...
+[287月2026 19:35:33.785] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info took 317.4 microseconds
+[287月2026 19:35:33.798] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
+[287月2026 19:35:33.817] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering categories: jei:minecraft took 18.16 milliseconds
+[287月2026 19:35:33.822] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 23.85 milliseconds
+[287月2026 19:35:33.824] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
+[287月2026 19:35:33.830] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 5.274 milliseconds
+[287月2026 19:35:33.831] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
+[287月2026 19:35:33.831] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 721.6 microseconds
+[287月2026 19:35:33.832] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
+[287月2026 19:35:33.846] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 14.10 milliseconds
+[287月2026 19:35:33.847] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
+[287月2026 19:35:33.847] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 264.8 microseconds
+[287月2026 19:35:33.849] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
+[287月2026 19:35:33.960] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 110.5 milliseconds
+[287月2026 19:35:33.976] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:internal took 15.77 milliseconds
+[287月2026 19:35:33.976] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 127.0 milliseconds
+[287月2026 19:35:33.986] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
+[287月2026 19:35:33.990] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 4.025 milliseconds
+[287月2026 19:35:33.998] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
+[287月2026 19:35:34.012] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
+[287月2026 19:35:34.022] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 9.673 milliseconds
+[287月2026 19:35:34.029] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
+[287月2026 19:35:34.031] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
+[287月2026 19:35:34.032] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
+[287月2026 19:35:34.045] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 13.56 milliseconds
+[287月2026 19:35:34.045] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
+[287月2026 19:35:34.082] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 1697 ingredients
+[287月2026 19:35:34.160] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 1697 ingredients
+[287月2026 19:35:34.161] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 114.7 milliseconds
+[287月2026 19:35:34.256] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:neoforge_gui took 228.1 milliseconds
+[287月2026 19:35:34.256] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 228.5 milliseconds
+[287月2026 19:35:34.258] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 260.3 milliseconds
+[287月2026 19:35:34.259] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
+[287月2026 19:35:34.259] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 270.1 microseconds
+[287月2026 19:35:34.259] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 613.0 milliseconds
+[287月2026 19:35:34.270] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 152 advancements
+[287月2026 19:35:43.070] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
+[287月2026 19:35:43.089] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:overworld
+[287月2026 19:35:43.094] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_end
+[287月2026 19:35:43.094] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_nether
+[287月2026 19:35:43.549] [Render thread/INFO] [mezz.jei.library.startup.JeiStarter/]: Stopping JEI
+[287月2026 19:35:43.549] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable...
+[287月2026 19:35:43.549] [Render thread/INFO] [mezz.jei.neoforge.plugins.neoforge.NeoForgeGuiPlugin/]: Stopping JEI GUI
+[287月2026 19:35:43.550] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable took 1.267 milliseconds
+[287月2026 19:35:43.579] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Dev lost connection: 连接中断
+[287月2026 19:35:43.579] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev退出了游戏
+[287月2026 19:35:43.602] [Server thread/INFO] [net.minecraft.server.network.ServerCommonPacketListenerImpl/]: Stopping singleplayer server as player logged out
+[287月2026 19:35:43.622] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[287月2026 19:35:43.624] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[287月2026 19:35:43.624] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[287月2026 19:35:43.657] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:overworld
+[287月2026 19:35:43.701] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_end
+[287月2026 19:35:43.709] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_nether
+[287月2026 19:35:43.727] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (新的世界): All chunks are saved
+[287月2026 19:35:43.727] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[287月2026 19:35:43.727] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[287月2026 19:35:43.727] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[287月2026 19:35:44.033] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!

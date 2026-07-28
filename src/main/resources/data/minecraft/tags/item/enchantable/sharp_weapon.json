@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#spearcore:spears",
-    "#spearcore:copper_spear"
+    "#spearcore:spear"
   ]
 }

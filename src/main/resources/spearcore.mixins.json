@@ -5,7 +5,8 @@
   "mixins": [
     "ServerPlayerMotionMixin",
     "ServerGamePacketListenerSpearMixin",
-    "LivingEntitySpearMixin"
+    "LivingEntitySpearMixin",
+    "SpearCooldownAttackMixin"
   ],
   "client": [
     "ItemInitializeClientMixin",

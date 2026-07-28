@@ -1,6 +1,7 @@
 package net.minecraft.spearcore;
 
 import net.minecraft.spearcore.config.SpearConfig;
+import net.minecraft.spearcore.init.SpearAttributes;
 import net.minecraft.spearcore.init.SpearCoreItems;
 import net.minecraft.spearcore.init.SpearSounds;
 import net.minecraft.spearcore.network.SpearStabAttackPacket;
@@ -53,7 +54,9 @@ public class SpearcoreMod {
 		// Start of user code block mod init
 	       SpearSounds.REGISTRY.register(modEventBus);
 	       SpearConfig.register(modContainer);
-	       SpearCoreItems.REGISTRY.register(modEventBus);
+           SpearCoreItems.REGISTRY.register(modEventBus);
+        SpearAttributes.ATTRIBUTES.register(modEventBus);
+        modEventBus.addListener(SpearAttributes::addToPlayer);
 	       // End of user code block mod init
 	}
 

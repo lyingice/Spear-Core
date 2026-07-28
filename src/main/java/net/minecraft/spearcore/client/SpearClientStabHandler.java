@@ -23,7 +23,7 @@ public class SpearClientStabHandler {
         }
         PacketDistributor.sendToServer(new SpearStabAttackPacket());
         SpearItem.jerotesLungeForwardMaybe(player);
-        player.resetAttackStrengthTicker();
+        //player.resetAttackStrengthTicker();
     }
 
     @SubscribeEvent
@@ -37,6 +37,6 @@ public class SpearClientStabHandler {
             return;
         }
         SpearItem.jerotesLungeForwardMaybe(player);
-        player.resetAttackStrengthTicker();
+        //player.resetAttackStrengthTicker();
     }
 }

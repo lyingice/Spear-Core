@@ -14,11 +14,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/**
- * 复刻 J 库 ServerGamePacketListenerImplMixin 的核心用途：
- * 直接从客户端移动包记录玩家真实位移，而不是在 tick 末尾用服务端位置差兜底。
- * 这样长矛速度判定不会被使用物品减速、服务端移动同步时序或骑乘包处理干扰。
- */
 @Mixin(ServerGamePacketListenerImpl.class)
 public abstract class ServerGamePacketListenerSpearMixin {
 
@@ -82,8 +77,7 @@ public abstract class ServerGamePacketListenerSpearMixin {
     @Unique
     private void spearcore$rememberKnownMovement(Vec3 movement) {
         if (movement.lengthSqr() > 1.0E-5D) {
-            this.player.resetFallDistance();
+            ((KnownMovementAccessor) this.player).SetKnownMovement(movement);
         }
-        ((KnownMovementAccessor) this.player).SetKnownMovement(movement);
     }
 }

@@ -2,6 +2,7 @@ package net.minecraft.spearcore.item;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -9,12 +10,15 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.spearcore.event.SpearDamageEvent;
+import net.minecraft.spearcore.init.SpearAttributes;
 import net.minecraft.spearcore.init.SpearSounds;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
@@ -31,6 +35,7 @@ import net.minecraft.spearcore.util.SpearCollision;
 import net.minecraft.spearcore.util.SpearCondition;
 import net.minecraft.spearcore.util.SpearCooldownAccessor;
 import net.minecraft.spearcore.util.UseSpearSpecialEntity;
+import net.neoforged.neoforge.common.NeoForge;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -228,6 +233,11 @@ public abstract class SpearItem extends Item {
             if (!canDismount && !canKnockback && !canDamage) continue;
 
             float damage = (float) baseDamage + (float) Mth.floor(relSpeed * (double) getDamageMultiplier());
+            double attrMult = user.getAttributeValue(SpearAttributes.SPEAR_CHARGE_MULTIPLIER);
+            SpearDamageEvent event = new SpearDamageEvent(user, target,
+                    damage, SpearDamageEvent.AttackType.CHARGE);
+            NeoForge.EVENT_BUS.post(event);
+            damage *= (float) (attrMult * event.getMultiplier());
             hitSomething |= stabAttack(
                     SlotUtil.slotForHand(user, user.getUsedItemHand()),
                     target, damage, canDamage, canKnockback, canDismount, user);
@@ -276,6 +286,12 @@ public abstract class SpearItem extends Item {
 
         float baseDamage = (float) attacker.getAttributeValue(Attributes.ATTACK_DAMAGE);
         float damage = baseDamage + (float) Mth.floor(attackerSpeed * getDamageMultiplier());
+
+        double attrMult = attacker.getAttributeValue(SpearAttributes.SPEAR_STAB_MULTIPLIER);
+        SpearDamageEvent event = new SpearDamageEvent(attacker, /* 首个目标暂填 null */ null,
+                damage, SpearDamageEvent.AttackType.STAB);
+        NeoForge.EVENT_BUS.post(event);
+        damage *= (float) (attrMult * event.getMultiplier());
 
         boolean hitSomething = false;
         if (playSound) {
@@ -354,7 +370,8 @@ public abstract class SpearItem extends Item {
         }
 
         if (!hitSomething) return false;
-
+        level.playSound(null, target.getX(), target.getY(), target.getZ(),
+                getHitSound(), SoundSource.PLAYERS, 1.0F, 1.0F);
         attacker.setLastHurtMob(target);
         stack.hurtAndBreak(1, attacker, slot);
         return true;
