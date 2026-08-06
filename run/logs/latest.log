@@ -1,13 +1,13 @@
-[287月2026 19:35:17.107] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientdev, --version, 21.1.190, --assetIndex, 17, --assetsDir, C:\\Users\\12501\\.mcreator\\gradle\\caches\\neoformruntime\\assets, --gameDir, ., --fml.fmlVersion, 4.0.41, --fml.mcVersion, 1.21.1, --fml.neoForgeVersion, 21.1.190, --fml.neoFormVersion, 20240808.144430]
-[287月2026 19:35:17.110] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: JVM identified as Microsoft OpenJDK 64-Bit Server VM 21.0.10+7-LTS
-[287月2026 19:35:17.111] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 11.0.5+main.901c6ea8 starting: java version 21.0.10 by Microsoft; OS Windows 11 arch amd64 version 10.0
-[287月2026 19:35:17.189] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
-[287月2026 19:35:17.273] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
-[287月2026 19:35:17.558] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.6 got version 4.6
-[287月2026 19:35:17.637] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/C:/Users/12501/.mcreator/gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.15.2+mixin.0.8.7/2af2f021d8e02a0220dc27a7a72b4666d66d44ca/sponge-mixin-0.15.2+mixin.0.8.7.jar%23138!/ Service=ModLauncher Env=CLIENT
-[287月2026 19:35:17.722] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: AMD Radeon RX 7900 XT GL version 4.6.0 Core Profile Context 26.2.2.260209, ATI Technologies Inc.
-[287月2026 19:35:17.975] [main/INFO] [net.neoforged.fml.loading.moddiscovery.locators.JarInJarDependencyLocator/]: Found 2 dependencies adding them to mods collection
-[287月2026 19:35:17.976] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/]: 
+[028月2026 00:10:10.277] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientdev, --version, 21.1.190, --assetIndex, 17, --assetsDir, C:\\Users\\12501\\.mcreator\\gradle\\caches\\neoformruntime\\assets, --gameDir, ., --fml.fmlVersion, 4.0.41, --fml.mcVersion, 1.21.1, --fml.neoForgeVersion, 21.1.190, --fml.neoFormVersion, 20240808.144430]
+[028月2026 00:10:10.285] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: JVM identified as Microsoft OpenJDK 64-Bit Server VM 21.0.10+7-LTS
+[028月2026 00:10:10.286] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 11.0.5+main.901c6ea8 starting: java version 21.0.10 by Microsoft; OS Windows 11 arch amd64 version 10.0
+[028月2026 00:10:10.373] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[028月2026 00:10:10.473] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
+[028月2026 00:10:10.760] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.6 got version 4.6
+[028月2026 00:10:10.844] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/C:/Users/12501/.mcreator/gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.15.2+mixin.0.8.7/2af2f021d8e02a0220dc27a7a72b4666d66d44ca/sponge-mixin-0.15.2+mixin.0.8.7.jar%23138!/ Service=ModLauncher Env=CLIENT
+[028月2026 00:10:10.934] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: AMD Radeon RX 7900 XT GL version 4.6.0 Core Profile Context 26.2.2.260209, ATI Technologies Inc.
+[028月2026 00:10:11.208] [main/INFO] [net.neoforged.fml.loading.moddiscovery.locators.JarInJarDependencyLocator/]: Found 2 dependencies adding them to mods collection
+[028月2026 00:10:11.211] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/]: 
      Mod List:
 		Name Version (Mod Id)
 
@@ -15,137 +15,175 @@
 		Just Enough Items 19.27.0.340 (jei)
 		Minecraft 1.21.1 (minecraft)
 		NeoForge 21.1.190 (neoforge)
-		Spear Core 2.0.3 (spearcore)
-[287月2026 19:35:18.867] [main/INFO] [mixin/]: Compatibility level set to JAVA_21
-[287月2026 19:35:18.876] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientdev' with arguments [--version, 21.1.190, --gameDir, ., --assetsDir, C:\Users\12501\.mcreator\gradle\caches\neoformruntime\assets, --assetIndex, 17]
-[287月2026 19:35:19.155] [main/WARN] [mixin/]: Error loading class: net/minecraft/client/gui/components/AbstractScrollArea (java.lang.ClassNotFoundException: net.minecraft.client.gui.components.AbstractScrollArea)
-[287月2026 19:35:19.155] [main/WARN] [mixin/]: @Mixin target net.minecraft.client.gui.components.AbstractScrollArea was not found imblocker-neoforge.mixins.json:AbstractScrollWidgetMixin from mod imblocker
-[287月2026 19:35:19.171] [main/WARN] [mixin/]: Error loading class: net/minecraft/client/gui/components/AbstractScrollArea (java.lang.ClassNotFoundException: net.minecraft.client.gui.components.AbstractScrollArea)
-[287月2026 19:35:19.171] [main/WARN] [mixin/]: Error loading class: net/minecraft/client/gui/components/AbstractScrollArea (java.lang.ClassNotFoundException: net.minecraft.client.gui.components.AbstractScrollArea)
-[287月2026 19:35:19.212] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.4.1).
-[287月2026 19:35:20.395] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 229 Datafixer optimizations took 134 milliseconds
-[287月2026 19:35:20.731] [main/WARN] [oshi.driver.windows.perfmon.PerfmonDisabled/]: Invalid registry value type detected for PerfOS counters. Should be REG_DWORD. Ignoring: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PerfOS\Performance\Disable Performance Counters.
-[287月2026 19:35:23.709] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[287月2026 19:35:23.709] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
-[287月2026 19:35:23.711] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[287月2026 19:35:23.712] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[287月2026 19:35:23.712] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[287月2026 19:35:23.822] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/12501/MCreatorWorkspaces/spearcore/build/moddev/artifacts/neoforge-21.1.190.jar%23189!/assets/.mcassetsroot' uses unexpected schema
-[287月2026 19:35:23.823] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/12501/MCreatorWorkspaces/spearcore/build/moddev/artifacts/neoforge-21.1.190.jar%23189!/data/.mcassetsroot' uses unexpected schema
-[287月2026 19:35:23.840] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
-[287月2026 19:35:23.846] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
-[287月2026 19:35:23.904] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.3+5
-[287月2026 19:35:24.057] [modloading-worker-0/WARN] [io.github.reserveword.imblocker.common.IMBlockerCore/]: [IMBlocker] Class com.simibubi.create.content.equipment.clipboard.ClipboardScreen not found, ignored.
-[287月2026 19:35:24.058] [modloading-worker-0/WARN] [io.github.reserveword.imblocker.common.IMBlockerCore/]: [IMBlocker] Class net.mehvahdjukaar.supplementaries.client.screens.TextHolderEditScreen not found, ignored.
-[287月2026 19:35:24.061] [modloading-worker-0/INFO] [io.github.reserveword.imblocker.common.IMBlockerCore/]: [IMBlocker] bakelist screenWhitelist result [class net.minecraft.client.gui.screens.inventory.BookEditScreen, class net.minecraft.client.gui.screens.inventory.AbstractSignEditScreen]
-[287月2026 19:35:24.062] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.190, for MC 1.21.1
-[287月2026 19:35:24.098] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
-[287月2026 19:35:24.099] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 886.0 microseconds
-[287月2026 19:35:24.545] [Render thread/INFO] [net.neoforged.neoforge.gametest.GameTestHooks/]: Enabled Gametest Namespaces: []
-[287月2026 19:35:24.646] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: vanilla, mod_resources, mod/imblocker, mod/neoforge, mod/spearcore, mod/jei
-[287月2026 19:35:24.745] [Worker-Main-11/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.1.05.hex, loading
-[287月2026 19:35:24.765] [Worker-Main-17/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_jp_patch-15.1.05.hex, loading
-[287月2026 19:35:25.569] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
-[287月2026 19:35:25.570] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
-[287月2026 19:35:25.659] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on 扬声器 (HECATE G5无线版)
-[287月2026 19:35:25.659] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
-[287月2026 19:35:25.720] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x2 minecraft:textures/atlas/blocks.png-atlas
-[287月2026 19:35:25.724] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x2 minecraft:textures/atlas/signs.png-atlas
-[287月2026 19:35:25.725] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x2 minecraft:textures/atlas/shield_patterns.png-atlas
-[287月2026 19:35:25.725] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x2 minecraft:textures/atlas/banner_patterns.png-atlas
-[287月2026 19:35:25.725] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x1024x2 minecraft:textures/atlas/armor_trims.png-atlas
-[287月2026 19:35:25.728] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x2 minecraft:textures/atlas/chest.png-atlas
-[287月2026 19:35:25.728] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x2 minecraft:textures/atlas/decorated_pot.png-atlas
-[287月2026 19:35:25.728] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x2 minecraft:textures/atlas/beds.png-atlas
-[287月2026 19:35:25.728] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x2 minecraft:textures/atlas/shulker_boxes.png-atlas
-[287月2026 19:35:25.843] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
-[287月2026 19:35:25.843] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
-[287月2026 19:35:25.844] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
-[287月2026 19:35:25.844] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 64x64x0 minecraft:textures/atlas/map_decorations.png-atlas
-[287月2026 19:35:25.844] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x0 minecraft:textures/atlas/gui.png-atlas
-[287月2026 19:35:25.865] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
-[287月2026 19:35:25.907] [Render thread/INFO] [net.neoforged.neoforge.client.entity.animation.json.AnimationLoader/]: Loaded 0 entity animations
-[287月2026 19:35:25.908] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 jei:textures/atlas/gui.png-atlas
-[287月2026 19:35:32.011] [Render thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 1297 recipes
-[287月2026 19:35:32.079] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 1399 advancements
-[287月2026 19:35:32.323] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Starting integrated minecraft server version 1.21.1
-[287月2026 19:35:32.323] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
-[287月2026 19:35:32.799] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
-[287月2026 19:35:32.963] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: 准备生成区域中：0%
-[287月2026 19:35:33.017] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 211 ms
-[287月2026 19:35:33.017] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
-[287月2026 19:35:33.067] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing view distance to 5, from 10
-[287月2026 19:35:33.067] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing simulation distance to 12, from 0
-[287月2026 19:35:33.531] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[local:E:99b9322a] logged in with entity id 1 at (68.19568175937435, 79.0, -22.515688029754465)
-[287月2026 19:35:33.606] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev加入了游戏
-[287月2026 19:35:33.645] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
-[287月2026 19:35:33.655] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
-[287月2026 19:35:33.663] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 7.902 milliseconds
-[287月2026 19:35:33.664] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
-[287月2026 19:35:33.667] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 2.023 milliseconds
-[287月2026 19:35:33.670] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
-[287月2026 19:35:33.762] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering ingredients: jei:minecraft took 91.55 milliseconds
-[287月2026 19:35:33.763] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 92.12 milliseconds
-[287月2026 19:35:33.763] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients...
-[287月2026 19:35:33.763] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients took 315.2 microseconds
-[287月2026 19:35:33.763] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases...
-[287月2026 19:35:33.764] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases took 430.9 microseconds
-[287月2026 19:35:33.785] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info...
-[287月2026 19:35:33.785] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info took 317.4 microseconds
-[287月2026 19:35:33.798] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
-[287月2026 19:35:33.817] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering categories: jei:minecraft took 18.16 milliseconds
-[287月2026 19:35:33.822] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 23.85 milliseconds
-[287月2026 19:35:33.824] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
-[287月2026 19:35:33.830] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 5.274 milliseconds
-[287月2026 19:35:33.831] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
-[287月2026 19:35:33.831] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 721.6 microseconds
-[287月2026 19:35:33.832] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
-[287月2026 19:35:33.846] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 14.10 milliseconds
-[287月2026 19:35:33.847] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
-[287月2026 19:35:33.847] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 264.8 microseconds
-[287月2026 19:35:33.849] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
-[287月2026 19:35:33.960] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 110.5 milliseconds
-[287月2026 19:35:33.976] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:internal took 15.77 milliseconds
-[287月2026 19:35:33.976] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 127.0 milliseconds
-[287月2026 19:35:33.986] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
-[287月2026 19:35:33.990] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 4.025 milliseconds
-[287月2026 19:35:33.998] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
-[287月2026 19:35:34.012] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
-[287月2026 19:35:34.022] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 9.673 milliseconds
-[287月2026 19:35:34.029] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
-[287月2026 19:35:34.031] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
-[287月2026 19:35:34.032] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
-[287月2026 19:35:34.045] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 13.56 milliseconds
-[287月2026 19:35:34.045] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
-[287月2026 19:35:34.082] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 1697 ingredients
-[287月2026 19:35:34.160] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 1697 ingredients
-[287月2026 19:35:34.161] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 114.7 milliseconds
-[287月2026 19:35:34.256] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:neoforge_gui took 228.1 milliseconds
-[287月2026 19:35:34.256] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 228.5 milliseconds
-[287月2026 19:35:34.258] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 260.3 milliseconds
-[287月2026 19:35:34.259] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
-[287月2026 19:35:34.259] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 270.1 microseconds
-[287月2026 19:35:34.259] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 613.0 milliseconds
-[287月2026 19:35:34.270] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 152 advancements
-[287月2026 19:35:43.070] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
-[287月2026 19:35:43.089] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:overworld
-[287月2026 19:35:43.094] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_end
-[287月2026 19:35:43.094] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_nether
-[287月2026 19:35:43.549] [Render thread/INFO] [mezz.jei.library.startup.JeiStarter/]: Stopping JEI
-[287月2026 19:35:43.549] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable...
-[287月2026 19:35:43.549] [Render thread/INFO] [mezz.jei.neoforge.plugins.neoforge.NeoForgeGuiPlugin/]: Stopping JEI GUI
-[287月2026 19:35:43.550] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable took 1.267 milliseconds
-[287月2026 19:35:43.579] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Dev lost connection: 连接中断
-[287月2026 19:35:43.579] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev退出了游戏
-[287月2026 19:35:43.602] [Server thread/INFO] [net.minecraft.server.network.ServerCommonPacketListenerImpl/]: Stopping singleplayer server as player logged out
-[287月2026 19:35:43.622] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
-[287月2026 19:35:43.624] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
-[287月2026 19:35:43.624] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
-[287月2026 19:35:43.657] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:overworld
-[287月2026 19:35:43.701] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_end
-[287月2026 19:35:43.709] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_nether
-[287月2026 19:35:43.727] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (新的世界): All chunks are saved
-[287月2026 19:35:43.727] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
-[287月2026 19:35:43.727] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
-[287月2026 19:35:43.727] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
-[287月2026 19:35:44.033] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!
+		Spear Core 2.0.6 (spearcore)
+[028月2026 00:10:12.994] [main/INFO] [mixin/]: Compatibility level set to JAVA_21
+[028月2026 00:10:13.012] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientdev' with arguments [--version, 21.1.190, --gameDir, ., --assetsDir, C:\Users\12501\.mcreator\gradle\caches\neoformruntime\assets, --assetIndex, 17]
+[028月2026 00:10:13.606] [main/WARN] [mixin/]: Error loading class: net/minecraft/client/gui/components/AbstractScrollArea (java.lang.ClassNotFoundException: net.minecraft.client.gui.components.AbstractScrollArea)
+[028月2026 00:10:13.606] [main/WARN] [mixin/]: @Mixin target net.minecraft.client.gui.components.AbstractScrollArea was not found imblocker-neoforge.mixins.json:AbstractScrollWidgetMixin from mod imblocker
+[028月2026 00:10:13.641] [main/WARN] [mixin/]: Error loading class: net/minecraft/client/gui/components/AbstractScrollArea (java.lang.ClassNotFoundException: net.minecraft.client.gui.components.AbstractScrollArea)
+[028月2026 00:10:13.642] [main/WARN] [mixin/]: Error loading class: net/minecraft/client/gui/components/AbstractScrollArea (java.lang.ClassNotFoundException: net.minecraft.client.gui.components.AbstractScrollArea)
+[028月2026 00:10:13.780] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.4.1).
+[028月2026 00:10:16.030] [main/WARN] [oshi.driver.windows.perfmon.PerfmonDisabled/]: Invalid registry value type detected for PerfOS counters. Should be REG_DWORD. Ignoring: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PerfOS\Performance\Disable Performance Counters.
+[028月2026 00:10:16.118] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 229 Datafixer optimizations took 638 milliseconds
+[028月2026 00:10:21.804] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[028月2026 00:10:21.805] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[028月2026 00:10:21.809] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[028月2026 00:10:21.810] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[028月2026 00:10:21.811] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[028月2026 00:10:22.026] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/12501/MCreatorWorkspaces/spearcore/build/moddev/artifacts/neoforge-21.1.190.jar%23189!/assets/.mcassetsroot' uses unexpected schema
+[028月2026 00:10:22.026] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/12501/MCreatorWorkspaces/spearcore/build/moddev/artifacts/neoforge-21.1.190.jar%23189!/data/.mcassetsroot' uses unexpected schema
+[028月2026 00:10:22.057] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[028月2026 00:10:22.065] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
+[028月2026 00:10:22.166] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.3+5
+[028月2026 00:10:22.547] [modloading-worker-0/WARN] [io.github.reserveword.imblocker.common.IMBlockerCore/]: [IMBlocker] Class com.simibubi.create.content.equipment.clipboard.ClipboardScreen not found, ignored.
+[028月2026 00:10:22.547] [modloading-worker-0/WARN] [io.github.reserveword.imblocker.common.IMBlockerCore/]: [IMBlocker] Class net.mehvahdjukaar.supplementaries.client.screens.TextHolderEditScreen not found, ignored.
+[028月2026 00:10:22.552] [modloading-worker-0/INFO] [io.github.reserveword.imblocker.common.IMBlockerCore/]: [IMBlocker] bakelist screenWhitelist result [class net.minecraft.client.gui.screens.inventory.AbstractSignEditScreen, class net.minecraft.client.gui.screens.inventory.BookEditScreen]
+[028月2026 00:10:22.555] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.190, for MC 1.21.1
+[028月2026 00:10:22.615] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
+[028月2026 00:10:22.617] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 1.696 milliseconds
+[028月2026 00:10:23.546] [Render thread/INFO] [net.neoforged.neoforge.gametest.GameTestHooks/]: Enabled Gametest Namespaces: []
+[028月2026 00:10:23.737] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: vanilla, mod_resources, mod/imblocker, mod/neoforge, mod/spearcore, mod/jei
+[028月2026 00:10:23.943] [Worker-Main-11/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.1.05.hex, loading
+[028月2026 00:10:24.033] [Worker-Main-5/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_jp_patch-15.1.05.hex, loading
+[028月2026 00:10:26.073] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
+[028月2026 00:10:26.074] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[028月2026 00:10:26.161] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on 扬声器 (HECATE G5无线版)
+[028月2026 00:10:26.161] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
+[028月2026 00:10:26.215] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x2 minecraft:textures/atlas/blocks.png-atlas
+[028月2026 00:10:26.219] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x2 minecraft:textures/atlas/signs.png-atlas
+[028月2026 00:10:26.219] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x2 minecraft:textures/atlas/shield_patterns.png-atlas
+[028月2026 00:10:26.219] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x2 minecraft:textures/atlas/banner_patterns.png-atlas
+[028月2026 00:10:26.219] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x1024x2 minecraft:textures/atlas/armor_trims.png-atlas
+[028月2026 00:10:26.223] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x2 minecraft:textures/atlas/chest.png-atlas
+[028月2026 00:10:26.223] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x2 minecraft:textures/atlas/decorated_pot.png-atlas
+[028月2026 00:10:26.223] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x2 minecraft:textures/atlas/beds.png-atlas
+[028月2026 00:10:26.223] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x2 minecraft:textures/atlas/shulker_boxes.png-atlas
+[028月2026 00:10:26.356] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[028月2026 00:10:26.357] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
+[028月2026 00:10:26.357] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[028月2026 00:10:26.357] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 64x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[028月2026 00:10:26.357] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x0 minecraft:textures/atlas/gui.png-atlas
+[028月2026 00:10:26.377] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[028月2026 00:10:26.416] [Render thread/INFO] [net.neoforged.neoforge.client.entity.animation.json.AnimationLoader/]: Loaded 0 entity animations
+[028月2026 00:10:26.416] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 jei:textures/atlas/gui.png-atlas
+[028月2026 00:10:45.026] [Render thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 1297 recipes
+[028月2026 00:10:45.117] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 1399 advancements
+[028月2026 00:10:45.387] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Starting integrated minecraft server version 1.21.1
+[028月2026 00:10:45.387] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[028月2026 00:10:45.906] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[028月2026 00:10:46.082] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: 准备生成区域中：0%
+[028月2026 00:10:46.135] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[028月2026 00:10:46.146] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 221 ms
+[028月2026 00:10:46.180] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing view distance to 5, from 10
+[028月2026 00:10:46.180] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing simulation distance to 12, from 0
+[028月2026 00:10:46.659] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[local:E:518b5039] logged in with entity id 1 at (68.19568175937435, 79.0, -22.515688029754465)
+[028月2026 00:10:46.734] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev加入了游戏
+[028月2026 00:10:46.810] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
+[028月2026 00:10:46.820] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
+[028月2026 00:10:46.829] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 8.291 milliseconds
+[028月2026 00:10:46.829] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
+[028月2026 00:10:46.832] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 2.518 milliseconds
+[028月2026 00:10:46.834] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
+[028月2026 00:10:46.944] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering ingredients: jei:minecraft took 108.4 milliseconds
+[028月2026 00:10:46.944] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 109.1 milliseconds
+[028月2026 00:10:46.945] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients...
+[028月2026 00:10:46.945] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients took 362.6 microseconds
+[028月2026 00:10:46.946] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases...
+[028月2026 00:10:46.947] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases took 856.7 microseconds
+[028月2026 00:10:46.972] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info...
+[028月2026 00:10:46.972] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info took 359.9 microseconds
+[028月2026 00:10:46.991] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
+[028月2026 00:10:47.015] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering categories: jei:minecraft took 22.13 milliseconds
+[028月2026 00:10:47.020] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 28.82 milliseconds
+[028月2026 00:10:47.021] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
+[028月2026 00:10:47.027] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 5.117 milliseconds
+[028月2026 00:10:47.028] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
+[028月2026 00:10:47.028] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 627.9 microseconds
+[028月2026 00:10:47.029] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
+[028月2026 00:10:47.042] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 13.58 milliseconds
+[028月2026 00:10:47.045] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
+[028月2026 00:10:47.045] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 396.5 microseconds
+[028月2026 00:10:47.045] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
+[028月2026 00:10:47.215] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 169.0 milliseconds
+[028月2026 00:10:47.232] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:internal took 16.36 milliseconds
+[028月2026 00:10:47.232] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 186.1 milliseconds
+[028月2026 00:10:47.238] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
+[028月2026 00:10:47.242] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 3.781 milliseconds
+[028月2026 00:10:47.250] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
+[028月2026 00:10:47.257] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
+[028月2026 00:10:47.268] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 10.87 milliseconds
+[028月2026 00:10:47.274] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
+[028月2026 00:10:47.275] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
+[028月2026 00:10:47.276] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
+[028月2026 00:10:47.293] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 16.52 milliseconds
+[028月2026 00:10:47.293] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
+[028月2026 00:10:47.335] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 1697 ingredients
+[028月2026 00:10:47.427] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 1697 ingredients
+[028月2026 00:10:47.427] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 133.7 milliseconds
+[028月2026 00:10:47.535] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:neoforge_gui took 261.6 milliseconds
+[028月2026 00:10:47.536] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 262.1 milliseconds
+[028月2026 00:10:47.539] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 289.0 milliseconds
+[028月2026 00:10:47.540] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
+[028月2026 00:10:47.540] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 377.6 microseconds
+[028月2026 00:10:47.540] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 729.9 milliseconds
+[028月2026 00:10:47.552] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 152 advancements
+[028月2026 00:12:18.026] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] 错误的“minecraft:attribute_modifiers”组件：“Not a map: "spearcore"”
+[028月2026 00:12:18.029] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] ...modifiers=[spearcore]]<--[此处]
+[028月2026 00:17:07.287] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
+[028月2026 00:17:07.302] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:overworld
+[028月2026 00:17:07.303] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_end
+[028月2026 00:17:07.304] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_nether
+[028月2026 00:19:20.589] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] 错误的“minecraft:attribute_modifiers”组件：“Unknown registry key in ResourceKey[minecraft:root / minecraft:attribute]: minecraft:spearcore.spear_stab”
+[028月2026 00:19:20.590] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] ...modifiers=[{type:"spearcore.spear_stab",amount:0.1,id:"minecraftsearch:modifier_0",operation:"add_value",slot:"any"}]] 1<--[此处]
+[028月2026 00:20:11.697] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Dev: 已将1个[铜矛]给予Dev]
+[028月2026 00:20:11.700] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] 已将1个[铜矛]给予Dev
+[028月2026 00:21:58.287] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
+[028月2026 00:21:58.300] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:overworld
+[028月2026 00:21:58.301] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_end
+[028月2026 00:21:58.301] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_nether
+[028月2026 00:26:14.726] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Dev: 已将1个[铜矛]给予Dev]
+[028月2026 00:26:14.729] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] 已将1个[铜矛]给予Dev
+[028月2026 00:26:33.927] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Dev: 已将1个[铜矛]给予Dev]
+[028月2026 00:26:33.934] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] 已将1个[铜矛]给予Dev
+[028月2026 00:27:02.049] [Server thread/INFO] [net.minecraft.world.entity.npc.Villager/]: Villager Villager['村民'/117, l='ServerLevel[新的世界]', x=45.82, y=74.00, z=-39.10] died, message: '村民 被矛刺穿了'
+[028月2026 00:27:02.052] [Render thread/INFO] [net.minecraft.world.entity.npc.Villager/]: Villager Villager['村民'/117, l='ClientLevel', x=46.49, y=74.00, z=-38.65] died, message: '村民死了'
+[028月2026 00:27:13.053] [Server thread/INFO] [net.minecraft.world.entity.npc.Villager/]: Villager Villager['村民'/120, l='ServerLevel[新的世界]', x=52.30, y=73.00, z=-51.51] died, message: '村民 被矛刺穿了'
+[028月2026 00:27:13.057] [Render thread/INFO] [net.minecraft.world.entity.npc.Villager/]: Villager Villager['村民'/120, l='ClientLevel', x=52.30, y=73.00, z=-51.51] died, message: '村民死了'
+[028月2026 00:27:40.549] [Server thread/INFO] [net.minecraft.world.entity.npc.Villager/]: Villager Villager['村民'/130, l='ServerLevel[新的世界]', x=83.50, y=78.00, z=-14.47] died, message: '村民 被矛刺穿了'
+[028月2026 00:27:40.552] [Render thread/INFO] [net.minecraft.world.entity.npc.Villager/]: Villager Villager['村民'/130, l='ClientLevel', x=83.50, y=78.00, z=-14.73] died, message: '村民死了'
+[028月2026 00:27:57.898] [Server thread/INFO] [net.minecraft.world.entity.npc.Villager/]: Villager Villager['村民'/176, l='ServerLevel[新的世界]', x=78.53, y=75.00, z=-65.55] died, message: '村民 被矛刺穿了'
+[028月2026 00:27:57.899] [Render thread/INFO] [net.minecraft.world.entity.npc.Villager/]: Villager Villager['村民'/176, l='ClientLevel', x=79.25, y=75.00, z=-65.35] died, message: '村民死了'
+[028月2026 00:28:14.398] [Server thread/INFO] [net.minecraft.world.entity.npc.Villager/]: Villager Villager['村民'/217, l='ServerLevel[新的世界]', x=45.43, y=75.00, z=-14.69] died, message: '村民 被矛刺穿了'
+[028月2026 00:28:14.399] [Render thread/INFO] [net.minecraft.world.entity.npc.Villager/]: Villager Villager['村民'/217, l='ClientLevel', x=45.43, y=75.00, z=-14.69] died, message: '村民死了'
+[028月2026 00:28:53.463] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Dev: 已将1个[铜矛]给予Dev]
+[028月2026 00:28:53.469] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] 已将1个[铜矛]给予Dev
+[028月2026 00:29:14.886] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
+[028月2026 00:29:14.908] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:overworld
+[028月2026 00:29:14.911] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_end
+[028月2026 00:29:14.911] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_nether
+[028月2026 00:30:23.989] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Dev: 已将1个[铜矛]给予Dev]
+[028月2026 00:30:23.994] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] 已将1个[铜矛]给予Dev
+[028月2026 00:31:52.680] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Dev: 已将1个[铁矛]给予Dev]
+[028月2026 00:31:52.684] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] 已将1个[铁矛]给予Dev
+[028月2026 00:34:58.787] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
+[028月2026 00:34:58.798] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:overworld
+[028月2026 00:34:58.800] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_end
+[028月2026 00:34:58.800] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_nether
+[028月2026 00:34:59.208] [Render thread/INFO] [mezz.jei.library.startup.JeiStarter/]: Stopping JEI
+[028月2026 00:34:59.208] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable...
+[028月2026 00:34:59.208] [Render thread/INFO] [mezz.jei.neoforge.plugins.neoforge.NeoForgeGuiPlugin/]: Stopping JEI GUI
+[028月2026 00:34:59.210] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable took 1.575 milliseconds
+[028月2026 00:34:59.238] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Dev lost connection: 连接中断
+[028月2026 00:34:59.238] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev退出了游戏
+[028月2026 00:34:59.248] [Server thread/INFO] [net.minecraft.server.network.ServerCommonPacketListenerImpl/]: Stopping singleplayer server as player logged out
+[028月2026 00:34:59.287] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[028月2026 00:34:59.287] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[028月2026 00:34:59.287] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[028月2026 00:34:59.301] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:overworld
+[028月2026 00:34:59.337] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_end
+[028月2026 00:34:59.344] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_nether
+[028月2026 00:34:59.359] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (新的世界): All chunks are saved
+[028月2026 00:34:59.359] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[028月2026 00:34:59.359] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[028月2026 00:34:59.359] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[028月2026 00:34:59.762] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!

@@ -11,5 +11,7 @@
   "enchantment.spearcore.lunge.description": "戳刺攻击时将攻击者向前推进。",
   "death.attack.spear": "%1$s 被矛刺穿了",
   "death.attack.spear.item": "%1$s 被 %2$s 用 %3$s 刺穿了",
-  "death.attack.spear.player": "%1$s 被 %2$s 刺穿了"
+  "death.attack.spear.player": "%1$s 被 %2$s 刺穿了",
+  "attribute.spearcore.spear_stab_multiplier": "长矛戳击伤害",
+  "attribute.spearcore.spear_charge_multiplier": "长矛冲刺伤害"
 }

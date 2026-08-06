@@ -10,7 +10,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.spearcore.event.SpearChargePhaseEvent;
 import net.minecraft.spearcore.event.SpearDamageEvent;
+import net.minecraft.spearcore.event.SpearHitEvent;
 import net.minecraft.spearcore.init.SpearAttributes;
 import net.minecraft.spearcore.init.SpearSounds;
 import net.minecraft.util.Mth;
@@ -79,7 +81,29 @@ public abstract class SpearItem extends Item {
 
     protected int getSpearEnchantmentValue() { return 0; }
     protected boolean canRepair(ItemStack stack, ItemStack repairCandidate) { return false; }
+    /** 蓄力阶段缓存，用于阶段变更检测 */
+    private final WeakHashMap<LivingEntity, SpearChargePhaseEvent.Phase> spearPhaseCache =
+            new WeakHashMap<>();
+    /** 该实体是否正在蓄力持矛 */
+    public static boolean isChargingSpear(LivingEntity entity) {
+        return entity.isUsingItem()
+                && !entity.getUseItem().isEmpty()
+                && entity.getUseItem().getItem() instanceof SpearItem;
+    }
 
+    /** 蓄力进度 0~1 */
+    public static float getSpearChargeProgress(LivingEntity entity) {
+        if (!isChargingSpear(entity)
+                || !(entity.getUseItem().getItem() instanceof SpearItem spear)) return 0.0F;
+        ItemStack stack = entity.getUseItem();
+        int usedTicks = stack.getUseDuration(entity) - entity.getUseItemRemainingTicks();
+        return Mth.clamp(usedTicks / (float) spear.getDamageEndTick(), 0.0F, 1.0F);
+    }
+    protected static double getSpearMultiplier(LivingEntity entity,
+                                               net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute> attribute) {
+        var instance = entity.getAttribute(attribute);
+        return instance != null ? instance.getValue() : 1.0;
+    }
     // ========== getKnownMovement / getMotion（J库 static） ==========
 
     private static Vec3 getKnownMovement(Entity entity) {
@@ -170,7 +194,12 @@ public abstract class SpearItem extends Item {
     public int computeDamageUseDuration() {
         return getDelayTicks() + getDamageConditions().map(SpearCondition::maxDurationTicks).orElse(0);
     }
-
+    private SpearChargePhaseEvent.Phase getCurrentPhase(int usedTicks) {
+        if (usedTicks < getDelayTicks()) return SpearChargePhaseEvent.Phase.DELAY;
+        if (usedTicks < getDismountEndTick()) return SpearChargePhaseEvent.Phase.DISMOUNT;
+        if (usedTicks < getKnockbackEndTick()) return SpearChargePhaseEvent.Phase.KNOCKBACK;
+        return SpearChargePhaseEvent.Phase.DAMAGE;
+    }
     // ========== onUseTick — 等价于 J库 damageEntities ==========
 
     @Override
@@ -183,6 +212,12 @@ public abstract class SpearItem extends Item {
         }
 
         int usedTicks = stack.getUseDuration(user) - remainingTicks;
+        //阶段变更检测
+        SpearChargePhaseEvent.Phase phase = getCurrentPhase(usedTicks);
+        if (spearPhaseCache.get(user) != phase) {
+            spearPhaseCache.put(user, phase);
+            NeoForge.EVENT_BUS.post(new SpearChargePhaseEvent(user, phase));
+        }
         if (usedTicks < getDelayTicks()) return;
         int effectiveTicks = usedTicks - getDelayTicks();
 
@@ -233,14 +268,15 @@ public abstract class SpearItem extends Item {
             if (!canDismount && !canKnockback && !canDamage) continue;
 
             float damage = (float) baseDamage + (float) Mth.floor(relSpeed * (double) getDamageMultiplier());
-            double attrMult = user.getAttributeValue(SpearAttributes.SPEAR_CHARGE_MULTIPLIER);
+            double attrMult = getSpearMultiplier(user, SpearAttributes.SPEAR_CHARGE_MULTIPLIER);
             SpearDamageEvent event = new SpearDamageEvent(user, target,
                     damage, SpearDamageEvent.AttackType.CHARGE);
             NeoForge.EVENT_BUS.post(event);
             damage *= (float) (attrMult * event.getMultiplier());
             hitSomething |= stabAttack(
                     SlotUtil.slotForHand(user, user.getUsedItemHand()),
-                    target, damage, canDamage, canKnockback, canDismount, user);
+                    target, damage, canDamage, canKnockback, canDismount, user,
+                    SpearDamageEvent.AttackType.CHARGE);
         }
 
         if (hitSomething) {
@@ -258,7 +294,8 @@ public abstract class SpearItem extends Item {
         for (EntityHitResult hit : getHitEntitiesAlong(attacker, this, getHitboxMargin2(),
                 entity -> canHitEntity(attacker, entity))) {
             hitSomething |= stabAttack(slot, hit.getEntity(), baseDamage, true,
-                    dealsKnockback(), dismounts(), attacker);
+                    dealsKnockback(), dismounts(), attacker,
+                    SpearDamageEvent.AttackType.STAB);
         }
 
         if (attacker instanceof ServerPlayer serverPlayer) {
@@ -287,7 +324,7 @@ public abstract class SpearItem extends Item {
         float baseDamage = (float) attacker.getAttributeValue(Attributes.ATTACK_DAMAGE);
         float damage = baseDamage + (float) Mth.floor(attackerSpeed * getDamageMultiplier());
 
-        double attrMult = attacker.getAttributeValue(SpearAttributes.SPEAR_STAB_MULTIPLIER);
+        double attrMult = getSpearMultiplier(attacker, SpearAttributes.SPEAR_STAB_MULTIPLIER);
         SpearDamageEvent event = new SpearDamageEvent(attacker, /* 首个目标暂填 null */ null,
                 damage, SpearDamageEvent.AttackType.STAB);
         NeoForge.EVENT_BUS.post(event);
@@ -315,6 +352,8 @@ public abstract class SpearItem extends Item {
                 if (attacker instanceof Player player) {
                     player.setLastHurtMob(target);
                 }
+                NeoForge.EVENT_BUS.post(new SpearHitEvent(attacker, target, damage,
+                        SpearDamageEvent.AttackType.STAB));
                 if (attacker instanceof SpearCooldownAccessor accessor) {
                     accessor.RememberStabbedEntity(target);
                 }
@@ -339,7 +378,8 @@ public abstract class SpearItem extends Item {
     // ========== stabAttack（J库核心） ==========
 
     private boolean stabAttack(EquipmentSlot slot, Entity target, float damage, boolean canDamage,
-                               boolean canKnockback, boolean canDismount, LivingEntity attacker) {
+                               boolean canKnockback, boolean canDismount, LivingEntity attacker,
+                               SpearDamageEvent.AttackType attackType) {
         Level level = attacker.level();
         if (!(level instanceof ServerLevel serverLevel)) return false;
 
@@ -370,6 +410,7 @@ public abstract class SpearItem extends Item {
         }
 
         if (!hitSomething) return false;
+        NeoForge.EVENT_BUS.post(new SpearHitEvent(attacker, target, damage, attackType));
         level.playSound(null, target.getX(), target.getY(), target.getZ(),
                 getHitSound(), SoundSource.PLAYERS, 1.0F, 1.0F);
         attacker.setLastHurtMob(target);

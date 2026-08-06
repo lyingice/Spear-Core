@@ -11,5 +11,7 @@
   "enchantment.spearcore.lunge.description": "Push the attacker forward during a stabbing attack.",
   "death.attack.spear": "%1$s was pierced by a spear",
   "death.attack.spear.item": "%1$s was pierced by %2$s using %3$s",
-  "death.attack.spear.player": "%1$s was pierced by %2$s"
+  "death.attack.spear.player": "%1$s was pierced by %2$s",
+  "attribute.spearcore.spear_stab_multiplier": "Spear Stab Damage",
+  "attribute.spearcore.spear_charge_multiplier": "Spear Charge Damage"
 }
