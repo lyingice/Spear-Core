@@ -344,6 +344,10 @@ public abstract class SpearItem extends Item {
                 continue;
             }
             if (target.hurt(SpearDamageTypes.spear(attacker.level(), attacker), damage)) {
+                // 与蓄力路径一致，命中后把效果转发给 hurtEnemy 钩子
+                if (target instanceof LivingEntity livingTarget && attacker instanceof Player player) {
+                    stack.hurtEnemy(livingTarget, player);
+                }
                 hitSomething = true;
                 stack.hurtAndBreak(1, attacker, slot);
                 if (dealsKnockback()) {

@@ -121,6 +121,8 @@ key_key.hotbar.6:key.keyboard.6
 key_key.hotbar.7:key.keyboard.7
 key_key.hotbar.8:key.keyboard.8
 key_key.hotbar.9:key.keyboard.9
+key_key.punchy.open_main_menu:key.keyboard.f8
+key_key.punchy.inspect:key.keyboard.i
 key_key.unlockIME:key.keyboard.right.shift
 key_key.jei.toggleOverlay:key.keyboard.o:CONTROL
 key_key.jei.focusSearch:key.keyboard.f:CONTROL

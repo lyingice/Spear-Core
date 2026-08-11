@@ -3,6 +3,7 @@ package net.minecraft.spearcore.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.spearcore.client.animation.SpearAnimations;
+import net.minecraft.spearcore.compat.punchy.PunchyCompat;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
@@ -25,6 +26,8 @@ public class SpearClientExtensions implements IClientItemExtensions {
     public boolean applyForgeHandTransform(@NotNull PoseStack poseStack, @NotNull LocalPlayer player,
                                            @NotNull HumanoidArm arm, @NotNull ItemStack itemInHand,
                                            float partialTick, float equipProcess, float swingProcess) {
+        if (PunchyCompat.isActive()) return false;
+
         // 根据手臂方向确定偏移方向（右臂为正，左臂为负）
         int dir = arm == HumanoidArm.RIGHT ? 1 : -1;
 
