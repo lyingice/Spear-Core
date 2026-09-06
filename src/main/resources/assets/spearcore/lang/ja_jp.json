@@ -1,0 +1,17 @@
+{
+  "item.spearcore.wooden_spear": "木の槍",
+  "item.spearcore.stone_spear": "石の槍",
+  "item.spearcore.copper_spear": "銅の槍",
+  "item.spearcore.iron_spear": "鉄の槍",
+  "item.spearcore.golden_spear": "金の槍",
+  "item.spearcore.diamond_spear": "ダイヤモンドの槍",
+  "item.spearcore.netherite_spear": "ネザライトの槍",
+  "item.spearcore.spear.desc": "突進して突き刺す武器。移動速度が速いほどダメージが増加する。",
+  "enchantment.spearcore.lunge": "突進",
+  "enchantment.spearcore.lunge.description": "突き攻撃時、攻撃者を前方に押し出す。",
+  "death.attack.spear": "%1$sは突き刺された",
+  "death.attack.spear.item": "%1$sは%2$sの%3$sで突き刺された",
+  "death.attack.spear.player": "%1$sは%2$sに突き刺された",
+  "attribute.spearcore.spear_stab_multiplier": "槍の突きダメージ",
+  "attribute.spearcore.spear_charge_multiplier": "槍の突進ダメージ"
+}
