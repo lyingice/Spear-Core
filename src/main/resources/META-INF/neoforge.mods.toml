@@ -44,4 +44,13 @@ authors="Lyingice"
     versionRange="[2.6.2,)"
     ordering="AFTER"
     side="CLIENT"
+
+# KubeJS 联动为可选依赖：插件类只通过 kubejs.plugins.txt 字符串反射加载，
+# 未安装 KubeJS 时不会加载任何相关类，mod 行为与不加该依赖时完全一致。
+[[dependencies.spearcore]]
+    modId="kubejs"
+    type="optional"
+    versionRange="[2101,)"
+    ordering="AFTER"
+    side="BOTH"
 # End of user code block dependencies configuration

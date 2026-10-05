@@ -26,5 +26,15 @@
       <option name="name" value="NeoForged Releases" />
       <option name="url" value="https://maven.neoforged.net/releases/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="latvian" />
+      <option name="name" value="latvian" />
+      <option name="url" value="https://maven.latvian.dev/releases" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jitpack" />
+      <option name="name" value="jitpack" />
+      <option name="url" value="https://jitpack.io" />
+    </remote-repository>
   </component>
 </project>

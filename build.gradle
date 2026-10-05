@@ -38,9 +38,28 @@ neoForge {
         }
     }
 }
+repositories {
+    // KubeJS / Rhino 的发布仓库（仅用于编译与开发期联调）
+    maven {
+        name = 'latvian'
+        url = 'https://maven.latvian.dev/releases'
+    }
+    // KubeJS 的运行期传递依赖 animated-gif-lib-for-java 只发布在 JitPack
+    maven {
+        name = 'jitpack'
+        url = 'https://jitpack.io'
+    }
+}
 dependencies {
     // 编译时可用，但不打包进最终 jar
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // KubeJS 联动（mods.toml 中声明为 optional）。
+    // compileOnly：编译 compat.kubejs 包用，绝不进入发布 jar；
+    // runtimeOnly：开发期让 KubeJS 真的加载起来，便于联调。
+    // 要验证"没装 KubeJS"的启动路径，把 runtimeOnly 这行注释掉即可。
+    compileOnly 'dev.latvian.mods:kubejs-neoforge:2101.7.2-build.379'
+    runtimeOnly 'dev.latvian.mods:kubejs-neoforge:2101.7.2-build.379'
 }
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation

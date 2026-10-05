@@ -1,0 +1,3 @@
+# spearcore 的 KubeJS 插件声明。每行一个类名，可跟 'client' 或某个 modid 作为加载条件。
+# KubeJS 用 Class.forName 反射加载；这里只是字符串，所以没装 KubeJS 时不会有任何类被加载。
+net.minecraft.spearcore.compat.kubejs.SpearCoreKubeJSPlugin
