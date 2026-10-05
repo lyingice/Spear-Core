@@ -1,26 +1,12 @@
 {
   "required": true,
+  "minVersion": "0.8.4",
   "package": "net.minecraft.spearcore.mixin",
-  "compatibilityLevel": "JAVA_21",
-  "mixins": [
-    "ServerPlayerMotionMixin",
-    "ServerGamePacketListenerSpearMixin",
-    "LivingEntitySpearMixin",
-    "SpearCooldownAttackMixin",
-    "MobSpearMixin"
-  ],
-  "client": [
-    "ItemInitializeClientMixin",
-    "LocalPlayerFovMixin",
-    "LocalPlayerInputMixin",
-    "ItemInHandRendererMixin",
-    "ItemInHandLayerMixin",
-    "HumanoidModelMixin",
-    "AbstractZombieModelMixin",
-    "LivingEntitySpearClientMixin"
-  ],
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "mixins.spearcore.refmap.json",
+  "mixins": [],
+  "client": [],
   "injectors": {
     "defaultRequire": 1
-  },
-  "minVersion": "0.8.4"
+  }
 }

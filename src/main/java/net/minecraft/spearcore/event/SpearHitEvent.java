@@ -2,7 +2,7 @@ package net.minecraft.spearcore.event;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.bus.api.Event;
+import net.minecraftforge.eventbus.api.Event;
 
 /**
  * 长矛命中目标后触发（伤害已结算）。

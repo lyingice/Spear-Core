@@ -1,68 +1,59 @@
 plugins {
     id 'eclipse'
-    id 'net.neoforged.moddev' version '2.0.141'
+    id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
 
 version = '3.0.0'
-base.archivesName = "spearcore-1.21.1-neo"
+group = 'net.minecraft.spearcore'
+archivesBaseName = 'spearcore-1.20.1-forge'
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-neoForge {
-    version = "21.1.217"
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+
+    copyIdeResources = true
 
     runs {
         client {
-            client()
-
             def mcreatorJvmOptions = System.getenv('MCREATOR_JVM_OPTIONS')
             if (mcreatorJvmOptions) {
-                mcreatorJvmOptions.split("\\s+").findAll { it.trim() }.each { arg ->
-                    jvmArgument(arg)
-                }
+                jvmArgs += mcreatorJvmOptions.split("\\s+").findAll { it.trim() }.toList()
             }
         }
+
         server {
-            server()
         }
 
         configureEach {
-            systemProperty 'forge.logging.markers', 'REGISTRIES'
-            logLevel = org.slf4j.event.Level.DEBUG
-        }
-    }
+            workingDirectory project.file('run')
 
-    mods {
-        mcreator {
-            sourceSet sourceSets.main
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                spearcore {
+                    source sourceSets.main
+                }
+            }
         }
     }
 }
-repositories {
-    // KubeJS / Rhino 的发布仓库（仅用于编译与开发期联调）
-    maven {
-        name = 'latvian'
-        url = 'https://maven.latvian.dev/releases'
-    }
-    // KubeJS 的运行期传递依赖 animated-gif-lib-for-java 只发布在 JitPack
-    maven {
-        name = 'jitpack'
-        url = 'https://jitpack.io'
-    }
-}
+
 dependencies {
-    // 编译时可用，但不打包进最终 jar
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    minecraft 'net.minecraftforge:forge:1.20.1-47.3.0'
 
-    // KubeJS 联动（mods.toml 中声明为 optional）。
-    // compileOnly：编译 compat.kubejs 包用，绝不进入发布 jar；
-    // runtimeOnly：开发期让 KubeJS 真的加载起来，便于联调。
-    // 要验证"没装 KubeJS"的启动路径，把 runtimeOnly 这行注释掉即可。
-    compileOnly 'dev.latvian.mods:kubejs-neoforge:2101.7.2-build.379'
-    runtimeOnly 'dev.latvian.mods:kubejs-neoforge:2101.7.2-build.379'
+    // Mixin 注解处理器：生成 refmap（1.20.1 的 Mixin 靠它把注入目标映射到混淆名）
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
+
+mixin {
+    add sourceSets.main, 'mixins.spearcore.refmap.json'
+    config 'spearcore.mixins.json'
+    quiet
+}
+
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.encoding = 'UTF-8'
 }
-
-apply from: 'mcreator.gradle'

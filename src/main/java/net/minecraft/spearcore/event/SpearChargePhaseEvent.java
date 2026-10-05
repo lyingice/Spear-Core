@@ -1,7 +1,7 @@
 package net.minecraft.spearcore.event;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.bus.api.Event;
+import net.minecraftforge.eventbus.api.Event;
 
 /**
  * 长矛蓄力阶段变更时触发（只在切换瞬间发一次）。

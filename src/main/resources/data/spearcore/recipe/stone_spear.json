@@ -15,7 +15,7 @@
     }
   },
   "result": {
-    "id": "spearcore:stone_spear",
+    "item": "spearcore:stone_spear",
     "count": 1
   }
 }

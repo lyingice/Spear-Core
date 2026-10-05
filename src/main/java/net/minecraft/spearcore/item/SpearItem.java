@@ -37,10 +37,13 @@ import net.minecraft.spearcore.util.SpearCollision;
 import net.minecraft.spearcore.util.SpearCondition;
 import net.minecraft.spearcore.util.SpearCooldownAccessor;
 import net.minecraft.spearcore.util.UseSpearSpecialEntity;
-import net.neoforged.neoforge.common.NeoForge;
+import net.minecraftforge.common.MinecraftForge;
 
 import java.util.*;
 import java.util.function.Predicate;
+import net.minecraftforge.common.ForgeMod;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.spearcore.init.SpearEnchantments;
 
 /**
  * SpearItem — 矛的核心类，严格基于 J库 ItemToolBaseSpearBase 移植。
@@ -96,11 +99,11 @@ public abstract class SpearItem extends Item {
         if (!isChargingSpear(entity)
                 || !(entity.getUseItem().getItem() instanceof SpearItem spear)) return 0.0F;
         ItemStack stack = entity.getUseItem();
-        int usedTicks = stack.getUseDuration(entity) - entity.getUseItemRemainingTicks();
+        int usedTicks = stack.getUseDuration() - entity.getUseItemRemainingTicks();
         return Mth.clamp(usedTicks / (float) spear.getDamageEndTick(), 0.0F, 1.0F);
     }
     protected static double getSpearMultiplier(LivingEntity entity,
-                                               net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute> attribute) {
+                                               net.minecraft.world.entity.ai.attributes.Attribute attribute) {
         var instance = entity.getAttribute(attribute);
         return instance != null ? instance.getValue() : 1.0;
     }
@@ -143,12 +146,12 @@ public abstract class SpearItem extends Item {
     public float effectiveMaxRange(Entity entity) {
         if (entity instanceof Player player) {
             return (player.isCreative() ? getMaxCreativeRange() : getMaxRange())
-                    + (player.getAttribute(Attributes.ENTITY_INTERACTION_RANGE) != null
-                    ? (float) Math.max(0, player.getAttributeValue(Attributes.ENTITY_INTERACTION_RANGE) - 3) : 0);
+                    + (player.getAttribute(ForgeMod.ENTITY_REACH.get()) != null
+                    ? (float) Math.max(0, player.getAttributeValue(ForgeMod.ENTITY_REACH.get()) - 3) : 0);
         }
         return getMaxRange() * getMobFactor()
-                + (entity instanceof LivingEntity le && le.getAttribute(Attributes.ENTITY_INTERACTION_RANGE) != null
-                ? (float) Math.max(0, le.getAttributeValue(Attributes.ENTITY_INTERACTION_RANGE) - 3) : 0);
+                + (entity instanceof LivingEntity le && le.getAttribute(ForgeMod.ENTITY_REACH.get()) != null
+                ? (float) Math.max(0, le.getAttributeValue(ForgeMod.ENTITY_REACH.get()) - 3) : 0);
     }
 
     // ========== use（J库） ==========
@@ -159,7 +162,7 @@ public abstract class SpearItem extends Item {
     }
 
     @Override
-    public int getUseDuration(ItemStack stack, LivingEntity entity) {
+    public int getUseDuration(ItemStack stack) {
         return 72000;
     }
 
@@ -211,12 +214,12 @@ public abstract class SpearItem extends Item {
             return;
         }
 
-        int usedTicks = stack.getUseDuration(user) - remainingTicks;
+        int usedTicks = stack.getUseDuration() - remainingTicks;
         //阶段变更检测
         SpearChargePhaseEvent.Phase phase = getCurrentPhase(usedTicks);
         if (spearPhaseCache.get(user) != phase) {
             spearPhaseCache.put(user, phase);
-            NeoForge.EVENT_BUS.post(new SpearChargePhaseEvent(user, phase));
+            MinecraftForge.EVENT_BUS.post(new SpearChargePhaseEvent(user, phase));
         }
         if (usedTicks < getDelayTicks()) return;
         int effectiveTicks = usedTicks - getDelayTicks();
@@ -268,10 +271,10 @@ public abstract class SpearItem extends Item {
             if (!canDismount && !canKnockback && !canDamage) continue;
 
             float damage = (float) baseDamage + (float) Mth.floor(relSpeed * (double) getDamageMultiplier());
-            double attrMult = getSpearMultiplier(user, SpearAttributes.SPEAR_CHARGE_MULTIPLIER);
+            double attrMult = getSpearMultiplier(user, SpearAttributes.SPEAR_CHARGE_MULTIPLIER.get());
             SpearDamageEvent event = new SpearDamageEvent(user, target,
                     damage, SpearDamageEvent.AttackType.CHARGE);
-            NeoForge.EVENT_BUS.post(event);
+            MinecraftForge.EVENT_BUS.post(event);
             damage *= (float) (attrMult * event.getMultiplier());
             hitSomething |= stabAttack(
                     SlotUtil.slotForHand(user, user.getUsedItemHand()),
@@ -324,10 +327,10 @@ public abstract class SpearItem extends Item {
         float baseDamage = (float) attacker.getAttributeValue(Attributes.ATTACK_DAMAGE);
         float damage = baseDamage + (float) Mth.floor(attackerSpeed * getDamageMultiplier());
 
-        double attrMult = getSpearMultiplier(attacker, SpearAttributes.SPEAR_STAB_MULTIPLIER);
+        double attrMult = getSpearMultiplier(attacker, SpearAttributes.SPEAR_STAB_MULTIPLIER.get());
         SpearDamageEvent event = new SpearDamageEvent(attacker, /* 首个目标暂填 null */ null,
                 damage, SpearDamageEvent.AttackType.STAB);
-        NeoForge.EVENT_BUS.post(event);
+        MinecraftForge.EVENT_BUS.post(event);
         damage *= (float) (attrMult * event.getMultiplier());
 
         boolean hitSomething = false;
@@ -349,14 +352,14 @@ public abstract class SpearItem extends Item {
                     stack.hurtEnemy(livingTarget, player);
                 }
                 hitSomething = true;
-                stack.hurtAndBreak(1, attacker, slot);
+                stack.hurtAndBreak(1, attacker, e -> e.broadcastBreakEvent(slot));
                 if (dealsKnockback()) {
                     causeExtraKnockback(attacker, target, 0.4F, target.getDeltaMovement());
                 }
                 if (attacker instanceof Player player) {
                     player.setLastHurtMob(target);
                 }
-                NeoForge.EVENT_BUS.post(new SpearHitEvent(attacker, target, damage,
+                MinecraftForge.EVENT_BUS.post(new SpearHitEvent(attacker, target, damage,
                         SpearDamageEvent.AttackType.STAB));
                 if (attacker instanceof SpearCooldownAccessor accessor) {
                     accessor.RememberStabbedEntity(target);
@@ -414,11 +417,11 @@ public abstract class SpearItem extends Item {
         }
 
         if (!hitSomething) return false;
-        NeoForge.EVENT_BUS.post(new SpearHitEvent(attacker, target, damage, attackType));
+        MinecraftForge.EVENT_BUS.post(new SpearHitEvent(attacker, target, damage, attackType));
         level.playSound(null, target.getX(), target.getY(), target.getZ(),
                 getHitSound(), SoundSource.PLAYERS, 1.0F, 1.0F);
         attacker.setLastHurtMob(target);
-        stack.hurtAndBreak(1, attacker, slot);
+        stack.hurtAndBreak(1, attacker, e -> e.broadcastBreakEvent(slot));
         return true;
     }
 
@@ -562,12 +565,7 @@ public abstract class SpearItem extends Item {
             return;
         }
         ItemStack stack = user.getMainHandItem();
-        int lungeLevel = stack.getEnchantmentLevel(
-                user.level().registryAccess()
-                        .registryOrThrow(Registries.ENCHANTMENT)
-                        .getHolderOrThrow(ResourceKey.create(Registries.ENCHANTMENT,
-                                ResourceLocation.fromNamespaceAndPath("spearcore", "lunge")))
-        );
+        int lungeLevel = EnchantmentHelper.getItemEnchantmentLevel(SpearEnchantments.LUNGE.get(), stack);
 
         if (lungeLevel <= 0) {
             return;
@@ -580,7 +578,7 @@ public abstract class SpearItem extends Item {
         }
 
         if (stack.isDamageableItem() && user instanceof Player) {
-            stack.hurtAndBreak(1, user, EquipmentSlot.MAINHAND);
+            stack.hurtAndBreak(1, user, e -> e.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         }
         if (user instanceof Player player) {
             player.causeFoodExhaustion(4.0f * lungeLevel);

@@ -2,8 +2,7 @@ package net.minecraft.spearcore.event;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.bus.api.Event;
-import net.neoforged.bus.api.ICancellableEvent;
+import net.minecraftforge.eventbus.api.Event;
 
 /**
  * 在矛计算最终伤害前触发。

@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 public final class SpearDamageTypes {
     public static final ResourceKey<DamageType> SPEAR = ResourceKey.create(
             Registries.DAMAGE_TYPE,
-            ResourceLocation.fromNamespaceAndPath(SpearcoreMod.MODID, "spear")
+            new ResourceLocation(SpearcoreMod.MODID, "spear")
     );
 
     private SpearDamageTypes() {

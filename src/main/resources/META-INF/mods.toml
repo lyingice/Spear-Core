@@ -1,0 +1,32 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT License"
+
+[[mods]]
+modId="spearcore"
+version="3.0.0"
+displayName="Spear Core"
+displayURL="https://center.mcmod.cn/863182/"
+logoFile="spear.png"
+credits="Lyingice's Spear Core"
+authors="Lyingice"
+
+# Start of user code block mod configuration
+# End of user code block mod configuration
+
+[[dependencies.spearcore]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.spearcore]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1]"
+    ordering="AFTER"
+    side="BOTH"
+
+# Start of user code block dependencies configuration
+# End of user code block dependencies configuration

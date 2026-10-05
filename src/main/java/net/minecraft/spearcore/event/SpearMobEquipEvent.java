@@ -2,14 +2,18 @@ package net.minecraft.spearcore.event;
 
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.Event;
-import net.neoforged.bus.api.ICancellableEvent;
+import net.minecraftforge.eventbus.api.Cancelable;
+import net.minecraftforge.eventbus.api.Event;
 
 /**
  * 生物生成时发放长矛（MobSpearMixin 触发）。
  * 其他模组可修改矛/掉率/取消发放。
+ *
+ * <p>1.20.1 的 Forge 用 `@Cancelable` 注解标记可取消事件（NeoForge 是 ICancellableEvent 接口），
+ * 注解之后 Event#isCanceled()/setCanceled() 才可用。</p>
  */
-public class SpearMobEquipEvent extends Event implements ICancellableEvent {
+@Cancelable
+public class SpearMobEquipEvent extends Event {
 
     private final Mob mob;
     private ItemStack spearStack;
@@ -26,7 +30,4 @@ public class SpearMobEquipEvent extends Event implements ICancellableEvent {
     public void setSpearStack(ItemStack spearStack) { this.spearStack = spearStack; }
     public float getDropChance() { return dropChance; }
     public void setDropChance(float dropChance) { this.dropChance = dropChance; }
-
-    // 注意：不再自己声明 isCanceled()/setCanceled()
-    // 这两个方法由 ICancellableEvent 接口提供默认实现
 }
