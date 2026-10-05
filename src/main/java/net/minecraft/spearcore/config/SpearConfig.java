@@ -24,6 +24,14 @@ public class SpearConfig {
                     "默认关闭：命中后保持速度与奔跑状态，撞完接着冲。")
             .define("slowDownAttackerOnHit", false);
 
+    /**
+     * 安装 Punchy 时，让其矛蓄力动画按本模组各材质的阶段(tick)切换。
+     * 关闭则用 Punchy 自带的固定时间轴。仅客户端读取。
+     */
+    public static final ForgeConfigSpec.BooleanValue PUNCHY_STAGE_BRIDGE = BUILDER
+            .comment("安装 Punchy 时，让其矛蓄力动画按本模组各材质的阶段(tick)切换；关闭则用 Punchy 自带的固定时间轴")
+            .define("punchyStageBridge", true);
+
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 
     public static void register() {

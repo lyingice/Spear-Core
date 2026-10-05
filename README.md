@@ -201,7 +201,7 @@ slowDownAttackerOnHit = false
 这个分支是 **1.20.1 + Forge**；**1.21.1 + NeoForge** 在 `main` 分支上，两者玩法一致。
 
 **Q：和别的 mod 冲突吗？**
-**JEI**（查配方）直接可用，**KubeJS**（用脚本加自己的矛）也已支持（KubeJS 2001.6.5-build.26+forge）。**Punchy**（第一人称视角动画接管）尚未接入，见下文。
+**JEI**（查配方）、**KubeJS**（用脚本加自己的矛）与 **Punchy**（第一人称视角动画）都已支持。
 
 ---
 
@@ -306,10 +306,15 @@ StartupEvents.registry('item', event => {
 
 **对应版本**：KubeJS **2001.6.5-build.26+forge**（1.20.1 Forge）。
 
-## Punchy（尚未接入）
+## Punchy（已支持）
 
-`compat/punchy/PunchyCompat` 目前恒返回 false，行为等价于"没装 Punchy"，即不接管第一人称视角动画。
-Punchy 在 1.20.1 Forge 上的最新版是 **2.8d**，接入属下一轮工作。
+装了 Punchy 时，矛的蓄力动画会**跟着本模组各材质的时间轴走** ——
+举矛段(delay+dismount) → 击退段 → 仅伤害段，而不是用 Punchy 自带的固定时间轴。
+不喜欢可以用配置项 `punchyStageBridge = false` 关掉，回到 Punchy 自己的节奏。
+
+对应版本：Punchy **2.8d**（1.20.1 Forge）。没装 Punchy 时整条链路自动跳过：
+桥接的 mixin 配置是 `required=false`，并额外由 `PunchyMixinPlugin` 在启动早期判定是否应用
+（实测：无 Punchy 时零 ClassNotFound、零异常）。
 
 ## 1.20.1 移植说明
 
@@ -530,7 +535,7 @@ Yes. Spears take enchantments like any other weapon. Lunge is the spear-specific
 This branch is **1.20.1 + Forge**; **1.21.1 + NeoForge** lives on the `main` branch. Gameplay is identical.
 
 **Q: Does it conflict with other mods?**
-**JEI** (recipe viewing) works today, and **KubeJS** (add your own spears from scripts) is supported too (KubeJS 2001.6.5-build.26+forge). **Punchy** (taking over the first-person view animation) is not wired up yet — see below.
+**JEI** (recipe viewing), **KubeJS** (add your own spears from scripts) and **Punchy** (first-person view animation) are all supported.
 
 ---
 
@@ -635,9 +640,15 @@ The full walkthrough (parameter tables, texture conventions, pitfalls; Chinese a
 
 **Matching version**: KubeJS **2001.6.5-build.26+forge** (1.20.1 Forge).
 
-## Punchy (not wired up yet)
+## Punchy (supported)
 
-`compat/punchy/PunchyCompat` currently always returns false, i.e. exactly the "Punchy is not installed" behaviour — the first-person view animation is not taken over. The newest Punchy for 1.20.1 Forge is **2.8d**; hooking it up is the next round of work.
+With Punchy installed, the spear charge animation **follows this mod's per-material timeline** —
+raise (delay + dismount) → knockback → damage-only — instead of Punchy's fixed timeline.
+Set `punchyStageBridge = false` to hand control back to Punchy.
+
+Matching version: Punchy **2.8d** (1.20.1 Forge). Without Punchy the whole chain is skipped:
+the bridge mixin config is `required=false` and `PunchyMixinPlugin` decides at startup whether to
+apply it (measured: zero ClassNotFound and zero exceptions without Punchy).
 
 ## Porting notes (1.21.1 → 1.20.1)
 
