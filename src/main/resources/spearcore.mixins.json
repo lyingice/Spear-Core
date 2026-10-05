@@ -4,8 +4,23 @@
   "package": "net.minecraft.spearcore.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "mixins.spearcore.refmap.json",
-  "mixins": [],
-  "client": [],
+  "mixins": [
+    "ServerPlayerMotionMixin",
+    "ServerGamePacketListenerSpearMixin",
+    "LivingEntitySpearMixin",
+    "MobSpearMixin"
+  ],
+  "client": [
+    "SpearCooldownAttackMixin",
+    "ItemInitializeClientMixin",
+    "LocalPlayerFovMixin",
+    "LocalPlayerInputMixin",
+    "ItemInHandRendererMixin",
+    "ItemInHandLayerMixin",
+    "HumanoidModelMixin",
+    "AbstractZombieModelMixin",
+    "LivingEntitySpearClientMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }
