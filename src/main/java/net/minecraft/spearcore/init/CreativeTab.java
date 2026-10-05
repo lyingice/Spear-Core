@@ -21,16 +21,21 @@ public class CreativeTab {
                 ResourceLocation.fromNamespaceAndPath("minecraft", "combat"));
         if (event.getTabKey() != CombatTab) return;
 
-        if (SpearConfig.ENABLE_VANILLA_SPEARS.get()) {
-            event.insertAfter(new ItemStack(Items.NETHERITE_SWORD), SpearCoreItems.NETHERITE_SPEAR.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertAfter(new ItemStack(Items.NETHERITE_SWORD), SpearCoreItems.DIAMOND_SPEAR.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertAfter(new ItemStack(Items.NETHERITE_SWORD), SpearCoreItems.GOLDEN_SPEAR.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertAfter(new ItemStack(Items.NETHERITE_SWORD), SpearCoreItems.IRON_SPEAR.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertAfter(new ItemStack(Items.NETHERITE_SWORD), SpearCoreItems.STONE_SPEAR.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertAfter(new ItemStack(Items.NETHERITE_SWORD), SpearCoreItems.WOODEN_SPEAR.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        }
-        if (SpearConfig.ENABLE_COPPER_SPEAR.get()) {
-            event.insertAfter(new ItemStack(Items.NETHERITE_SWORD), SpearCoreItems.COPPER_SPEAR.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        }
+        boolean vanillaSpears = SpearConfig.ENABLE_VANILLA_SPEARS.get();
+        boolean copperSpear = SpearConfig.ENABLE_COPPER_SPEAR.get();
+        if (!vanillaSpears && !copperSpear) return;
+
+        // 材质档次顺序：木 → 石 → 铜 → 铁 → 金 → 钻石 → 下界合金
+        // insertAfter 是"紧跟锚点"，所以必须逆序调用，最终顺序才等于上面的档次顺序。
+        // 铜夹在石与铁之间（与 1.20.1 分支、以及本模组的数值表一致）。
+        ItemStack anchor = new ItemStack(Items.NETHERITE_SWORD);
+        CreativeModeTab.TabVisibility visible = CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS;
+        if (vanillaSpears) event.insertAfter(anchor, SpearCoreItems.NETHERITE_SPEAR.get().getDefaultInstance(), visible);
+        if (vanillaSpears) event.insertAfter(anchor, SpearCoreItems.DIAMOND_SPEAR.get().getDefaultInstance(), visible);
+        if (vanillaSpears) event.insertAfter(anchor, SpearCoreItems.GOLDEN_SPEAR.get().getDefaultInstance(), visible);
+        if (vanillaSpears) event.insertAfter(anchor, SpearCoreItems.IRON_SPEAR.get().getDefaultInstance(), visible);
+        if (copperSpear) event.insertAfter(anchor, SpearCoreItems.COPPER_SPEAR.get().getDefaultInstance(), visible);
+        if (vanillaSpears) event.insertAfter(anchor, SpearCoreItems.STONE_SPEAR.get().getDefaultInstance(), visible);
+        if (vanillaSpears) event.insertAfter(anchor, SpearCoreItems.WOODEN_SPEAR.get().getDefaultInstance(), visible);
     }
 }
