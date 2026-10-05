@@ -39,6 +39,11 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
 
+            // 让开发环境把依赖 mod（这里是 KubeJS）的 mixin 名字从 SRG 重映射到 Mojang 名。
+            // KubeJS 的 mixin 是按 SRG 名写的（@Shadow m_7038_ 之类），开发环境目标是 Mojang 名，
+            // 不开这两个开关它自己的 mixin 会在开发环境直接崩。
+
+
             mods {
                 spearcore {
                     source sourceSets.main
@@ -48,11 +53,50 @@ minecraft {
     }
 }
 
+repositories {
+    // KubeJS / Rhino 的发布仓库（仅用于编译与开发期联调）
+    maven {
+        name = 'latvian'
+        url = 'https://maven.latvian.dev/releases'
+    }
+    // KubeJS 的传递依赖 animated-gif-lib-for-java 只发布在 JitPack
+    maven {
+        name = 'jitpack'
+        url = 'https://jitpack.io'
+    }
+    // KubeJS 1.20.1 依赖 architectury
+    maven {
+        name = 'architectury'
+        url = 'https://maven.architectury.dev/'
+    }
+}
+
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.3.0'
 
     // Mixin 注解处理器：生成 refmap（1.20.1 的 Mixin 靠它把注入目标映射到混淆名）
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    // KubeJS 联动（mods.toml 里声明为 optional）。
+    // compileOnly：只有 compat.kubejs 包会编译它，绝不进发布 jar；
+    //             没装 KubeJS 时那个包里的类永远不会被加载（靠 kubejs.plugins.txt 反射入口隔离）。
+    // runtimeOnly：开发期真的把 KubeJS 跑起来，便于联调。
+    // 要验证"没装 KubeJS"的启动路径，把 runtimeOnly 这行注释掉即可。
+    // 必须包 fg.deobf：KubeJS 的 mixin 是按 SRG 名写的（@Shadow m_7038_ 之类），
+    // 生产环境目标是 SRG 名所以没事，但开发环境目标是 Mojang 名 ——
+    // 不反混淆的话 KubeJS 自己的 mixin 会在开发环境直接崩（@Shadow 找不到目标方法）。
+    compileOnly 'dev.latvian.mods:kubejs-forge:2001.6.5-build.26'
+    // 开发运行期必须用反混淆版：KubeJS 的 mixin 直接写了 SRG 名（@Shadow m_7038_），
+    // 而开发环境目标是 Mojang 名，不重写常量池它自己的 mixin 就会崩。
+    // fg.deobf 不带传递依赖，所以 rhino / architectury 也要单独列出来（版本号取自
+    // gradlew dependencies --configuration runtimeClasspath）。
+    // 开发运行期用反混淆版：KubeJS 的 mixin 直接写了 SRG 名（@Shadow m_7038_），
+    // 开发环境目标是 Mojang 名，不重写常量池它自己的 mixin 会崩。
+    // fg.deobf 不带传递依赖，所以 rhino / architectury 必须单独列出来。
+    // 要验证"没装 KubeJS"的启动路径，把这三行注释掉即可（已实测：零 ClassNotFound）。
+    runtimeOnly fg.deobf('dev.latvian.mods:kubejs-forge:2001.6.5-build.26')
+    runtimeOnly fg.deobf('dev.latvian.mods:rhino-forge:2001.2.2-build.17')
+    runtimeOnly fg.deobf('dev.architectury:architectury-forge:9.1.12')
 }
 
 mixin {

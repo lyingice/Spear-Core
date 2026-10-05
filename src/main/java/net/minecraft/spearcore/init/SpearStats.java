@@ -8,6 +8,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.Items;
 import net.minecraft.sounds.SoundEvent;
 
+import java.util.function.Supplier;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -24,9 +26,9 @@ public class SpearStats {
             Ingredient repairIngredient,
             boolean fireResistant,
             String materialName,
-            SoundEvent useSound,
-            SoundEvent hitSound,
-            SoundEvent attackSound,
+            Supplier<SoundEvent> useSound,
+            Supplier<SoundEvent> hitSound,
+            Supplier<SoundEvent> attackSound,
             float swingTimes,
             float hitboxMargin,
             int contactCooldownTicks,
@@ -54,7 +56,7 @@ public class SpearStats {
                 float attackDamageBonus, int enchantmentValue,
                 Rarity rarity, Ingredient repairIngredient, boolean fireResistant,
                 String materialName,
-                SoundEvent useSound, SoundEvent hitSound, SoundEvent attackSound,
+                Supplier<SoundEvent> useSound, Supplier<SoundEvent> hitSound, Supplier<SoundEvent> attackSound,
                 float swingTimes, float hitboxMargin, int contactCooldownTicks,
                 int delayTicks, Optional<SpearCondition> dismountConditions,
                 Optional<SpearCondition> knockbackConditions, Optional<SpearCondition> damageConditions,
@@ -82,7 +84,7 @@ public class SpearStats {
             float attackDamageBonus, int enchantmentValue,
             Rarity rarity, Ingredient repairIngredient, boolean fireResistant,
             String materialName,
-            SoundEvent useSound, SoundEvent hitSound, SoundEvent attackSound,
+            Supplier<SoundEvent> useSound, Supplier<SoundEvent> hitSound, Supplier<SoundEvent> attackSound,
             float delaySec, float dismountSec, float knockbackSec, float damageSec
     ) {
         return Stats.of(
@@ -107,7 +109,7 @@ public class SpearStats {
             int durability, float attackDuration, float damageMultiplier,
             float attackDamageBonus, int enchantmentValue,
             Rarity rarity, Ingredient repairIngredient, String materialName,
-            SoundEvent useSound, SoundEvent hitSound, SoundEvent attackSound,
+            Supplier<SoundEvent> useSound, Supplier<SoundEvent> hitSound, Supplier<SoundEvent> attackSound,
             float delaySec, float dismountSec, float knockbackSec, float damageSec
     ) {
         return spearOf(durability, attackDuration, damageMultiplier, attackDamageBonus,
@@ -118,13 +120,13 @@ public class SpearStats {
 
     // ========== 音效 ==========
 
-    private static final SoundEvent WOOD_USE = SpearSounds.ITEM_SPEAR_WOOD_USE.get();
-    private static final SoundEvent WOOD_HIT = SpearSounds.ITEM_SPEAR_WOOD_HIT.get();
-    private static final SoundEvent WOOD_ATTACK = SpearSounds.ITEM_SPEAR_WOOD_ATTACK.get();
+    private static final Supplier<SoundEvent> WOOD_USE = SpearSounds.ITEM_SPEAR_WOOD_USE;
+    private static final Supplier<SoundEvent> WOOD_HIT = SpearSounds.ITEM_SPEAR_WOOD_HIT;
+    private static final Supplier<SoundEvent> WOOD_ATTACK = SpearSounds.ITEM_SPEAR_WOOD_ATTACK;
 
-    private static final SoundEvent SPEAR_USE = SpearSounds.ITEM_SPEAR_USE.get();
-    private static final SoundEvent SPEAR_HIT = SpearSounds.ITEM_SPEAR_HIT.get();
-    private static final SoundEvent SPEAR_ATTACK = SpearSounds.ITEM_SPEAR_ATTACK.get();
+    private static final Supplier<SoundEvent> SPEAR_USE = SpearSounds.ITEM_SPEAR_USE;
+    private static final Supplier<SoundEvent> SPEAR_HIT = SpearSounds.ITEM_SPEAR_HIT;
+    private static final Supplier<SoundEvent> SPEAR_ATTACK = SpearSounds.ITEM_SPEAR_ATTACK;
 
     // ========== 预设常量 ==========
 
@@ -202,9 +204,9 @@ public class SpearStats {
     public static Ingredient repairIngredient(Item spear) { return get(spear).repairIngredient(); }
     public static boolean fireResistant(Item spear) { return get(spear).fireResistant(); }
     public static String materialName(Item spear) { return get(spear).materialName(); }
-    public static SoundEvent useSound(Item spear) { return get(spear).useSound(); }
-    public static SoundEvent hitSound(Item spear) { return get(spear).hitSound(); }
-    public static SoundEvent attackSound(Item spear) { return get(spear).attackSound(); }
+    public static SoundEvent useSound(Item spear) { return get(spear).useSound().get(); }
+    public static SoundEvent hitSound(Item spear) { return get(spear).hitSound().get(); }
+    public static SoundEvent attackSound(Item spear) { return get(spear).attackSound().get(); }
     public static float swingTimes(Item spear) { return get(spear).swingTimes(); }
     public static float hitboxMargin(Item spear) { return get(spear).hitboxMargin(); }
     public static int contactCooldownTicks(Item spear) { return get(spear).contactCooldownTicks(); }

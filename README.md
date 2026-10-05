@@ -201,7 +201,7 @@ slowDownAttackerOnHit = false
 这个分支是 **1.20.1 + Forge**；**1.21.1 + NeoForge** 在 `main` 分支上，两者玩法一致。
 
 **Q：和别的 mod 冲突吗？**
-**JEI**（查配方）直接可用。**KubeJS**（脚本加矛）和 **Punchy**（第一人称视角动画）在 1.20.1 上属于**第二轮**，尚未接入；代码里接入点已经留好（`compat/kubejs` 用 `kubejs.plugins.txt` + `Class.forName` 做类加载隔离，`compat/punchy/PunchyCompat` 暂为恒 false 占位）。
+**JEI**（查配方）直接可用，**KubeJS**（用脚本加自己的矛）也已支持（KubeJS 2001.6.5-build.26+forge）。**Punchy**（第一人称视角动画接管）尚未接入，见下文。
 
 ---
 
@@ -285,15 +285,31 @@ public class MySpearItem extends ConfiguredSpearItem {
 - `KnownMovementAccessor` / `SpearCooldownAccessor`：通过 mixin 注入到实体上的接口，用于读写"已知移动向量"与"刚被谁戳过"的免疫记录。
 - 自定义音效可以复用 `SpearSounds` 里的条目，也可以自己注册 `SoundEvent` 传给 Stats。
 
-## KubeJS 与 Punchy（1.20.1 上是第二轮）
+## KubeJS（已支持）
 
-这个分支先做核心玩法：**KubeJS**（用脚本加矛）和 **Punchy**（接管第一人称视角动画）还没接。
-接入点已经留在代码里，第二轮直接填即可：
+脚本里可以直接注册真正的矛，写法与 1.21.1 分支完全一致：
 
-- `compat/kubejs`：靠 `kubejs.plugins.txt` + `Class.forName` 做**类加载隔离**，核心代码不引用任何 `dev.latvian.mods.*`
-- `compat/punchy/PunchyCompat`：目前恒返回 false，行为等价于"没装 Punchy"
+```js
+StartupEvents.registry('item', event => {
+    event.create('mypack:bronze_spear', 'spearcore:spear')
+        .displayName('青铜矛')
+        .durability(400)
+        .attackDamageBonus(3)
+        .texture('mypack:item/bronze_spear')
+})
+```
 
-KubeJS 的完整写法与参数表见 **[kjs-guide.md](kjs-guide.md)**（那份教程对应 1.21.1 分支；1.20.1 对应的 KubeJS 是 2001.x，接入后脚本写法一致）。
+完整教程（参数表、贴图规范、常见坑，中英双语）：**[kjs-guide.md](kjs-guide.md)**。
+
+**类加载隔离**：整个项目只有 `compat/kubejs` 包引用 `dev.latvian.mods.*`，入口是 `kubejs.plugins.txt` 里的类名字符串 + `Class.forName`。
+没装 KubeJS 时那个包永远不会被加载（已实测：无 KubeJS 启动零 ClassNotFound、零 Exception）。
+
+**对应版本**：KubeJS **2001.6.5-build.26+forge**（1.20.1 Forge）。
+
+## Punchy（尚未接入）
+
+`compat/punchy/PunchyCompat` 目前恒返回 false，行为等价于"没装 Punchy"，即不接管第一人称视角动画。
+Punchy 在 1.20.1 Forge 上的最新版是 **2.8d**，接入属下一轮工作。
 
 ## 1.20.1 移植说明
 
@@ -514,7 +530,7 @@ Yes. Spears take enchantments like any other weapon. Lunge is the spear-specific
 This branch is **1.20.1 + Forge**; **1.21.1 + NeoForge** lives on the `main` branch. Gameplay is identical.
 
 **Q: Does it conflict with other mods?**
-**JEI** (recipe viewing) works today. **KubeJS** (add your own spears from scripts) and **Punchy** (first-person view animation) are **round two** on 1.20.1 and are not wired up yet; the seams are already in the code (`compat/kubejs` isolates class loading via `kubejs.plugins.txt` + `Class.forName`, `compat/punchy/PunchyCompat` is a stub that always returns false).
+**JEI** (recipe viewing) works today, and **KubeJS** (add your own spears from scripts) is supported too (KubeJS 2001.6.5-build.26+forge). **Punchy** (taking over the first-person view animation) is not wired up yet — see below.
 
 ---
 
@@ -599,14 +615,29 @@ All of them are on Forge's `MinecraftForge.EVENT_BUS` (the game bus):
 - `KnownMovementAccessor` / `SpearCooldownAccessor`: interfaces injected into entities via mixin, for reading and writing the "known movement" vector and the recently-stabbed immunity records.
 - Custom sounds may reuse the entries in `SpearSounds`, or you can register your own `SoundEvent` and pass it to the stats.
 
-## KubeJS and Punchy (round two on 1.20.1)
+## KubeJS (supported)
 
-This branch ships the core gameplay first; **KubeJS** (register spears from scripts) and **Punchy** (taking over the first-person view animation) are not wired up yet. The seams are already in place:
+A script can register a real spear, with exactly the same syntax as on the 1.21.1 branch:
 
-- `compat/kubejs`: class-loading isolation through `kubejs.plugins.txt` + `Class.forName`; the core never references `dev.latvian.mods.*`
-- `compat/punchy/PunchyCompat`: currently always returns false, i.e. exactly the "Punchy is not installed" behaviour
+```js
+StartupEvents.registry('item', event => {
+    event.create('mypack:bronze_spear', 'spearcore:spear')
+        .displayName('Bronze Spear')
+        .durability(400)
+        .attackDamageBonus(3)
+        .texture('mypack:item/bronze_spear')
+})
+```
 
-The full KubeJS walkthrough and parameter tables are in **[kjs-guide.md](kjs-guide.md)** (that guide targets the 1.21.1 branch; on 1.20.1 the matching KubeJS is 2001.x and the script syntax is the same).
+The full walkthrough (parameter tables, texture conventions, pitfalls; Chinese and English) is in **[kjs-guide.md](kjs-guide.md)**.
+
+**Class-loading isolation**: `compat/kubejs` is the only package in the project that references `dev.latvian.mods.*`; the entry point is a class-name string in `kubejs.plugins.txt` plus `Class.forName`. Without KubeJS installed that package is never loaded (measured: a KubeJS-less boot shows zero ClassNotFound and zero exceptions).
+
+**Matching version**: KubeJS **2001.6.5-build.26+forge** (1.20.1 Forge).
+
+## Punchy (not wired up yet)
+
+`compat/punchy/PunchyCompat` currently always returns false, i.e. exactly the "Punchy is not installed" behaviour — the first-person view animation is not taken over. The newest Punchy for 1.20.1 Forge is **2.8d**; hooking it up is the next round of work.
 
 ## Porting notes (1.21.1 → 1.20.1)
 
