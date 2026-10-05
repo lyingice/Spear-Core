@@ -18,6 +18,9 @@ authors="Lyingice"
     config = "spearcore.mixins.json"
 
 # Start of user code block custom mixins
+# Punchy（可选依赖）阶段的软桥接：未安装 Punchy 时由插件判定跳过，配置 required=false 不会因目标缺失而崩
+[[mixins]]
+    config = "spearcore.punchy.mixins.json"
 # End of user code block custom mixins
 
 [[dependencies.spearcore]]

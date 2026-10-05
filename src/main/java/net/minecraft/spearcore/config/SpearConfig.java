@@ -15,6 +15,14 @@ public class SpearConfig {
             .comment("是否启用铜长矛")
             .define("enableCopperSpear", false);
 
+    /**
+     * 安装 Punchy 时，让其矛蓄力动画按本模组各材质的阶段(tick)切换。
+     * 关闭后使用 Punchy 自带的固定时间轴（10/20 tick）。仅客户端读取。
+     */
+    public static final ModConfigSpec.BooleanValue PUNCHY_STAGE_BRIDGE = BUILDER
+            .comment("安装 Punchy 时，让其矛蓄力动画按本模组各材质的阶段(tick)切换；关闭则用 Punchy 自带的固定 10/20 tick 时间轴")
+            .define("punchyStageBridge", true);
+
     public static final ModConfigSpec SPEC = BUILDER.build();
 
     public static void register(ModContainer container) {
