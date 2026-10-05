@@ -15,6 +15,12 @@ public class SpearConfig {
             .comment("是否启用铜长矛")
             .define("enableCopperSpear", false);
 
+    public static final ForgeConfigSpec.BooleanValue SLOW_DOWN_ATTACKER_ON_HIT = BUILDER
+            .comment("命中目标时给攻击者自己减速（水平速度 ×0.6）并取消奔跑，",
+                    "也就是原版那股\"撞完得重新起跑\"的手感。",
+                    "默认关闭：命中后保持速度与奔跑状态，撞完接着冲。")
+            .define("slowDownAttackerOnHit", false);
+
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 
     public static void register() {

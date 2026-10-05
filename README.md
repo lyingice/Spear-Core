@@ -161,14 +161,25 @@ enableVanillaSpears = false
 
 # 是否启用铜矛
 enableCopperSpear = false
+
+# 命中目标时给攻击者自己减速（水平速度 ×0.6）并取消奔跑
+# 默认关闭：撞完保持速度和奔跑状态，接着冲
+slowDownAttackerOnHit = false
 ```
 
-这两个开关控制的是：
+前两个开关控制的是：
 
 - 这些矛**会不会出现在创造模式物品栏**；
 - 怪物**会不会携带**这些矛。
 
 **关掉也不影响**合成、`/give` 和其他正常获取途径——物品一直在，只是不在创造栏里、怪物也不带。
+
+第三个开关 `slowDownAttackerOnHit` 管的是**撞完之后你自己**：
+
+- `false`（默认）：命中后保持水平速度与奔跑状态，可以接着冲、连续撞；
+- `true`：命中瞬间把自己水平速度削到 60% 并取消奔跑，也就是原版那股"撞完得重新起跑"的手感。
+
+它**只影响攻击者自己的动量**，不影响被打飞那些目标的击退力度。
 
 ---
 
@@ -463,14 +474,25 @@ enableVanillaSpears = false
 
 # Whether the copper spear is enabled
 enableCopperSpear = false
+
+# Slow the attacker down on hit (horizontal speed x0.6) and cancel sprinting
+# Default off: keep your speed and your sprint through the hit
+slowDownAttackerOnHit = false
 ```
 
-These two switches control:
+The first two switches control:
 
 - whether these spears **appear in the creative inventory**;
 - whether mobs **spawn carrying** them.
 
 **Turning them off changes nothing else**: crafting, `/give` and every normal way of obtaining them still work. The items always exist — they are simply hidden from the creative tabs and never handed to mobs.
+
+The third switch, `slowDownAttackerOnHit`, is about **you, right after a hit**:
+
+- `false` (default): you keep your horizontal speed and your sprint, so you can chain charges;
+- `true`: on impact your own horizontal speed is cut to 60% and sprinting is cancelled — the vanilla "you have to build up speed again" feel.
+
+It affects **only the attacker's own momentum**; the knockback dealt to the target is unchanged.
 
 ---
 

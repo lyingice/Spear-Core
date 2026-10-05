@@ -44,6 +44,7 @@ import java.util.function.Predicate;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.spearcore.init.SpearEnchantments;
+import net.minecraft.spearcore.config.SpearConfig;
 
 /**
  * SpearItem — 矛的核心类，严格基于 J库 ItemToolBaseSpearBase 移植。
@@ -431,6 +432,10 @@ public abstract class SpearItem extends Item {
         boolean asPlayer = attacker instanceof Player
                 || (attacker instanceof UseSpearSpecialEntity u && u.isJerotesSpearCauseExtraKnockbackPlayer());
 
+        // 命中后是否把攻击者自己也减速（水平速度 ×0.6）并取消奔跑。
+        // 配置项 slowDownAttackerOnHit 默认 false：默认保持速度与奔跑状态，撞完不用重新起跑。
+        boolean slowDownAttacker = SpearConfig.SLOW_DOWN_ATTACKER_ON_HIT.get();
+
         if (asPlayer) {
             if (strength > 0.0f) {
                 if (target instanceof LivingEntity living) {
@@ -440,8 +445,10 @@ public abstract class SpearItem extends Item {
                     target.push(-Mth.sin(attacker.getYRot() * ((float) Math.PI / 180)) * strength, 0.1,
                             Mth.cos(attacker.getYRot() * ((float) Math.PI / 180)) * strength);
                 }
-                attacker.setDeltaMovement(attacker.getDeltaMovement().multiply(0.6, 1.0, 0.6));
-                attacker.setSprinting(false);
+                if (slowDownAttacker) {
+                    attacker.setDeltaMovement(attacker.getDeltaMovement().multiply(0.6, 1.0, 0.6));
+                    attacker.setSprinting(false);
+                }
             }
             if (target instanceof ServerPlayer serverPlayer && target.hurtMarked) {
                 serverPlayer.connection.send(
@@ -453,7 +460,9 @@ public abstract class SpearItem extends Item {
             if (strength > 0.0f && target instanceof LivingEntity living) {
                 living.knockback(strength, Mth.sin(attacker.getYRot() * ((float) Math.PI / 180)),
                         -Mth.cos(attacker.getYRot() * ((float) Math.PI / 180)));
-                attacker.setDeltaMovement(attacker.getDeltaMovement().multiply(0.6, 1.0, 0.6));
+                if (slowDownAttacker) {
+                    attacker.setDeltaMovement(attacker.getDeltaMovement().multiply(0.6, 1.0, 0.6));
+                }
             }
         }
     }

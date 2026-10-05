@@ -3,6 +3,7 @@ package net.minecraft.spearcore.gametest;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.spearcore.SpearcoreMod;
+import net.minecraft.spearcore.config.SpearConfig;
 import net.minecraft.spearcore.init.SpearCoreItems;
 import net.minecraft.spearcore.init.SpearStats;
 import net.minecraft.spearcore.item.SpearItem;
@@ -118,5 +119,57 @@ public final class SpearGameTests {
         helper.assertTrue(target.getHealth() < before,
                 "戳刺没有造成伤害（" + before + " -> " + target.getHealth() + "）");
         helper.succeed();
+    }
+
+    /**
+     * 命中目标后给攻击者自己减速（水平速度 ×0.6）并由 setSprinting(false) 取消奔跑，
+     * 这个"撞完得重新起跑"的手感由 slowDownAttackerOnHit 控制，<b>默认关闭</b>。
+     *
+     * <p>两段都在同一个测试里跑，避免翻配置影响到并行/同批次的其他测试。</p>
+     */
+    @PrefixGameTestTemplate(false)
+    @GameTest(templateNamespace = SpearcoreMod.MODID, template = TEMPLATE, batch = "spearcore")
+    public static void hitMomentumFollowsConfig(GameTestHelper helper) {
+        helper.assertFalse(SpearConfig.SLOW_DOWN_ATTACKER_ON_HIT.get(), "slowDownAttackerOnHit 默认应为 false");
+
+        // 第一段：默认（关闭）—— 命中后水平速度不变，不用重新起跑
+        double defaultSpeed = spearcore$stabAndReadSpeed(helper, 1, 1);
+        helper.assertTrue(Math.abs(defaultSpeed - 0.3D) < 1.0E-6D,
+                "默认关闭时命中不该减速，x 速度变成了 " + defaultSpeed);
+
+        // 第二段：打开开关 —— 应当被削到 0.3 × 0.6 = 0.18
+        double slowedSpeed;
+        try {
+            SpearConfig.SLOW_DOWN_ATTACKER_ON_HIT.set(true);
+            slowedSpeed = spearcore$stabAndReadSpeed(helper, 3, 1);
+        } finally {
+            SpearConfig.SLOW_DOWN_ATTACKER_ON_HIT.set(false);
+        }
+        helper.assertTrue(Math.abs(slowedSpeed - 0.18D) < 1.0E-6D,
+                "打开开关后水平速度应被削到 0.18，实际 " + slowedSpeed);
+
+        helper.succeed();
+    }
+
+    /** 在指定 x 车道摆一对"持矛攻击者 + 目标"，戳一次，返回攻击者戳完的水平速度。 */
+    private static double spearcore$stabAndReadSpeed(GameTestHelper helper, int attackerX, int attackerZ) {
+        Mob attacker = helper.spawnWithNoFreeWill(EntityType.ZOMBIE, attackerX, 1, attackerZ);
+        ItemStack spear = new ItemStack(SpearCoreItems.IRON_SPEAR.get());
+        attacker.setItemSlot(EquipmentSlot.MAINHAND, spear);
+        attacker.setYRot(0.0F);
+        attacker.setXRot(0.0F);
+        attacker.setYHeadRot(0.0F);
+
+        SpearItem spearItem = (SpearItem) spear.getItem();
+        // 怪物有 mobFactor（默认 0.5）缩减，目标要按怪物自己的有效射程摆
+        double minRange = spearItem.effectiveMinRange(attacker);
+        double maxRange = spearItem.effectiveMaxRange(attacker);
+        int targetZ = attackerZ + Math.max(1, (int) Math.round((minRange + maxRange) / 2.0));
+        helper.spawnWithNoFreeWill(EntityType.ZOMBIE, attackerX, 1, targetZ);
+
+        attacker.setDeltaMovement(0.3D, 0.0D, 0.0D);
+        boolean hit = spearItem.performStabAttack(attacker, spear, EquipmentSlot.MAINHAND, false);
+        helper.assertTrue(hit, "戳刺没有命中目标（车道 x=" + attackerX + "）");
+        return attacker.getDeltaMovement().x;
     }
 }
