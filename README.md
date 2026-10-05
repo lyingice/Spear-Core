@@ -5,7 +5,9 @@
 > 给 Minecraft 加了一套长矛：能蓄力冲锋、能戳刺、跑得越快伤害越高，怪物也会拿着它追着你捅。
 > A set of **spears** for Minecraft: charge, stab, hit harder the faster you run — and mobs will chase you with one too.
 
-> 适用版本：**Minecraft 1.21.1 · NeoForge**（客户端与服务端都要装） / **Minecraft 1.21.1 · NeoForge**, client and server both.
+> 适用版本：**Minecraft 1.20.1 · Forge**（客户端与服务端都要装） / **Minecraft 1.20.1 · Forge**, client and server both.
+>
+> 本分支 = 1.20.1 + Forge；1.21.1 + NeoForge 是 `main` 分支，两边功能一致。
 
 ---
 
@@ -24,7 +26,7 @@
 
 ## 安装
 
-1. 游戏版本要 **1.21.1**，加载器 **NeoForge**。
+1. 游戏版本要 **1.20.1**，加载器 **Forge**（47.3.0 及以上）。
 2. 把 jar 放进 `mods` 文件夹。
 3. **客户端和服务端都要放**。只装服务端的话，联机时别人看到的是空手。
 4. 单人游戏不用管，直接开。
@@ -185,10 +187,10 @@ enableCopperSpear = false
 能，矛按普通武器规则吃附魔。突进是它专属的。
 
 **Q：支持别的版本吗？**
-只支持 **1.21.1 + NeoForge**。
+这个分支是 **1.20.1 + Forge**；**1.21.1 + NeoForge** 在 `main` 分支上，两者玩法一致。
 
 **Q：和别的 mod 冲突吗？**
-目前兼容 **Punchy**（装了它就不再接管第一人称视角动画）、**JEI**（能查配方）、**KubeJS**（能用脚本加自己的矛）。
+**JEI**（查配方）直接可用。**KubeJS**（脚本加矛）和 **Punchy**（第一人称视角动画）在 1.20.1 上属于**第二轮**，尚未接入；代码里接入点已经留好（`compat/kubejs` 用 `kubejs.plugins.txt` + `Class.forName` 做类加载隔离，`compat/punchy/PunchyCompat` 暂为恒 false 占位）。
 
 ---
 
@@ -257,7 +259,7 @@ public class MySpearItem extends ConfiguredSpearItem {
 
 ## 事件
 
-全部在 NeoForge 的 `NeoForge.EVENT_BUS`（游戏总线）上：
+全部在 Forge 的 `MinecraftForge.EVENT_BUS`（游戏总线）上：
 
 | 事件 | 时机 | 能改什么 |
 |---|---|---|
@@ -272,21 +274,42 @@ public class MySpearItem extends ConfiguredSpearItem {
 - `KnownMovementAccessor` / `SpearCooldownAccessor`：通过 mixin 注入到实体上的接口，用于读写"已知移动向量"与"刚被谁戳过"的免疫记录。
 - 自定义音效可以复用 `SpearSounds` 里的条目，也可以自己注册 `SoundEvent` 传给 Stats。
 
-## KubeJS（整合包作者）
+## KubeJS 与 Punchy（1.20.1 上是第二轮）
 
-不想写 Java 的话，用 KubeJS 脚本就能直接注册真正的矛：
+这个分支先做核心玩法：**KubeJS**（用脚本加矛）和 **Punchy**（接管第一人称视角动画）还没接。
+接入点已经留在代码里，第二轮直接填即可：
 
-```js
-StartupEvents.registry('item', event => {
-    event.create('mypack:bronze_spear', 'spearcore:spear')
-        .displayName('青铜矛')
-        .durability(400)
-        .attackDamageBonus(3)
-        .texture('mypack:item/bronze_spear')
-})
+- `compat/kubejs`：靠 `kubejs.plugins.txt` + `Class.forName` 做**类加载隔离**，核心代码不引用任何 `dev.latvian.mods.*`
+- `compat/punchy/PunchyCompat`：目前恒返回 false，行为等价于"没装 Punchy"
+
+KubeJS 的完整写法与参数表见 **[kjs-guide.md](kjs-guide.md)**（那份教程对应 1.21.1 分支；1.20.1 对应的 KubeJS 是 2001.x，接入后脚本写法一致）。
+
+## 1.20.1 移植说明
+
+从 1.21.1 / NeoForge 移植到 1.20.1 / Forge 时，下面这些 API 是对不上的（都已按 1.20.1 改好）：
+
+| 1.21.1 / NeoForge | 1.20.1 / Forge |
+|---|---|
+| `CustomPacketPayload` + `StreamCodec` | `SimpleImpl` 的 `SimpleChannel` |
+| `mods.toml` 里的 `[[mixins]]` | `build.gradle` 的 `mixin { config ... }` → MANIFEST 的 `MixinConfigs` |
+| `Attributes.ENTITY_INTERACTION_RANGE` | `ForgeMod.ENTITY_REACH` |
+| `getDefaultAttributeModifiers(ItemStack)` + `ItemAttributeModifiers` | `getDefaultAttributeModifiers(EquipmentSlot)` + `Multimap` |
+| `Operation.ADD_VALUE`，修饰符 ID 用 `ResourceLocation` | `Operation.ADDITION`，ID 用 `UUID` |
+| 附魔是数据包 JSON | 附魔是注册表对象：`LungeEnchantment` + `EnchantmentCategory.create` |
+| `Item#postHurtEnemy` | `Item#hurtEnemy`（1.20.1 的耐久扣减在这里） |
+| `ICancellableEvent` | `@Cancelable` |
+| `ResourceLocation.fromNamespaceAndPath(ns, path)` | `new ResourceLocation(ns, path)` |
+
+### 自己构建与验证
+
+```bash
+./gradlew build              # 产物：build/libs/spearcore-1.20.1-forge-3.0.0.jar
+./gradlew runServer          # 无头启动；启动自检会打印"已注册 7 把长矛"
+./gradlew runGameTestServer  # 由游戏本体判定的自动化测试
 ```
 
-完整教程（参数表、贴图规范、常见坑，中英双语）：**[kjs-guide.md](kjs-guide.md)**。
+GameTest 的判定看日志：`All N required tests passed :)` 或 `N required tests failed :(`，
+退出码等于失败的必需测试数。测试结构模板在 `gameteststructures/`，Gradle 会拷进 `run/`。
 
 ---
 
@@ -305,7 +328,7 @@ StartupEvents.registry('item', event => {
 
 ## Installation
 
-1. **Minecraft 1.21.1** with **NeoForge**.
+1. **Minecraft 1.20.1** with **Forge** (47.3.0 or newer).
 2. Drop the jar into your `mods` folder.
 3. **Install it on both the client and the server.** Server-only means other players see an empty hand.
 4. Single-player needs nothing else.
@@ -466,10 +489,10 @@ They are disabled by default — see the Configuration section above. You can al
 Yes. Spears take enchantments like any other weapon. Lunge is the spear-specific one.
 
 **Q: Does it support other versions?**
-Only **1.21.1 + NeoForge**.
+This branch is **1.20.1 + Forge**; **1.21.1 + NeoForge** lives on the `main` branch. Gameplay is identical.
 
 **Q: Does it conflict with other mods?**
-It currently works with **Punchy** (with it installed, Spear Core stops overriding the first-person view animation), **JEI** (recipe viewing) and **KubeJS** (add your own spears from scripts).
+**JEI** (recipe viewing) works today. **KubeJS** (add your own spears from scripts) and **Punchy** (first-person view animation) are **round two** on 1.20.1 and are not wired up yet; the seams are already in the code (`compat/kubejs` isolates class loading via `kubejs.plugins.txt` + `Class.forName`, `compat/punchy/PunchyCompat` is a stub that always returns false).
 
 ---
 
@@ -539,7 +562,7 @@ If you cannot be bothered with the numbers, `SpearStats.spearOf(...)` is a simpl
 
 ## Events
 
-All of them are on NeoForge's `NeoForge.EVENT_BUS` (the game bus):
+All of them are on Forge's `MinecraftForge.EVENT_BUS` (the game bus):
 
 | Event | When | What you can change |
 |---|---|---|
@@ -554,18 +577,39 @@ All of them are on NeoForge's `NeoForge.EVENT_BUS` (the game bus):
 - `KnownMovementAccessor` / `SpearCooldownAccessor`: interfaces injected into entities via mixin, for reading and writing the "known movement" vector and the recently-stabbed immunity records.
 - Custom sounds may reuse the entries in `SpearSounds`, or you can register your own `SoundEvent` and pass it to the stats.
 
-## KubeJS (modpack authors)
+## KubeJS and Punchy (round two on 1.20.1)
 
-If you would rather not write Java, a KubeJS script can register a real spear directly:
+This branch ships the core gameplay first; **KubeJS** (register spears from scripts) and **Punchy** (taking over the first-person view animation) are not wired up yet. The seams are already in place:
 
-```js
-StartupEvents.registry('item', event => {
-    event.create('mypack:bronze_spear', 'spearcore:spear')
-        .displayName('Bronze Spear')
-        .durability(400)
-        .attackDamageBonus(3)
-        .texture('mypack:item/bronze_spear')
-})
+- `compat/kubejs`: class-loading isolation through `kubejs.plugins.txt` + `Class.forName`; the core never references `dev.latvian.mods.*`
+- `compat/punchy/PunchyCompat`: currently always returns false, i.e. exactly the "Punchy is not installed" behaviour
+
+The full KubeJS walkthrough and parameter tables are in **[kjs-guide.md](kjs-guide.md)** (that guide targets the 1.21.1 branch; on 1.20.1 the matching KubeJS is 2001.x and the script syntax is the same).
+
+## Porting notes (1.21.1 → 1.20.1)
+
+These APIs do not line up between 1.21.1/NeoForge and 1.20.1/Forge (all already handled):
+
+| 1.21.1 / NeoForge | 1.20.1 / Forge |
+|---|---|
+| `CustomPacketPayload` + `StreamCodec` | `SimpleImpl`'s `SimpleChannel` |
+| `[[mixins]]` in `mods.toml` | `mixin { config ... }` in `build.gradle` → `MixinConfigs` in the MANIFEST |
+| `Attributes.ENTITY_INTERACTION_RANGE` | `ForgeMod.ENTITY_REACH` |
+| `getDefaultAttributeModifiers(ItemStack)` + `ItemAttributeModifiers` | `getDefaultAttributeModifiers(EquipmentSlot)` + `Multimap` |
+| `Operation.ADD_VALUE`, modifier IDs as `ResourceLocation` | `Operation.ADDITION`, IDs as `UUID` |
+| Enchantments are datapack JSON | Enchantments are registry objects: `LungeEnchantment` + `EnchantmentCategory.create` |
+| `Item#postHurtEnemy` | `Item#hurtEnemy` (durability is deducted here on 1.20.1) |
+| `ICancellableEvent` | `@Cancelable` |
+| `ResourceLocation.fromNamespaceAndPath(ns, path)` | `new ResourceLocation(ns, path)` |
+
+### Building and verifying
+
+```bash
+./gradlew build              # output: build/libs/spearcore-1.20.1-forge-3.0.0.jar
+./gradlew runServer          # headless boot; the startup check prints "已注册 7 把长矛"
+./gradlew runGameTestServer  # automated tests judged by the game itself
 ```
 
-Full tutorial (parameter tables, texture conventions, pitfalls; Chinese and English): **[kjs-guide.md](kjs-guide.md)**.
+Read the verdict from the log: `All N required tests passed :)` or `N required tests failed :(`;
+the exit code equals the number of failed required tests. The structure template lives in
+`gameteststructures/` and Gradle stages it into `run/`.

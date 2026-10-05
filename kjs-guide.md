@@ -3,6 +3,8 @@
 > **中文版在下半部分，English version below.**  [中文版](#中文版) ｜ [English version](#english-version)
 >
 > 这份文档只讲 KubeJS 的用法，不需要写 Java、不需要编译。 / This guide only covers the KubeJS side: no Java and no compiling required.
+>
+> ⚠️ **版本提示**：这份教程对应 **1.21.1 + NeoForge** 分支。**1.20.1 + Forge** 分支的 KubeJS 支持属于**第二轮**，尚未接入（接入点已留在 `compat/kubejs`，见该分支 README 的"KubeJS 与 Punchy"一节）。 / **Version note**: this guide targets the **1.21.1 + NeoForge** branch. KubeJS support on the **1.20.1 + Forge** branch is **round two** and is not wired up yet (the seam is in `compat/kubejs`; see that branch's README, "KubeJS and Punchy").
 
 ---
 

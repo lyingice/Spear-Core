@@ -45,6 +45,10 @@ public abstract class LivingEntitySpearMixin extends Entity implements SpearCool
     @Unique
     public boolean WasRecentlyStabbed(Entity target, int cooldownTicks) {
         if (this.RecentStabbedEntities == null) return false;
+        // 必须显式判存在：fastutil 的 getLong 对不存在的键返回 0，
+        // 于是世界刚开的头 cooldownTicks 刻里，任何"从未被戳过"的目标都会被算成
+        // "在 tick 0 被戳过"而被静默跳过（GameTest 在全新世界跑，正好抓到）。
+        if (!this.RecentStabbedEntities.containsKey(target)) return false;
         return this.level().getGameTime() - this.RecentStabbedEntities.getLong(target) < (long) cooldownTicks;
     }
 

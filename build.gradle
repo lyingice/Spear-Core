@@ -26,6 +26,13 @@ minecraft {
         server {
         }
 
+        gameTestServer {
+            // 注意：ForgeGradle 6 没有 forceExit（那是 FG5 的写法），判定以日志里的
+            // "All N required tests passed :)" / "N required tests failed :(" 为准。
+            jvmArgs '-Xmx2G'
+            property 'forge.enabledGameTestNamespaces', 'spearcore'
+        }
+
         configureEach {
             workingDirectory project.file('run')
 
@@ -52,6 +59,17 @@ mixin {
     add sourceSets.main, 'mixins.spearcore.refmap.json'
     config 'spearcore.mixins.json'
     quiet
+}
+
+// 把仓库里的测试结构拷进 run/，保证运行可复现
+tasks.register('stageGameTestStructures', Copy) {
+    from 'gameteststructures'
+    into 'run/gameteststructures'
+}
+
+// 注意：不能用 tasks.named('runGameTestServer')——ForgeGradle 在 minecraft{} 之后才创建这些 run 任务
+tasks.matching { it.name == 'runGameTestServer' }.configureEach {
+    dependsOn 'stageGameTestStructures'
 }
 
 tasks.withType(JavaCompile).configureEach {
