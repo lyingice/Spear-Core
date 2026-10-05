@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/spearcore.iml" filepath="$PROJECT_DIR$/.idea/modules/spearcore.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spearcore.main.iml" filepath="$PROJECT_DIR$/.idea/modules/spearcore.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spearcore-1.20.1-forge.iml" filepath="$PROJECT_DIR$/.idea/modules/spearcore-1.20.1-forge.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spearcore-1.20.1-forge.main.iml" filepath="$PROJECT_DIR$/.idea/modules/spearcore-1.20.1-forge.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spearcore-1.20.1-forge.test.iml" filepath="$PROJECT_DIR$/.idea/modules/spearcore-1.20.1-forge.test.iml" />
     </modules>
   </component>
 </project>

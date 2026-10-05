@@ -11,3 +11,4 @@
 
 # 1.20.1 移植期间暂存的 1.21.1 源码（内容与 main 分支一致，勿提交）
 _phase0_aside_src/
+/gameteststructures/
