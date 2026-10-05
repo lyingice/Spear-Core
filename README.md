@@ -157,17 +157,17 @@
 
 ```toml
 # 是否启用原版材质长矛（木、石、铁、金、钻石、下界合金）
-enableVanillaSpears = false
+enableVanillaSpears = true
 
 # 是否启用铜矛
-enableCopperSpear = false
+enableCopperSpear = true
 
 # 命中目标时给攻击者自己减速（水平速度 ×0.6）并取消奔跑
 # 默认关闭：撞完保持速度和奔跑状态，接着冲
 slowDownAttackerOnHit = false
 ```
 
-前两个开关控制的是：
+前两个开关控制的是（**默认都开着**）：
 
 - 这些矛**会不会出现在创造模式物品栏**；
 - 怪物**会不会携带**这些矛。
@@ -470,17 +470,17 @@ The config file is `config/spearcore-common.toml`:
 
 ```toml
 # Whether the vanilla-material spears are enabled (wood, stone, iron, gold, diamond, netherite)
-enableVanillaSpears = false
+enableVanillaSpears = true
 
 # Whether the copper spear is enabled
-enableCopperSpear = false
+enableCopperSpear = true
 
 # Slow the attacker down on hit (horizontal speed x0.6) and cancel sprinting
 # Default off: keep your speed and your sprint through the hit
 slowDownAttackerOnHit = false
 ```
 
-The first two switches control:
+The first two switches (both **on by default**) control:
 
 - whether these spears **appear in the creative inventory**;
 - whether mobs **spawn carrying** them.
