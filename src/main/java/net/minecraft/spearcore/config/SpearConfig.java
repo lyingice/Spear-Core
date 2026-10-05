@@ -23,6 +23,17 @@ public class SpearConfig {
             .comment("安装 Punchy 时，让其矛蓄力动画按本模组各材质的阶段(tick)切换；关闭则用 Punchy 自带的固定 10/20 tick 时间轴")
             .define("punchyStageBridge", true);
 
+    /**
+     * 命中目标后给攻击者自己减速（水平速度 ×0.6）并取消奔跑，也就是"撞完得重新起跑"。
+     * 默认关闭：命中后保持速度与奔跑状态，可以接着冲、连续撞。
+     * 只影响攻击者自己的动量，不影响被打飞目标的击退力度。
+     */
+    public static final ModConfigSpec.BooleanValue SLOW_DOWN_ATTACKER_ON_HIT = BUILDER
+            .comment("命中目标时给攻击者自己减速（水平速度 ×0.6）并取消奔跑，",
+                    "也就是原版那股\"撞完得重新起跑\"的手感。",
+                    "默认关闭：命中后保持速度与奔跑状态，撞完接着冲。")
+            .define("slowDownAttackerOnHit", false);
+
     public static final ModConfigSpec SPEC = BUILDER.build();
 
     public static void register(ModContainer container) {
