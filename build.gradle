@@ -4,7 +4,7 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+'
 }
 
-version = '3.0.1'
+version = '3.0.2'
 group = 'net.minecraft.spearcore'
 archivesBaseName = 'spearcore-1.20.1-forge'
 
@@ -130,4 +130,12 @@ tasks.matching { it.name == 'runGameTestServer' }.configureEach {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+// Forge 1.20.1 生产环境用的是 SRG 名（m_xxxxx_），开发/GameTest 用的是 Mojmap 名。
+// 少了重混淆这一步，jar 在开发环境一切正常，进真实游戏就会 NoSuchFieldError / NoSuchMethodError
+// （实测：增量构建时 reobfJar 会被判定为最新而跳过，最终 jar 又是 Mojmap 名）。
+// 用 finalizedBy 锁死顺序：每次 jar 跑完都必定重混淆一遍。
+tasks.named('jar') {
+    finalizedBy 'reobfJar'
 }
