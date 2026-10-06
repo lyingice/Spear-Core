@@ -25,6 +25,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -397,12 +398,17 @@ public abstract class SpearItem extends Item {
 
         boolean damaged = false;
         if (canDamage) {
+            // 与 26.1.2 原版矛一致：伤害要过原版附魔修正（锋利/亡灵杀手/节肢杀手等）。
+            // 1.21.1 的 API 是 modifyDamage(ServerLevel, ItemStack, Entity, DamageSource, float)。
+            finalDamage = EnchantmentHelper.modifyDamage(serverLevel, stack, target, damageSource, finalDamage);
             damaged = target.hurt(damageSource, finalDamage);
             hitSomething |= damaged;
         }
 
         if (canKnockback) {
-            causeExtraKnockback(attacker, target, 0.4f, preMotion);
+            // 与原版一致：0.4 基础击退再经附魔击退修正（1.21.1 用 modifyKnockback）
+            float knockback = EnchantmentHelper.modifyKnockback(serverLevel, stack, target, damageSource, 0.4f);
+            causeExtraKnockback(attacker, target, knockback, preMotion);
         }
 
         if (canDismount && target.isPassenger()) {

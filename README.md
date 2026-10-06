@@ -87,6 +87,9 @@
 
 戳刺伤害 = **武器攻击力 + 你朝前冲的速度加成**，所以站着不动戳是最低的。
 
+> 注：MC 26.1.2 原版也加入了长矛。原版**穿刺是纯属性伤害、只有蓄力吃速度加成**，
+> 所以"穿刺也吃速度"是本模组与原版的一处设计差异；**蓄力那一整套数值两边完全一致**。
+
 ### 右键按住：蓄力冲锋
 
 按住**右键**开始蓄力，矛会依次进入几个阶段：
@@ -378,6 +381,10 @@ With JEI installed, just search for "spear" in game to see every recipe.
 - After a hit, the same mob cannot be stabbed again for a short while, so a single charge cannot deal a burst of damage.
 
 Stab damage = **weapon attack damage + a bonus from your forward speed**, so standing still and poking is the weakest option.
+
+> Note: MC 26.1.2 added spears to vanilla. Vanilla's stab is pure attribute damage and only the charge
+> scales with speed, so "stab also scales with speed" is a deliberate difference from vanilla. The charge
+> math itself is identical in both.
 
 ### Hold right click: charge
 
