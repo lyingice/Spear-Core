@@ -13,6 +13,8 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.RegisterGameTestsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -149,6 +151,75 @@ public final class SpearGameTests {
                 "打开开关后水平速度应被削到 0.18，实际 " + slowedSpeed);
 
         helper.succeed();
+    }
+
+    /**
+     * 附魔伤害必须真的参与结算（对齐 26.1.2 原版）。
+     *
+     * <p>这条是回归测试：曾经 stabAttack 直接 target.hurt，没走原版
+     * EnchantmentHelper 的附魔伤害修正，导致锋利/亡灵杀手挂在物品上却不加伤害。</p>
+     */
+    @PrefixGameTestTemplate(false)
+    @GameTest(templateNamespace = SpearcoreMod.MODID, template = TEMPLATE, batch = "spearcore")
+    public static void sharpnessIncreasesStabDamage(GameTestHelper helper) {
+        float plain = spearcore$stabDamage(helper, 1, 1, null, 0);
+        float sharp = spearcore$stabDamage(helper, 3, 1, Enchantments.SHARPNESS, 5);
+        helper.assertTrue(sharp > plain, "锋利附魔没有提高戳刺伤害：" + plain + " -> " + sharp);
+        helper.succeed();
+    }
+
+    /** 击退附魔必须真的加大击退（对齐 26.1.2 原版：0.4 + 附魔加成）。 */
+    @PrefixGameTestTemplate(false)
+    @GameTest(templateNamespace = SpearcoreMod.MODID, template = TEMPLATE, batch = "spearcore")
+    public static void knockbackEnchantmentPushesFarther(GameTestHelper helper) {
+        double plain = spearcore$stabAndReadTargetPush(helper, 1, 1, null, 0);
+        double pushed = spearcore$stabAndReadTargetPush(helper, 3, 1, Enchantments.KNOCKBACK, 2);
+        helper.assertTrue(pushed > plain, "击退附魔没有加大击退：" + plain + " -> " + pushed);
+        helper.succeed();
+    }
+
+    /** 摆一对"持矛攻击者 + 目标"，戳一次，返回目标掉的血量。 */
+    private static float spearcore$stabDamage(GameTestHelper helper, int attackerX, int attackerZ,
+                                             Enchantment enchantment, int level) {
+        return spearcore$stabOnce(helper, attackerX, attackerZ, enchantment, level).damageDealt();
+    }
+
+    /** 摆一对"持矛攻击者 + 目标"，戳一次，返回目标的水平速度（击退量）。 */
+    private static double spearcore$stabAndReadTargetPush(GameTestHelper helper, int attackerX, int attackerZ,
+                                                          Enchantment enchantment, int level) {
+        Mob target = spearcore$stabOnce(helper, attackerX, attackerZ, enchantment, level).target();
+        net.minecraft.world.phys.Vec3 motion = target.getDeltaMovement();
+        return Math.sqrt(motion.x * motion.x + motion.z * motion.z);
+    }
+
+    private record StabResult(Mob attacker, Mob target, float damageDealt) {
+    }
+
+    /** 摆一对"持矛攻击者 + 目标"并戳一次；矛按需附魔。 */
+    private static StabResult spearcore$stabOnce(GameTestHelper helper, int attackerX, int attackerZ,
+                                                 Enchantment enchantment, int level) {
+        Mob attacker = helper.spawnWithNoFreeWill(EntityType.ZOMBIE, attackerX, 1, attackerZ);
+        ItemStack spear = new ItemStack(SpearCoreItems.IRON_SPEAR.get());
+        if (enchantment != null) {
+            spear.enchant(enchantment, level);
+        }
+        attacker.setItemSlot(EquipmentSlot.MAINHAND, spear);
+        attacker.setYRot(0.0F);
+        attacker.setXRot(0.0F);
+        attacker.setYHeadRot(0.0F);
+
+        SpearItem spearItem = (SpearItem) spear.getItem();
+        double minRange = spearItem.effectiveMinRange(attacker);
+        double maxRange = spearItem.effectiveMaxRange(attacker);
+        helper.assertTrue(maxRange > minRange && minRange >= 0.0,
+                "怪物有效攻击距离不合法：" + minRange + ".." + maxRange);
+        int targetZ = attackerZ + Math.max(1, (int) Math.round((minRange + maxRange) / 2.0));
+
+        Mob target = helper.spawnWithNoFreeWill(EntityType.ZOMBIE, attackerX, 1, targetZ);
+        float before = target.getHealth();
+        boolean hit = spearItem.performStabAttack(attacker, spear, EquipmentSlot.MAINHAND, false);
+        helper.assertTrue(hit, "戳刺没有命中目标（车道 x=" + attackerX + "）");
+        return new StabResult(attacker, target, before - target.getHealth());
     }
 
     /** 在指定 x 车道摆一对"持矛攻击者 + 目标"，戳一次，返回攻击者戳完的水平速度。 */

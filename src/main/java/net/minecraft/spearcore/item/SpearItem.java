@@ -347,7 +347,14 @@ public abstract class SpearItem extends Item {
                     && accessor.WasRecentlyStabbed(target, getContactCooldownTicks())) {
                 continue;
             }
-            if (target.hurt(SpearDamageTypes.spear(attacker.level(), attacker), damage)) {
+            // 与 26.1.2 原版一致：左键穿刺也要过原版附魔伤害修正。
+            // 1.20.1 的 API 是 getDamageBonus(ItemStack, MobType)。
+            DamageSource spearSource = SpearDamageTypes.spear(attacker.level(), attacker);
+            float finalDamage = damage;
+            if (target instanceof LivingEntity livingTarget) {
+                finalDamage += EnchantmentHelper.getDamageBonus(stack, livingTarget.getMobType());
+            }
+            if (target.hurt(spearSource, finalDamage)) {
                 // 与蓄力路径一致，命中后把效果转发给 hurtEnemy 钩子
                 if (target instanceof LivingEntity livingTarget && attacker instanceof Player player) {
                     stack.hurtEnemy(livingTarget, player);
@@ -355,7 +362,9 @@ public abstract class SpearItem extends Item {
                 hitSomething = true;
                 stack.hurtAndBreak(1, attacker, e -> e.broadcastBreakEvent(slot));
                 if (dealsKnockback()) {
-                    causeExtraKnockback(attacker, target, 0.4F, target.getDeltaMovement());
+                    // 与原版一致：0.4 基础击退 + 附魔击退加成
+                    causeExtraKnockback(attacker, target,
+                            0.4F + EnchantmentHelper.getKnockbackBonus(attacker), target.getDeltaMovement());
                 }
                 if (attacker instanceof Player player) {
                     player.setLastHurtMob(target);
