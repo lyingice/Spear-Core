@@ -617,6 +617,21 @@ public abstract class SpearItem extends Item {
     @Override
     public boolean isEnchantable(ItemStack stack) { return true; }
 
+    /**
+     * 复刻 1.21 数据包里的可附魔范围。
+     *
+     * <p>1.21 上矛能被锋利/亡灵杀手/节肢杀手/击退/火焰附加/抢夺/耐久/经验修补附上，
+     * 靠的是 {@code data/minecraft/tags/item/enchantable/*.json}；1.20.1 没有这套标签，
+     * 适用范围硬编码在 {@link net.minecraft.world.item.enchantment.EnchantmentCategory} 里
+     * （原版 WEAPON 只认 SwordItem），所以这里用 Forge 的物品侧钩子补回来 ——
+     * 附魔台与铁砧都会经过它。</p>
+     */
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return SpearEnchantments.supportsVanilla(enchantment)
+                || super.canApplyAtEnchantingTable(stack, enchantment);
+    }
+
     @Override
     public int getEnchantmentValue() { return getSpearEnchantmentValue(); }
 

@@ -4,7 +4,7 @@ license="MIT License"
 
 [[mods]]
 modId="spearcore"
-version="3.0.2"
+version="3.0.3"
 displayName="Spear Core"
 displayURL="https://center.mcmod.cn/863182/"
 logoFile="spear.png"
