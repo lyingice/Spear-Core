@@ -83,6 +83,16 @@ public class SpearItemBuilder extends ItemBuilder {
     /** 为 null 时按约定使用 {@code <图标贴图>_in_hand}。 */
     private String inHandTexture;
 
+    /**
+     * 平面图标贴图，自己记一份。
+     * <p>
+     * KubeJS 2001（1.20.1）的 {@code ItemBuilder#texture(String)} 只往
+     * {@code textureJson} 里写 {@code layer0}，<b>不会</b>写它的 {@code texture} 字段，
+     * 所以不能读父类那个字段 —— 否则这里是 null，模型会退化成铁矛兜底
+     * （表现就是：背包图标是铁矛，手持却是自己的图）。
+     */
+    private String flatTexture;
+
     public SpearItemBuilder(ResourceLocation id) {
         super(id);
         this.rarity = SpearStats.IRON.rarity();
@@ -178,6 +188,7 @@ public class SpearItemBuilder extends ItemBuilder {
 
     @Override
     public SpearItemBuilder texture(String tex) {
+        this.flatTexture = tex;
         super.texture(tex);
         return this;
     }
@@ -303,9 +314,16 @@ public class SpearItemBuilder extends ItemBuilder {
 
     @Override
     public void generateAssetJsons(AssetJsonGenerator generator) {
-        String flat = (texture == null || texture.isEmpty())
-                ? new ResourceLocation(SpearcoreMod.MODID, "item/iron_spear").toString()
-                : texture;
+        String flat = this.flatTexture;
+        if (flat == null || flat.isEmpty()) {
+            // 兜底：脚本可能用 .texture('layer0', 'xxx') 直接写 textureJson
+            if (textureJson != null && textureJson.has("layer0")) {
+                flat = textureJson.get("layer0").getAsString();
+            }
+        }
+        if (flat == null || flat.isEmpty()) {
+            flat = new ResourceLocation(SpearcoreMod.MODID, "item/iron_spear").toString();
+        }
         String inHand = (inHandTexture == null || inHandTexture.isEmpty()) ? flat + "_in_hand" : inHandTexture;
 
         // 矛不能直接用 item/generated：那样拿在手里会被平铺、从中间劈开。
