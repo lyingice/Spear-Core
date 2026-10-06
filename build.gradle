@@ -3,10 +3,14 @@ plugins {
     id 'net.neoforged.moddev' version '2.0.141'
 }
 
-version = '3.0.1'
+version = '3.1.0'
 base.archivesName = "spearcore-1.21.1-neo"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+configurations {
+    punchyClient
+}
 
 neoForge {
     version = "21.1.217"
@@ -14,6 +18,11 @@ neoForge {
     runs {
         client {
             client()
+            // Punchy 是客户端专用 mod：只挂到客户端 run 的 classpath，
+            // 否则 GameTestServer（专用服务端）会在加载它时崩
+            // （Attempted to load class net/minecraft/client/gui/screens/Screen for invalid dist DEDICATED_SERVER）。
+            additionalRuntimeClasspathConfiguration.dependencies.add(
+                    project.dependencies.create(files('libs/punchy-2.6.2-neoforge-1.21.1.jar')))
 
             def mcreatorJvmOptions = System.getenv('MCREATOR_JVM_OPTIONS')
             if (mcreatorJvmOptions) {
@@ -24,6 +33,14 @@ neoForge {
         }
         server {
             server()
+        }
+        // GameTest：NeoForge userdev 的 run 类型里有 gameTestServer（MDG 没有内置的 gameTestServer()
+        // 方法，RunModel 只有 client/server/data），所以显式写 type。
+        // 判定与 1.20.1 一样看日志里的 "All N required tests passed :)" / "N required tests failed :("。
+        gameTestServer {
+            type = "gameTestServer"
+            gameDirectory = project.file('run')
+            systemProperty 'neoforge.enabledGameTestNamespaces', 'spearcore'
         }
 
         configureEach {
@@ -37,6 +54,18 @@ neoForge {
             sourceSet sourceSets.main
         }
     }
+
+}
+
+// GameTest 的模板结构：runGameTestServer 的工作目录是 run/，
+// 模板必须落在 run/gameteststructures/ 下（StructureUtils 的 testStructuresDir 默认值）。
+// 注意用 matching 而不是 named：run 任务由 MDG 在评估后创建，named 会在配置期直接失败。
+tasks.register('stageGameTestStructures', Copy) {
+    from 'gameteststructures'
+    into 'run/gameteststructures'
+}
+tasks.matching { it.name == 'runGameTestServer' }.configureEach {
+    dependsOn 'stageGameTestStructures'
 }
 repositories {
     // KubeJS / Rhino 的发布仓库（仅用于编译与开发期联调）
@@ -51,8 +80,10 @@ repositories {
     }
 }
 dependencies {
-    // 编译时可用，但不打包进最终 jar
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // Punchy 联动（可选依赖）：编译期需要它在 classpath 上（mixin 注解处理器要校验目标类），
+    // 运行期只有客户端需要，所以单独放 punchyClient 配置，由上面的 client run 挂载。
+    compileOnly files('libs/punchy-2.6.2-neoforge-1.21.1.jar')
+    punchyClient files('libs/punchy-2.6.2-neoforge-1.21.1.jar')
 
     // KubeJS 联动（mods.toml 中声明为 optional）。
     // compileOnly：编译 compat.kubejs 包用，绝不进入发布 jar；
