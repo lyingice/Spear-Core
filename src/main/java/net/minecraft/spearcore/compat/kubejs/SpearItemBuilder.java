@@ -82,6 +82,14 @@ public class SpearItemBuilder extends ItemBuilder {
     /** 为 null 时按约定使用 {@code <图标贴图>_in_hand}。 */
     private String inHandTexture;
 
+    /**
+     * 平面图标贴图，自己记一份。
+     * <p>
+     * KubeJS 2101 的 {@code texture(String)} 会写它的 {@code baseTexture} 字段，
+     * 本类原来直接读那个字段；自己再存一份，免得以后 KubeJS 改内部实现又静默失效。
+     */
+    private String flatTexture;
+
     public SpearItemBuilder(ResourceLocation id) {
         super(id);
         this.rarity = SpearStats.IRON.rarity();
@@ -182,6 +190,7 @@ public class SpearItemBuilder extends ItemBuilder {
 
     @Override
     public SpearItemBuilder texture(String tex) {
+        this.flatTexture = tex;
         super.texture(tex);
         return this;
     }
@@ -307,9 +316,13 @@ public class SpearItemBuilder extends ItemBuilder {
 
     @Override
     protected void generateItemModels(KubeAssetGenerator generator) {
-        String flat = (baseTexture == null || baseTexture.isEmpty())
-                ? ResourceLocation.fromNamespaceAndPath(SpearcoreMod.MODID, "item/iron_spear").toString()
-                : baseTexture;
+        String flat = this.flatTexture;
+        if (flat == null || flat.isEmpty()) {
+            flat = baseTexture; // KubeJS 自己那份（textureJson 也可能被 .texture(k, v) 写过）
+        }
+        if (flat == null || flat.isEmpty()) {
+            flat = ResourceLocation.fromNamespaceAndPath(SpearcoreMod.MODID, "item/iron_spear").toString();
+        }
         String inHand = (inHandTexture == null || inHandTexture.isEmpty()) ? flat + "_in_hand" : inHandTexture;
 
         // 矛不能直接用 item/generated：那样拿在手里会被平铺、从中间劈开。
