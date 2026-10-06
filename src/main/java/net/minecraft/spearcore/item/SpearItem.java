@@ -400,12 +400,19 @@ public abstract class SpearItem extends Item {
 
         boolean damaged = false;
         if (canDamage) {
+            // 与 26.1.2 原版矛一致：伤害要过原版附魔修正（锋利/亡灵杀手/节肢杀手等）。
+            // 1.20.1 的 API 是 getDamageBonus(ItemStack, MobType)。
+            if (target instanceof LivingEntity livingTarget) {
+                finalDamage += EnchantmentHelper.getDamageBonus(stack, livingTarget.getMobType());
+            }
             damaged = target.hurt(damageSource, finalDamage);
             hitSomething |= damaged;
         }
 
         if (canKnockback) {
-            causeExtraKnockback(attacker, target, 0.4f, preMotion);
+            // 与原版一致：0.4 基础击退 + 附魔击退加成（1.20.1 用 getKnockbackBonus）
+            causeExtraKnockback(attacker, target,
+                    0.4f + EnchantmentHelper.getKnockbackBonus(attacker), preMotion);
         }
 
         if (canDismount && target.isPassenger()) {
