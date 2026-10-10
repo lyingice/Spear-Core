@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>scene-b</title>
+  </head>
+  <body>
+    <template>
+      <style>
+      @font-face {
+        font-family: "SC Sans";
+        src: url("assets/fonts/NotoSansSC-VF.ttf");
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Mono Code";
+        src: url("assets/fonts/JetBrainsMono-400.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Mono Code";
+        src: url("assets/fonts/JetBrainsMono-700.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+        font-display: block;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      #root {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        color: #e6edf5;
+        font-family: "SC Sans", sans-serif;
+      }
+      .px { image-rendering: pixelated; image-rendering: crisp-edges; }
+      .reveal { display: block; overflow: hidden; }
+        #code-panel {
+          position: absolute;
+          left: 263px;
+          top: 190px;
+          width: 1394px;
+          border: 1px solid #1d2733;
+          border-radius: 20px;
+          background: #10161f;
+          box-shadow: 0 42px 120px rgba(0, 0, 0, 0.62), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+          overflow: hidden;
+          transform-origin: 18.4% 60.6%;
+        }
+        .panel-head {
+          height: 54px;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 0 26px;
+          background: #0c121a;
+          border-bottom: 1px solid #1d2733;
+        }
+        .panel-head .dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: #7fe3f2;
+          box-shadow: 0 0 14px rgba(127, 227, 242, 0.75);
+        }
+        .fname {
+          font-family: "Mono Code", monospace;
+          font-size: 24px;
+          color: #6b7c8f;
+          font-variant-ligatures: none;
+          font-feature-settings: "liga" 0, "calt" 0;
+        }
+        .code {
+          padding: 48px 52px;
+          font-family: "Mono Code", monospace;
+          font-size: 36px;
+          line-height: 62px;
+          font-weight: 400;
+          color: #d8e2ee;
+          font-variant-ligatures: none;
+          font-feature-settings: "liga" 0, "calt" 0;
+        }
+        .typerow { position: relative; height: 62px; white-space: pre; }
+        .typeroi { position: relative; display: inline-block; vertical-align: top; height: 62px; }
+        .typeclip { display: inline-block; white-space: pre; }
+        .carettrack { position: absolute; left: 0; top: 0; height: 62px; width: 0; }
+        .caret {
+          position: absolute;
+          right: -2px;
+          top: 15px;
+          width: 3px;
+          height: 32px;
+          border-radius: 2px;
+          background: #7fe3f2;
+          box-shadow: 0 0 12px rgba(127, 227, 242, 0.7);
+        }
+        .typerow .bar {
+          position: absolute;
+          left: -26px;
+          top: 12px;
+          width: 3px;
+          height: 38px;
+          border-radius: 2px;
+          background: #7fe3f2;
+          opacity: 0.5;
+        }
+        #callout-line {
+          position: absolute;
+          left: 1384px;
+          top: 420px;
+          width: 2px;
+          height: 380px;
+          transform-origin: top center;
+          background: linear-gradient(to bottom, rgba(127, 227, 242, 0.85), rgba(127, 227, 242, 0.06));
+        }
+        #callout-dot {
+          position: absolute;
+          left: 1376px;
+          top: 412px;
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          background: #7fe3f2;
+          box-shadow: 0 0 22px rgba(127, 227, 242, 0.85);
+        }
+        #callout {
+          position: absolute;
+          left: 1384px;
+          top: 806px;
+          padding: 18px 32px;
+          white-space: nowrap;
+          font-size: 34px;
+          font-weight: 600;
+          letter-spacing: 0.02em;
+          color: #7fe3f2;
+          background: rgba(127, 227, 242, 0.1);
+          border: 1px solid rgba(127, 227, 242, 0.42);
+          border-radius: 14px;
+          box-shadow: 0 0 40px rgba(127, 227, 242, 0.12);
+        }
+      </style>
+      <div id="root" data-composition-id="scene-b" data-width="1920" data-height="1080">
+        <div class="stage">
+          <div id="code-panel">
+            <div class="panel-head">
+              <span class="dot"></span>
+              <span class="fname">kubejs/startup_scripts/my_spears.js</span>
+            </div>
+            <div class="code">
+          <div class="typerow"><span class="typeroi"><span class="typeclip"><span class="typetext">StartupEvents.registry('item', event =&gt; {</span></span><span class="carettrack"><i class="caret"></i></span></span></div>
+          <div class="typerow core"><span class="bar"></span><span class="typeroi"><span class="typeclip"><span class="typetext">    event.create('mypack:bronze_spear', </span><span class="hl">'spearcore:spear'</span><span class="typetext">)</span></span><span class="carettrack"><i class="caret"></i></span></span></div>
+          <div class="typerow core"><span class="bar"></span><span class="typeroi"><span class="typeclip"><span class="typetext">        .displayName('青铜矛')</span></span><span class="carettrack"><i class="caret"></i></span></span></div>
+          <div class="typerow core"><span class="bar"></span><span class="typeroi"><span class="typeclip"><span class="typetext">        .durability(400)</span></span><span class="carettrack"><i class="caret"></i></span></span></div>
+          <div class="typerow core"><span class="bar"></span><span class="typeroi"><span class="typeclip"><span class="typetext">        .attackDamageBonus(3)</span></span><span class="carettrack"><i class="caret"></i></span></span></div>
+          <div class="typerow core"><span class="bar"></span><span class="typeroi"><span class="typeclip"><span class="typetext">        .texture('mypack:item/bronze_spear')</span></span><span class="carettrack"><i class="caret"></i></span></span></div>
+          <div class="typerow"><span class="typeroi"><span class="typeclip"><span class="typetext">})</span></span><span class="carettrack"><i class="caret"></i></span></span></div>
+            </div>
+          </div>
+          <div id="callout-line"></div>
+          <div id="callout-dot"></div>
+          <div id="callout">第二个参数 = 物品类型</div>
+        </div>
+      </div>
+      <script>
+        (function () {
+          "use strict";
+          var CHAR = 0.0135;
+          var GAP = 0.07;
+          var TYPE_START = 0.48;
+          var COLLAPSE = 4.85;
+
+          var rowsEl = Array.prototype.slice.call(document.querySelectorAll(".typerow"));
+          var clipsArr = rowsEl.map(function (r) { return r.querySelector(".typeclip"); });
+          var tracks = rowsEl.map(function (r) { return r.querySelector(".carettrack"); });
+          var barsArr = rowsEl.map(function (r) {
+            return r.className.indexOf("core") !== -1 ? r.querySelector(".bar") : null;
+          });
+
+          gsap.set(clipsArr, { clipPath: "inset(0 100% 0 0)" });
+          gsap.set(tracks, { width: "0%", opacity: 0 });
+          gsap.set(".typerow.core .bar", { scaleY: 0 });
+          gsap.set("#code-panel", { opacity: 0, y: 40, scale: 0.985 });
+          gsap.set(".panel-head", { opacity: 0 });
+          gsap.set("#callout-line", { scaleY: 0, opacity: 1 });
+          gsap.set("#callout-dot", { opacity: 0, scale: 0.4 });
+          gsap.set("#callout", { opacity: 0, xPercent: -50, y: 16, scale: 0.94 });
+
+          var tl = gsap.timeline({ paused: true });
+          tl.fromTo("#code-panel", { opacity: 0, y: 40, scale: 0.985 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.42, ease: "power3.out" }, 0);
+          tl.fromTo(".panel-head", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0.3);
+
+          var t = TYPE_START;
+          var rowStart = [];
+          rowsEl.forEach(function (row, i) {
+            var d = clipsArr[i].textContent.length * CHAR;
+            rowStart.push(t);
+            tl.set(tracks[i], { opacity: 1 }, t);
+            tl.fromTo(clipsArr[i], { clipPath: "inset(0 100% 0 0)" },
+              { clipPath: "inset(0 0% 0 0)", duration: d, ease: "none" }, t);
+            tl.fromTo(tracks[i], { width: "0%" },
+              { width: "100%", duration: d, ease: "none" }, t);
+            if (barsArr[i]) {
+              tl.fromTo(barsArr[i], { scaleY: 0 }, { scaleY: 1, duration: 0.18, ease: "power2.out" }, t);
+            }
+            t += d;
+            tl.set(tracks[i], { opacity: 0 }, t);
+            t += GAP;
+          });
+
+          var hl = document.querySelector(".hl");
+          var hlIdx = rowsEl.indexOf(hl.closest(".typerow"));
+          var hlText = clipsArr[hlIdx].textContent;
+          var hlAt = rowStart[hlIdx] + (hlText.indexOf(hl.textContent) + hl.textContent.length) * CHAR;
+
+          tl.to(".hl", {
+            color: "#7fe3f2",
+            backgroundColor: "rgba(127, 227, 242, 0.16)",
+            textShadow: "0 0 24px rgba(127, 227, 242, 0.55)",
+            duration: 0.2,
+            ease: "power2.out"
+          }, hlAt);
+          tl.to("#callout-dot", { opacity: 1, scale: 1, duration: 0.24, ease: "power2.out" }, hlAt + 0.1);
+          tl.fromTo("#callout-line", { scaleY: 0 }, { scaleY: 1, duration: 0.32, ease: "power2.out" }, hlAt + 0.14);
+          tl.to("#callout", { opacity: 1, y: 0, scale: 1, duration: 0.34, ease: "power3.out" }, hlAt + 0.22);
+
+          tl.to("#code-panel", { scale: 0.05, opacity: 0, duration: 0.45, ease: "power3.in" }, COLLAPSE);
+          tl.to("#callout", { opacity: 0, y: 10, duration: 0.24, ease: "power2.in" }, COLLAPSE);
+          tl.to("#callout-line", { opacity: 0, duration: 0.24, ease: "power2.in" }, COLLAPSE);
+          tl.to("#callout-dot", { opacity: 0, scale: 0.4, duration: 0.24, ease: "power2.in" }, COLLAPSE);
+
+          window.__timelines["scene-b"] = tl;
+          tl.seek(0);
+        })();
+      </script>
+    </template>
+  </body>
+</html>

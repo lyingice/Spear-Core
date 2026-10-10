@@ -1,0 +1,73 @@
+{
+  "project": "video-kjs",
+  "skill": "motion-graphics",
+  "category": "kinetic-type",
+  "asset_needs": [],
+  "canvas": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "duration": 9.8,
+    "audio": "none"
+  },
+  "palette": {
+    "bg": "#090d12",
+    "panel": "#10161f",
+    "line": "#1d2733",
+    "text": "#e6edf5",
+    "dim": "#8a9aac",
+    "accent": "#7fe3f2"
+  },
+  "accent_source": "highlight pixel #bbe4ed of kjs_spear.png, deepened to a usable UI accent",
+  "shot_brief": "Silent 9.8s design-led promo for the Spear Core KubeJS guide. Four beats: title, a typewriter code panel, the panel collapsing into the real kjs_spear item icon, and a lockup. One accent hue (spear-head cyan) on a dark spearcore-toned background; every word is quoted from kjs-guide.md.",
+  "beats": [
+    {
+      "id": "scene-a",
+      "start": 0,
+      "duration": 1.4,
+      "role": "title",
+      "on_screen": [
+        "用 KubeJS 加一把矛",
+        "Spear Core · 5 行代码"
+      ]
+    },
+    {
+      "id": "scene-b",
+      "start": 1.3,
+      "duration": 5.4,
+      "role": "code",
+      "on_screen": [
+        "StartupEvents.registry('item', event => {",
+        "…7 lines verbatim from kjs-guide.md §1…",
+        "第二个参数 = 物品类型"
+      ]
+    },
+    {
+      "id": "scene-c",
+      "start": 6.4,
+      "duration": 2.2,
+      "role": "result",
+      "on_screen": [
+        "真的矛",
+        "蓄力突刺 / 冲锋 / 怪物 AI / 附魔"
+      ]
+    },
+    {
+      "id": "scene-d",
+      "start": 8.45,
+      "duration": 1.35,
+      "role": "outro",
+      "on_screen": [
+        "Spear Core · KubeJS 教程",
+        "kjs-guide.md · 不需要写 Java"
+      ]
+    }
+  ],
+  "motion_rules": [
+    "mask reveal with overflow-hidden wrapper + yPercent",
+    "per-line clip-path typewriter with a caret that rides the reveal edge (width 0→100%)",
+    "back.out(1.6) icon pop with an expanding ring",
+    "staggered chip row for the four spear behaviours"
+  ],
+  "determinism": "no Math.random, no Date.now, no network; all times are literals or derived from text lengths"
+}

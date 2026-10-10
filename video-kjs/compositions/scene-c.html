@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>scene-c</title>
+  </head>
+  <body>
+    <template>
+      <style>
+      @font-face {
+        font-family: "SC Sans";
+        src: url("assets/fonts/NotoSansSC-VF.ttf");
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Mono Code";
+        src: url("assets/fonts/JetBrainsMono-400.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Mono Code";
+        src: url("assets/fonts/JetBrainsMono-700.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+        font-display: block;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      #root {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        color: #e6edf5;
+        font-family: "SC Sans", sans-serif;
+      }
+      .px { image-rendering: pixelated; image-rendering: crisp-edges; }
+      .reveal { display: block; overflow: hidden; }
+        #root {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .result { display: flex; align-items: center; gap: 96px; margin-top: -10px; }
+        .hero-slot {
+          position: relative;
+          width: 400px;
+          height: 400px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid #1d2733;
+          border-radius: 26px;
+          background:
+            linear-gradient(158deg, rgba(127, 227, 242, 0.09), rgba(127, 227, 242, 0) 58%),
+            #10161f;
+          box-shadow: 0 0 90px rgba(127, 227, 242, 0.13), inset 0 0 60px rgba(127, 227, 242, 0.05);
+        }
+        .hero-ring {
+          position: absolute;
+          inset: -2px;
+          border: 2px solid #7fe3f2;
+          border-radius: 28px;
+        }
+        #hero { width: 320px; height: 320px; }
+        #c-head {
+          font-size: 84px;
+          line-height: 1.18;
+          font-weight: 800;
+          letter-spacing: 0.01em;
+          color: #f2f7fc;
+        }
+        #c-list {
+          margin-top: 30px;
+          display: flex;
+          align-items: baseline;
+          gap: 18px;
+          font-size: 40px;
+          font-weight: 500;
+        }
+        #c-list .li { color: #cfe7f0; }
+        #c-list .sep { color: rgba(127, 227, 242, 0.55); }
+      </style>
+      <div id="root" data-composition-id="scene-c" data-width="1920" data-height="1080">
+        <div class="stage">
+          <div class="result">
+            <div class="hero-slot">
+              <img id="hero" class="px" src="assets/items/kjs_spear.png" alt="" />
+              <div class="hero-ring"></div>
+            </div>
+            <div class="result-text">
+              <div class="reveal" data-layout-allow-overflow><h2 id="c-head" data-layout-allow-overflow>真的矛</h2></div>
+              <div id="c-list">
+                <span class="li">蓄力突刺</span><span class="sep">/</span><span class="li">冲锋</span><span class="sep">/</span><span class="li">怪物 AI</span><span class="sep">/</span><span class="li">附魔</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        (function () {
+          "use strict";
+          gsap.set(".hero-slot", { opacity: 0 });
+          gsap.set(".hero-ring", { scale: 0.64, opacity: 0 });
+          gsap.set("#hero", { scale: 0.12, opacity: 0 });
+          gsap.set("#c-head", { yPercent: 118 });
+          gsap.set("#c-list .li, #c-list .sep", { opacity: 0, y: 16 });
+
+          var tl = gsap.timeline({ paused: true });
+          tl.fromTo(".hero-slot", { opacity: 0 }, { opacity: 1, duration: 0.34, ease: "power2.out" }, 0);
+          tl.to(".hero-ring", { opacity: 0.9, duration: 0.16, ease: "power2.out" }, 0.06);
+          tl.to(".hero-ring", { scale: 1.9, opacity: 0, duration: 0.52, ease: "power2.out" }, 0.22);
+          tl.fromTo("#hero", { scale: 0.12, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.58, ease: "back.out(1.6)" }, 0.12);
+          tl.fromTo("#c-head", { yPercent: 118 }, { yPercent: 0, duration: 0.46, ease: "power3.out" }, 0.32);
+          tl.fromTo("#c-list .li, #c-list .sep", { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, duration: 0.4, ease: "power2.out", stagger: 0.05 }, 0.36);
+          tl.to(".stage", { opacity: 0, duration: 0.26, ease: "power2.in" }, 1.94);
+
+          window.__timelines["scene-c"] = tl;
+          tl.seek(0);
+        })();
+      </script>
+    </template>
+  </body>
+</html>
