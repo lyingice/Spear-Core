@@ -94,14 +94,38 @@ public class SpearStats {
                 attackDuration,
                 0.25F, 10,
                 (int)(delaySec * 20.0F),
-                SpearCondition.ofAttackerSpeed((int)(dismountSec * 20.0F), 0.3F),
+                SpearCondition.ofAttackerSpeed((int)(dismountSec * 20.0F), dismountSpeedFor(materialName)),
                 SpearCondition.ofAttackerSpeed((int)(knockbackSec * 20.0F), 5.1F),
                 SpearCondition.ofRelativeSpeed((int)(damageSec * 20.0F), 4.6F),
                 0.38F,
                 2.0F, 4.5F, 2.0F, 6.5F,
-                0.125F, 0.5F,
-                true, false
+                // 戳刺判定箱：原版 PIERCING_WEAPON 的 hitbox_margin 是 0.25F（蓄力的 KINETIC_WEAPON 是 0.125F）。
+                0.25F, 0.5F,
+                true, true
         );
+    }
+
+    // ========== 击落骑手的速度阈值（写死为 Java 版数据，不随任何配置项变化） ==========
+
+    /**
+     * 原版 Java 版击落骑手所需的攻击者速度阈值（格/秒，按材质）。
+     *
+     * <p>顺序与官方数据一致：木 14、金 13、石 13、铜 12、铁 11、钻石 10、下界合金 9。
+     * 怪物使用这些条件时会再乘以 {@code needSpeed}（玩家 1.0 / 怪物 0.2）。</p>
+     */
+    private static final Map<String, Float> JE_DISMOUNT_SPEED = Map.of(
+            "wood", 14.0F,
+            "gold", 13.0F,
+            "stone", 13.0F,
+            "copper", 12.0F,
+            "iron", 11.0F,
+            "diamond", 10.0F,
+            "netherite", 9.0F
+    );
+
+    /** 某材质的击落速度阈值；未知材质按铁矛的 11.0 处理。 */
+    public static float dismountSpeedFor(String materialName) {
+        return JE_DISMOUNT_SPEED.getOrDefault(materialName, 11.0F);
     }
 
     // 无防火

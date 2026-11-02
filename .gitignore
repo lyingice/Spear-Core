@@ -2,12 +2,11 @@
 /.gradle/
 /build/
 /build/classes/java/main/
+# 仅本地保留，不再跟踪进版本库（历史上 .idea/.eclipse 被误提交过）
 /.eclipse/
 /.idea/
-/.mcreator/
 /libs/
 /run/
-/.mcreator/
 
 # 1.20.1 移植期间暂存的 1.21.1 源码（内容与 main 分支一致，勿提交）
 _phase0_aside_src/

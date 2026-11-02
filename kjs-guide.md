@@ -115,7 +115,7 @@ kubejs/
 |---|---|---|
 | `.phases(起手, 击落, 击退, 伤害)` | 四个蓄力阶段时长，单位**秒**；依次是"起手准备 / 能把骑手捅下来 / 能把人击退 / 能造成伤害"的有效窗口 | 0.6 / 2.5 / 6.75 / 11.25 |
 | `.reach(最小, 最大, 创造最小, 创造最大)` | 攻击距离 | 2 / 4.5 / 2 / 6.5 |
-| `.hitbox(半径1, 半径2)` | 判定箱外扩，越大越容易捅到 | 0.25 / 0.125 |
+| `.hitbox(蓄力半径, 戳刺半径)` | 判定箱外扩，越大越容易捅到；对应原版 `KINETIC_WEAPON` / `PIERCING_WEAPON`（蓄力在 `JAVA` 档会被压到 0.125） | 0.25 / 0.25 |
 | `.swing(秒)` | 挥击间隔（怪物 AI 与动画使用） | 0.95 |
 | `.contactCooldown(刻)` | 同一目标两次突刺之间的免疫时间，防止一次冲锋连续打同一个人 | 10 |
 | `.forwardMovement(数字)` | 冲锋时向前推进的力度 | 0.38 |
@@ -245,13 +245,13 @@ event.create('命名空间:名字', 'spearcore:spear')
     .fireResistant()                 // 可选：防火
     .phases(0.6, 2.5, 6.75, 11.25)   // 起手/击落/击退/伤害(秒)
     .reach(2.0, 4.5, 2.0, 6.5)       // 生存min/max, 创造min/max
-    .hitbox(0.25, 0.125)             // 判定箱外扩
+    .hitbox(0.25, 0.25)              // 判定箱外扩(蓄力/戳刺)
     .swing(0.95)                     // 挥击间隔(秒)
     .contactCooldown(10)             // 同目标突刺免疫(刻)
     .forwardMovement(0.38)           // 冲锋前推力度
     .mobFactor(0.5)                  // 怪物攻击距离倍率
     .knockback(true)                 // 是否击退
-    .dismount(false)                 // 是否击落骑手
+    .dismount(false)                 // 是否击落骑手（内建七把矛已改为 true，击落阈值固定 Java 版数据）
     .materialName('custom')          // 标记名
     .texture('命名空间:item/名字')      // 图标贴图(手持自动找 _in_hand)
     .inHandTexture('命名空间:item/手持图') // 可选：单独指定手持贴图
@@ -366,7 +366,7 @@ Anything you leave out uses the **iron spear** values. Tweak only what you care 
 |---|---|---|
 | `.phases(delay, dismount, knockback, damage)` | The four charge-up phases in **seconds**: ready-up / can pull a rider off / can knock the target back / can deal damage | 0.6 / 2.5 / 6.75 / 11.25 |
 | `.reach(min, max, creativeMin, creativeMax)` | Attack range | 2 / 4.5 / 2 / 6.5 |
-| `.hitbox(margin1, margin2)` | Hitbox inflation; larger is easier to hit with | 0.25 / 0.125 |
+| `.hitbox(margin1, margin2)` | Hitbox inflation for charge / jab, mirroring vanilla `KINETIC_WEAPON` / `PIERCING_WEAPON` (charge is clamped to 0.125 in `JAVA` mode); larger is easier to hit with | 0.25 / 0.25 |
 | `.swing(seconds)` | Swing interval (used by mob AI and animations) | 0.95 |
 | `.contactCooldown(ticks)` | Immunity between two stabs on the same target, so one lunge cannot hit the same entity repeatedly | 10 |
 | `.forwardMovement(number)` | Lunge forward push | 0.38 |
@@ -496,13 +496,13 @@ event.create('namespace:name', 'spearcore:spear')
     .fireResistant()                 // optional: fire proof
     .phases(0.6, 2.5, 6.75, 11.25)   // delay/dismount/knockback/damage (seconds)
     .reach(2.0, 4.5, 2.0, 6.5)       // survival min/max, creative min/max
-    .hitbox(0.25, 0.125)             // hitbox inflation
+    .hitbox(0.25, 0.25)              // hitbox inflation (charge / jab)
     .swing(0.95)                     // swing interval (seconds)
     .contactCooldown(10)             // same-target stab immunity (ticks)
     .forwardMovement(0.38)           // lunge forward push
     .mobFactor(0.5)                  // mob attack range multiplier
     .knockback(true)                 // knock targets back
-    .dismount(false)                 // pull riders off mounts
+    .dismount(false)                 // pull riders off mounts (built-in spears now default to true; thresholds are fixed to Java values)
     .materialName('custom')          // label
     .texture('namespace:item/name')      // icon texture (in-hand auto uses _in_hand)
     .inHandTexture('namespace:item/in_hand') // optional: set the in-hand texture explicitly

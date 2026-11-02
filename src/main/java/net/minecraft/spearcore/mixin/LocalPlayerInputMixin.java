@@ -1,7 +1,5 @@
 package net.minecraft.spearcore.mixin;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.spearcore.item.SpearItem;
@@ -9,41 +7,53 @@ import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * 举矛时取消原版"正在使用物品 → 移动输入 ×0.2"的减速。
+ * 举矛时取消原版"正在使用物品 → 移动输入 ×0.2"的减速，并允许起跑。
  *
- * <p><b>为什么从 @ModifyConstant 换成 MixinExtras @WrapOperation（issue #3）：</b>
+ * <p><b>为什么是 @Redirect 而不是 @ModifyConstant（issue #3）：</b>
  * {@code @ModifyConstant} 对同一条常量只允许一个模组生效。我们抢先改掉 aiStep 里的 0.2F 后，
  * 其它模组（例如 Tensura 的 useItemFirst）对同一常量的 {@code @ModifyConstant} 会找不到注入目标，
  * 抛 {@code InjectionError: Critical injection failure ... (0/1) succeeded} 直接启动崩溃，
  * 且与 priority 无关。</p>
  *
- * <p>{@code @WrapOperation} 包裹的是 {@code input.leftImpulse = ...} 这个写回动作，不碰常量本身：
- * <ul>
- *   <li>别的模组仍可自由 {@code @ModifyConstant} 那条 0.2F；多个 {@code @WrapOperation} 会链式执行；</li>
- *   <li>写回前读到的 {@code input.leftImpulse} 就是未被乘过的旧值，直接写回去即可；</li>
- *   <li>MixinExtras 由 shading 内嵌进 jar（Forge 1.20.1 不自带），初始化 config 在 build.gradle 里注册。</li>
- * </ul></p>
+ * <p>{@code @Redirect} 拦的是 {@code input.leftImpulse = ...} 这次写回，不碰常量本身：
+ * 别的模组仍可自由 {@code @ModifyConstant} 那条 0.2F；写回前读到的字段就是未被乘过的旧值，
+ * 直接写回去即可。代价是：如果另一个模组也用 {@code @Redirect} 拦同一次写回，两者会冲突，
+ * 但那属于同一注入点的硬冲突，无法用普通 Mixin 化解。</p>
+ *
+ * <p><b>为什么不再用 MixinExtras 的 @WrapOperation：</b>
+ * 1.20.1 的 Forge 不自带 MixinExtras，原先靠 shading 把它摊进本模组 jar。结果本模组变成
+ * 导出 {@code com.llamalad7.mixinextras.*} 包的模块，只要别的模组（如 justenoughbreeding）
+ * 也通过 jar-in-jar 带了 MixinExtras，ModLauncher 就会报
+ * {@code Modules spearcore and MixinExtras export package ... to module ...} 直接启动失败。
+ * 上游在 3.2.0hotfix 里同样去掉了内嵌（他们退回 @ModifyConstant），这里改用 @Redirect，
+ * 既不需要 MixinExtras，又保留了"不抢常量"的兼容性。</p>
  */
 @Mixin(value = LocalPlayer.class, priority = 2000)
 public class LocalPlayerInputMixin {
 
-    @WrapOperation(method = "aiStep",
+    @Redirect(method = "aiStep",
             at = @At(value = "FIELD",
                     target = "Lnet/minecraft/client/player/Input;leftImpulse:F",
                     opcode = Opcodes.PUTFIELD))
-    private void spearcore$keepLeftImpulse(Input input, float value, Operation<Void> original) {
-        original.call(input, spearcore$isUsingSpear((LocalPlayer) (Object) this) ? input.leftImpulse : value);
+    private void spearcore$keepLeftImpulse(Input input, float value) {
+        input.leftImpulse = spearcore$shouldKeepImpulse() ? input.leftImpulse : value;
     }
 
-    @WrapOperation(method = "aiStep",
+    @Redirect(method = "aiStep",
             at = @At(value = "FIELD",
                     target = "Lnet/minecraft/client/player/Input;forwardImpulse:F",
                     opcode = Opcodes.PUTFIELD))
-    private void spearcore$keepForwardImpulse(Input input, float value, Operation<Void> original) {
-        original.call(input, spearcore$isUsingSpear((LocalPlayer) (Object) this) ? input.forwardImpulse : value);
+    private void spearcore$keepForwardImpulse(Input input, float value) {
+        input.forwardImpulse = spearcore$shouldKeepImpulse() ? input.forwardImpulse : value;
+    }
+
+    /** 原版蓄力时移动输入会被乘 0.2，这里去掉这层减速（原版 Java 版蓄力本来就不减速）。 */
+    private boolean spearcore$shouldKeepImpulse() {
+        return spearcore$isUsingSpear((LocalPlayer) (Object) this);
     }
 
     /**

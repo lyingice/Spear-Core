@@ -30,7 +30,10 @@ public class SpearCollision {
         Vec3 look = getHeadLookAngle(attacker);
 
         boolean creative = attacker instanceof Player player && player.getAbilities().instabuild;
-        double minRange = creative ? spear.getMinCreativeRange() : spear.getMinRange();
+        // MODDED：最小距离归零；JAVA：按原版 2 格（创造 2 格、怪物减半）。
+        double minRange = SpearRules.ignoresMinRange()
+                ? 0.0
+                : (creative ? spear.getMinCreativeRange() : spear.getMinRange());
         double maxRange = creative ? spear.getMaxCreativeRange() : spear.getMaxRange();
         double speedBonus = Math.max(0.0, look.dot(SpearItem.getMotion(attacker)));
         speedBonus = Math.min(speedBonus, 4.0); // 最多加 4 格
@@ -71,11 +74,12 @@ public class SpearCollision {
             end = blockHit.getLocation();
         }
 
-        AABB searchBox = new AABB(start.x, start.y, start.z, end.x, end.y, end.z).inflate(hitboxMargin);
+        AABB searchBox = new AABB(start.x, start.y, start.z, end.x, end.y, end.z)
+                .inflate(hitboxMargin + SpearItem.movingTargetCompensation(attacker));
 
         List<EntityHitResult> results = new ArrayList<>();
         for (Entity target : level.getEntities(attacker, searchBox, predicate)) {
-            AABB targetBox = target.getBoundingBox().inflate(hitboxMargin);
+            AABB targetBox = SpearItem.compensatedTargetBox(attacker, target, hitboxMargin);
             Optional<Vec3> hit = targetBox.clip(start, end);
             if (hit.isPresent()) {
                 results.add(new EntityHitResult(target, hit.get()));

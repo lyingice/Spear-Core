@@ -44,7 +44,7 @@ import java.util.function.Predicate;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.spearcore.init.SpearEnchantments;
-import net.minecraft.spearcore.config.SpearConfig;
+import net.minecraft.spearcore.util.SpearRules;
 
 /**
  * SpearItem — 矛的核心类，严格基于 J库 ItemToolBaseSpearBase 移植。
@@ -137,6 +137,8 @@ public abstract class SpearItem extends Item {
     // ========== effectiveMinRange / effectiveMaxRange（J库） ==========
 
     public float effectiveMinRange(Entity entity) {
+        // MODDED：最小距离归零，贴脸也能戳刺/蓄力。
+        if (SpearRules.ignoresMinRange()) return 0.0f;
         if (entity instanceof Player player) {
             if (player.isSpectator()) return 0.0f;
             return player.isCreative() ? getMinCreativeRange() : getMinRange();
@@ -170,6 +172,14 @@ public abstract class SpearItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
+        // 冷却期间不能起手蓄力（基岩版戳刺后的后摇，以及基岩版的使用冷却本身）。
+        if (player.getCooldowns().isOnCooldown(this)) {
+            return InteractionResultHolder.pass(stack);
+        }
+        // 基岩版不能用副手举矛蓄力。
+        if (hand == InteractionHand.OFF_HAND && SpearRules.blocksOffhandCharging()) {
+            return InteractionResultHolder.pass(stack);
+        }
         player.startUsingItem(hand);
         makeSound(player);
         return InteractionResultHolder.consume(stack);
@@ -197,6 +207,25 @@ public abstract class SpearItem extends Item {
 
     public int computeDamageUseDuration() {
         return getDelayTicks() + getDamageConditions().map(SpearCondition::maxDurationTicks).orElse(0);
+    }
+
+    /** 按这个长矛的攻击速度折算出来的使用冷却 tick 数（基岩版戳刺冷却 / 戳刺后摇都用它）。 */
+    public int getUseCooldownTicks() {
+        return Math.round(getAttackDuration() * 20.0F);
+    }
+
+    /**
+     * 蓄力伤害的基线。
+     *
+     * <p>JAVA：取裸武器攻击力，力量/虚弱等修饰符不算（原版 MC-302778）。</p>
+     * <p>BEDROCK：取包含修饰符的攻击力，力量药水会加进蓄力伤害。</p>
+     */
+    public float chargeBaseDamage(LivingEntity user) {
+        if (user.getAttribute(Attributes.ATTACK_DAMAGE) == null) return 0.0F;
+        double value = SpearRules.chargeGainsAttributeModifiers()
+                ? user.getAttributeValue(Attributes.ATTACK_DAMAGE)
+                : user.getAttributeBaseValue(Attributes.ATTACK_DAMAGE);
+        return (float) value;
     }
     private SpearChargePhaseEvent.Phase getCurrentPhase(int usedTicks) {
         if (usedTicks < getDelayTicks()) return SpearChargePhaseEvent.Phase.DELAY;
@@ -239,8 +268,7 @@ public abstract class SpearItem extends Item {
             needSpeed = u.getJerotesSpearNeedSpeed();
         }
 
-        double baseDamage = user.getAttribute(Attributes.ATTACK_DAMAGE) != null
-                ? user.getAttributeBaseValue(Attributes.ATTACK_DAMAGE) : 0.0;
+        double baseDamage = chargeBaseDamage(user);
 
         boolean hitSomething = false;
 
@@ -249,11 +277,11 @@ public abstract class SpearItem extends Item {
             Entity target = hit.getEntity();
             if (!(target instanceof LivingEntity)) continue;
 
-            if (user instanceof SpearCooldownAccessor accessor) {
-                if (accessor.WasRecentlyStabbed(target, getContactCooldownTicks())) continue;
-            }
-            if (user instanceof SpearCooldownAccessor accessor) {
-                accessor.RememberStabbedEntity(target);
+            // 蓄力重复命中：JAVA 每个目标每次蓄力只结算一次；BEDROCK 用 10 tick 接触冷却。
+            if (user instanceof SpearCooldownAccessor accessor
+                    && accessor.WasRecentlyStabbed(target,
+                            SpearRules.chargeRepeatCooldownTicks(getContactCooldownTicks()))) {
+                continue;
             }
 
             double targetSpeed = look.dot(getMotion(target));
@@ -277,10 +305,14 @@ public abstract class SpearItem extends Item {
                     damage, SpearDamageEvent.AttackType.CHARGE);
             MinecraftForge.EVENT_BUS.post(event);
             damage *= (float) (attrMult * event.getMultiplier());
-            hitSomething |= stabAttack(
+            boolean applied = stabAttack(
                     SlotUtil.slotForHand(user, user.getUsedItemHand()),
                     target, damage, canDamage, canKnockback, canDismount, user,
                     SpearDamageEvent.AttackType.CHARGE);
+            if (applied && user instanceof SpearCooldownAccessor accessor) {
+                accessor.RememberStabbedEntity(target);
+            }
+            hitSomething |= applied;
         }
 
         if (hitSomething) {
@@ -326,7 +358,11 @@ public abstract class SpearItem extends Item {
         double attackerSpeed = Math.max(0.0, look.dot(getMotion(attacker)));
 
         float baseDamage = (float) attacker.getAttributeValue(Attributes.ATTACK_DAMAGE);
-        float damage = baseDamage + (float) Mth.floor(attackerSpeed * getDamageMultiplier());
+        float damage = baseDamage;
+        // 速度加成是 MODDED 专有行为；Java / 基岩版戳刺只看武器攻击力。
+        if (SpearRules.hasJabSpeedBonus()) {
+            damage += (float) Mth.floor(attackerSpeed * getDamageMultiplier());
+        }
 
         double attrMult = getSpearMultiplier(attacker, SpearAttributes.SPEAR_STAB_MULTIPLIER.get());
         SpearDamageEvent event = new SpearDamageEvent(attacker, /* 首个目标暂填 null */ null,
@@ -343,7 +379,8 @@ public abstract class SpearItem extends Item {
         for (EntityHitResult hit : getHitEntitiesAlong(attacker, this, getHitboxMargin2(),
                 entity -> canHitEntity(attacker, entity))) {
             Entity target = hit.getEntity();
-            if (attacker instanceof SpearCooldownAccessor accessor
+            if (SpearRules.hasJabRepeatCooldown()
+                    && attacker instanceof SpearCooldownAccessor accessor
                     && accessor.WasRecentlyStabbed(target, getContactCooldownTicks())) {
                 continue;
             }
@@ -377,6 +414,16 @@ public abstract class SpearItem extends Item {
             }
         }
 
+        // 基岩版：戳中之后进入使用冷却，且背包里所有长矛共用同一个冷却。
+        if (hitSomething && attacker instanceof Player player) {
+            applyUseCooldown(player, this);
+            // 基岩版还有一个"戳完不能马上蓄力"的后摇；JAVA 冷却模型下用物品冷却单独挂上。
+            int delay = SpearRules.jabToChargeDelayTicks(getUseCooldownTicks());
+            if (delay > 0 && !SpearRules.usesUseCooldown()) {
+                player.getCooldowns().addCooldown(this, delay);
+            }
+        }
+
         if (hitSomething) {
             attacker.level().broadcastEntityEvent(attacker, (byte) 2);
             attacker.level().playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(),
@@ -387,9 +434,31 @@ public abstract class SpearItem extends Item {
     }
 
     public static boolean canPlayerPerformStab(Player player, SpearItem spear) {
-        return player.isAlive() && !player.isSpectator()
-                && !player.getCooldowns().isOnCooldown(spear)
-                && player.getAttackStrengthScale(0.0F) >= 0.95F;
+        if (!player.isAlive() || player.isSpectator()) {
+            return false;
+        }
+        // 只有基岩版的使用冷却会挡住下一次戳刺；JAVA 冷却模型下物品冷却只用来挡蓄力（戳刺后摇）。
+        if (SpearRules.usesUseCooldown() && player.getCooldowns().isOnCooldown(spear)) {
+            return false;
+        }
+        // 基岩版用使用冷却；Java 版必须等原版攻击蓄力条回满。
+        return SpearRules.usesUseCooldown() || player.getAttackStrengthScale(0.0F) >= 0.95F;
+    }
+
+    /** 把一个时长按这个长矛的攻击速度折算成使用冷却，并给背包里所有长矛都挂上。 */
+    private static void applyUseCooldown(Player player, SpearItem spear) {
+        if (!SpearRules.usesUseCooldown()) {
+            return;
+        }
+        int ticks = Math.round(spear.getAttackDuration() * 20.0F);
+        for (ItemStack stack : player.getInventory().items) {
+            if (stack.getItem() instanceof SpearItem other) {
+                player.getCooldowns().addCooldown(other, ticks);
+            }
+        }
+        if (player.getOffhandItem().getItem() instanceof SpearItem other) {
+            player.getCooldowns().addCooldown(other, ticks);
+        }
     }
 
     // ========== stabAttack（J库核心） ==========
@@ -449,8 +518,8 @@ public abstract class SpearItem extends Item {
                 || (attacker instanceof UseSpearSpecialEntity u && u.isJerotesSpearCauseExtraKnockbackPlayer());
 
         // 命中后是否把攻击者自己也减速（水平速度 ×0.6）并取消奔跑。
-        // 配置项 slowDownAttackerOnHit 默认 false：默认保持速度与奔跑状态，撞完不用重新起跑。
-        boolean slowDownAttacker = SpearConfig.SLOW_DOWN_ATTACKER_ON_HIT.get();
+        // JAVA（默认）保留原版这股"撞完得重新起跑"的手感；MODDED 则保持速度与奔跑状态。
+        boolean slowDownAttacker = SpearRules.slowsDownAttackerOnHit();
 
         if (asPlayer) {
             if (strength > 0.0f) {
@@ -505,6 +574,9 @@ public abstract class SpearItem extends Item {
 
     // ========== getHitEntitiesAlong（J库） ==========
 
+    /** 客户端渲染实体比服务器晚约 3 tick；移动靶补偿按这个 tick 数回退。 */
+    private static final double MOVING_TARGET_COMPENSATION_TICKS = 3.0;
+
     public static List<EntityHitResult> getHitEntitiesAlong(LivingEntity user, SpearItem spear,
                                                              float hitboxMargin, Predicate<Entity> predicate) {
         Vec3 look = getHeadLookAngle(user);
@@ -521,11 +593,11 @@ public abstract class SpearItem extends Item {
         }
 
         AABB searchBox = AABB.ofSize(start, hitboxMargin, hitboxMargin, hitboxMargin)
-                .expandTowards(end.subtract(start)).inflate(1.0);
+                .expandTowards(end.subtract(start)).inflate(1.0 + movingTargetCompensation(user));
 
         List<EntityHitResult> results = new ArrayList<>();
         for (Entity target : level.getEntities(user, searchBox, predicate)) {
-            AABB targetBox = target.getBoundingBox().inflate(hitboxMargin);
+            AABB targetBox = compensatedTargetBox(user, target, hitboxMargin);
             if (targetBox.contains(start)) {
                 results.add(new EntityHitResult(target, start));
                 continue;
@@ -538,6 +610,28 @@ public abstract class SpearItem extends Item {
                 a.getLocation().distanceToSqr(start),
                 b.getLocation().distanceToSqr(start)));
         return results;
+    }
+
+    /**
+     * 目标判定箱。
+     *
+     * <p>MODDED 的移动靶补偿：服务器按目标当前位置判定，而客户端把实体延迟约 3 tick 渲染，
+     * 打横向移动的目标时准星对的是"看到的位置"，会差出近一个身位（MC-310857）。
+     * 这里把判定箱按目标最近 3 tick 的位移往回挪，等价于"打你看到的位置"。
+     * 只对玩家出手生效，怪物 AI 不受影响。</p>
+     */
+    public static AABB compensatedTargetBox(Entity attacker, Entity target, float hitboxMargin) {
+        AABB box = target.getBoundingBox();
+        if (SpearRules.compensatesMovingTargets() && attacker instanceof Player) {
+            box = box.move(getKnownMovement(target).scale(-MOVING_TARGET_COMPENSATION_TICKS));
+        }
+        return box.inflate(hitboxMargin);
+    }
+
+    /** 候选实体搜索框要多留的余量（补偿位移可能超出目标当前位置）。 */
+    public static double movingTargetCompensation(Entity attacker) {
+        return SpearRules.compensatesMovingTargets() && attacker instanceof Player
+                ? MOVING_TARGET_COMPENSATION_TICKS : 0.0;
     }
 
     private static Vec3 getHeadLookAngle(Entity entity) {
@@ -595,7 +689,8 @@ public abstract class SpearItem extends Item {
         if (lungeLevel <= 0) {
             return;
         }
-        if (user instanceof Player player && player.getFoodData().getFoodLevel() <= 7.0f) {
+        // 饥饿门槛：JAVA（原版）<6 就禁用；MODDED 饥饿值 ≤7 禁用。
+        if (user instanceof Player player && SpearRules.lungeBlockedByHunger(player.getFoodData().getFoodLevel())) {
             return;
         }
         if (user.isPassenger() || user.isFallFlying() || user.isInWater()) {
@@ -609,7 +704,7 @@ public abstract class SpearItem extends Item {
             player.causeFoodExhaustion(4.0f * lungeLevel);
         }
 
-        rushAttack(user, 0.65f * lungeLevel);
+        rushAttack(user, SpearRules.lungeStrength() * lungeLevel);
 
         SoundEvent sound = SpearSounds.ITEM_SPEAR_LUNGE_1.get();
         if (lungeLevel > 1) {

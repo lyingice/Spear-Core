@@ -17,10 +17,6 @@ minecraft {
 
     runs {
         client {
-            def mcreatorJvmOptions = System.getenv('MCREATOR_JVM_OPTIONS')
-            if (mcreatorJvmOptions) {
-                jvmArgs += mcreatorJvmOptions.split("\\s+").findAll { it.trim() }.toList()
-            }
         }
 
         server {
@@ -71,33 +67,19 @@ repositories {
     }
 }
 
-configurations {
-    // 只用于"打进发布 jar"的依赖（不参与编译传递）
-    embed
-}
-
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.3.0'
 
     // Mixin 注解处理器：生成 refmap（1.20.1 的 Mixin 靠它把注入目标映射到混淆名）
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    // ===== MixinExtras =====
-    // @WrapOperation / @ModifyExpressionValue 等"可叠加"注入，避免和别的模组抢同一个注入点。
-    // 1.21.1 由 NeoForge 自带；1.20.1 的 Forge 不带，所以这里内嵌进 jar（jarJar）。
-    // 注解处理器：为 MixinExtras 的注入器（@WrapOperation 等）生成 refmap 映射，
-    // 少了这一步，生产环境里 @At 的目标字段名不会被重映射，注入会静默失效。
-    annotationProcessor 'io.github.llamalad7:mixinextras-common:0.4.1'
-    compileOnly 'io.github.llamalad7:mixinextras-common:0.4.1'
-    // 运行时：Forge 1.20.1 不自带 MixinExtras。
-    // 开发期（runClient / GameTestServer）需要它在 classpath 上，发布包里靠下面的 shading 内嵌。
-    implementation 'io.github.llamalad7:mixinextras-forge:[0.4.1,)'
-    // 只用于"打进发布 jar"：
-    // mixinextras-forge 只是 Forge 适配层（含 MixinExtrasConfigPlugin + 初始化 mixin 配置），
-    // 真正的库在它的 META-INF/jars/MixinExtras-*.jar 里（嵌套 jar，shading 不会展开），
-    // 所以这里直接把 mixinextras-common 也并进来。
-    embed 'io.github.llamalad7:mixinextras-forge:[0.4.1,)'
-    embed 'io.github.llamalad7:mixinextras-common:0.5.5'
+    // 注意：这里不再内嵌 MixinExtras。
+    // shading 会把 com/llamalad7/mixinextras/** 摊进本模组的 jar 根目录，
+    // 于是本模组变成一个导出这些包的模块；一旦有别的模组（如 justenoughbreeding）
+    // 也通过 jar-in-jar 带了 MixinExtras，ModLauncher 就会报
+    // "Modules spearcore and MixinExtras export package ... to module ..."，直接启动失败。
+    // 上游在 3.2.0hotfix 里也把内嵌去掉了（同类问题），这里跟随该选择：
+    // 需求只用 @Redirect / @Inject 这类原版 Mixin 注入器就能实现，不需要 MixinExtras。
 
     // ===== KubeJS 联动（mods.toml 里声明为 optional）=====
     // compileOnly：只有 compat.kubejs 包编译它，绝不进发布 jar；
@@ -125,9 +107,6 @@ mixin {
     // 目标类缺失也不会崩。1.20.1 靠这些 config 写进 MANIFEST 的 MixinConfigs
     //（NeoForge 那边是 mods.toml 里的第二个 [[mixins]]）。
     config 'spearcore.punchy.mixins.json'
-    // MixinExtras 内嵌后需要它自己的初始化 mixin（由 shading 带进 jar）。
-    // 不注册这个 config，@WrapOperation 的注入器不会被注册，运行期会报 unknown injector。
-    config 'mixinextras.init.mixins.json'
     quiet
 }
 
@@ -163,16 +142,4 @@ tasks.withType(JavaCompile).configureEach {
 // 用 finalizedBy 锁死顺序：每次 jar 跑完都必定重混淆一遍。
 tasks.named('jar') {
     finalizedBy 'reobfJar'
-}
-
-
-// 把 embed 里的库（MixinExtras）直接并进发布 jar。
-// 用 shading 而不是 FG6 的 jarJar：那个任务在这个工程里跑完不产出合并 jar。
-// 多个模组各带一份 MixinExtras 是它本身支持的做法（0.2+ 都支持字段级注入）。
-jar {
-    from { configurations.embed.collect { zipTree(it) } }
-    // 排除适配层里那个嵌套 jar（类已经由 mixinextras-common 直接并进来了，留着只是白占 600KB）
-    exclude 'META-INF/jars/MixinExtras-*.jar'
-    // 两个 jar 都有 LICENSE_MixinExtras，取第一份即可
-    duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.EXCLUDE
 }

@@ -13,6 +13,7 @@
 
 # 中文版
 
+
 ## 这个 mod 加了什么
 
 - **七把矛**：木、石、铜、铁、金、钻石、下界合金，数值各不相同。
@@ -129,7 +130,7 @@
 
 - **戳刺时把自己向前推一段**，级别越高推得越远。
 - 代价：每戳一次扣 **1 点耐久**，并按级别**消耗饱食度**（3 级很费）。
-- 饥饿值低于 8（半格饥饿条以下）时**不会触发**。
+- 饥饿值低于 6 时**不会触发**（默认 Java 版规则；`behavior.lunge = MODDED` 时饥饿值 ≤7 就不触发）。
 - 骑乘时、鞘翅飞行时、在水里时**不会触发**。
 
 配合"移动越快伤害越高"的机制，突进能让你自己把速度加上去，是矛的核心附魔。
@@ -138,7 +139,16 @@
 
 ## 怪物也会用矛
 
-部分敌对生物生成时有概率直接拿着矛，并且会用矛的 AI（靠近、蓄力、冲锋、拉开距离）：
+怪物携带长矛的名单、概率与掉落率都由配置项控制，**默认 `JAVA`**，也就是和原版一致：
+
+| 生物 | 携带 | 概率 |
+|---|---|---|
+| 僵尸 / 尸壳 / 僵尸村民 | 铁矛 | 约 5% |
+| 猪灵 / 僵尸猪灵 | 金矛 | 约 5% |
+
+原版没公布精确概率，这里取社区常用的 5% 近似值；僵尸马与骆驼尸壳的骑手本身就是僵尸，所以骑手也一并覆盖。
+
+切到 `behavior.mobSpearEquipTable = MODDED` 则恢复本模组原本的概率表：
 
 | 生物 | 概率 |
 |---|---|
@@ -148,15 +158,19 @@
 | 僵尸 / 僵尸村民 / 掠夺者 | 8% |
 | 溺尸 | 6% |
 | 骷髅 / 流浪者 | 5% |
-| 猪灵蛮兵 | 固定拿金矛 |
+| 猪灵 / 猪灵蛮兵 / 僵尸猪灵 | 固定拿金矛 |
 
-所以别以为只有你会冲锋——**卫道士拿着矛冲过来是真的疼**。
+手里那根矛的掉落率由 `behavior.mobSpearDropChance` 决定：`JAVA`（默认）= **8.5%**，抢夺每级 +1%（抢夺 III 时 11.5%）；`MODDED` = 固定 15%。
+
+所以别以为只有你会冲锋——**卫道士拿着矛冲过来是真的疼**（MODDED 模式下）。
 
 ---
 
 ## 配置
 
-配置文件在 `config/spearcore-common.toml`：
+配置文件在 `config/spearcore-common.toml`。
+
+### 总开关
 
 ```toml
 # 是否启用原版材质长矛（木、石、铁、金、钻石、下界合金）
@@ -165,9 +179,8 @@ enableVanillaSpears = true
 # 是否启用铜矛
 enableCopperSpear = true
 
-# 命中目标时给攻击者自己减速（水平速度 ×0.6）并取消奔跑
-# 默认关闭：撞完保持速度和奔跑状态，接着冲
-slowDownAttackerOnHit = false
+# 安装 Punchy 时，让其矛蓄力动画按本模组各材质的阶段切换
+punchyStageBridge = true
 ```
 
 前两个开关控制的是（**默认都开着**）：
@@ -177,12 +190,69 @@ slowDownAttackerOnHit = false
 
 **关掉也不影响**合成、`/give` 和其他正常获取途径——物品一直在，只是不在创造栏里、怪物也不带。
 
-第三个开关 `slowDownAttackerOnHit` 管的是**撞完之后你自己**：
+### 行为开关（`[behavior]`）
 
-- `false`（默认）：命中后保持水平速度与奔跑状态，可以接着冲、连续撞；
-- `true`：命中瞬间把自己水平速度削到 60% 并取消奔跑，也就是原版那股"撞完得重新起跑"的手感。
+每个细节一个独立配置项，**默认一律是 `JAVA`**（= 原版 Java 版行为）。可选值只列出"行为确实不同"的版本，与 Java 一致的版本不会重复出现。
 
-它**只影响攻击者自己的动量**，不影响被打飞那些目标的击退力度。
+```toml
+[behavior]
+jabDamage = "JAVA"
+jabSpeedBonus = "JAVA"
+jabCooldown = "JAVA"
+chargeHitboxMargin = "JAVA"
+chargeRepeatHit = "JAVA"
+jabRepeatHit = "JAVA"
+durability = "JAVA"
+creativeMaxRange = "JAVA"
+offhandCharging = "JAVA"
+lunge = "JAVA"
+hitSlowDown = "JAVA"
+mobSpearEquipTable = "JAVA"
+mobSpearDropChance = "JAVA"
+minAttackRange = "JAVA"
+chargeStrength = "JAVA"
+jabToChargeDelay = "JAVA"
+movingTargetAssist = "JAVA"
+```
+
+| 配置项 | 可选值（第一个是默认） | 说明 |
+|---|---|---|
+| `jabDamage` | `JAVA` / `BEDROCK` | 戳刺伤害。JAVA：木/金 1、石/铜 2、铁 3、钻 4、下界合金 5；BEDROCK：每级 +1 点。 |
+| `jabSpeedBonus` | `JAVA` / `MODDED` | 戳刺是否额外加 `floor(攻速 × 倍率)`。JAVA/基岩版没有；MODDED 才有（疾跑冲锋更能打）。 |
+| `jabCooldown` | `JAVA` / `BEDROCK` | JAVA：等原版攻击蓄力条回满；BEDROCK：改用物的使用冷却，且**背包里所有长矛共享**。 |
+| `chargeHitboxMargin` | `JAVA` / `MODDED` | 蓄力判定箱额外膨胀：JAVA 0.125，MODDED 0.25。 |
+| `chargeRepeatHit` | `JAVA` / `BEDROCK` | 蓄力重复命中：JAVA 每个目标每次蓄力只结算一次；BEDROCK 同目标 10 tick（0.5s）一次。 |
+| `jabRepeatHit` | `JAVA` / `MODDED` | 戳刺重复命中：JAVA 没有额外冷却；MODDED 同目标 10 tick 内跳过。 |
+| `durability` | `JAVA` / `BEDROCK` / `MODDED` | 耐久。JAVA：59/131/190/250/32/1561/2031；BEDROCK：每级 +1；MODDED：本模组原表（铜 195、金 59）。 |
+| `creativeMaxRange` | `JAVA` / `BEDROCK` | 创造模式攻击距离上限：JAVA 6.5，BEDROCK 7.5。 |
+| `offhandCharging` | `JAVA` / `BEDROCK` | 能否用副手举矛蓄力。JAVA 可以；BEDROCK 不行。 |
+| `lunge` | `JAVA` / `MODDED` | 突进力度与饥饿门槛。JAVA：0.458 / 饥饿 <6 禁用；MODDED：0.65 / 饥饿 ≤7 禁用。 |
+| `hitSlowDown` | `JAVA` / `MODDED` | 命中后攻击者自己水平速度 ×0.6 并取消奔跑。JAVA 有（原版手感）；MODDED 没有。 |
+| `mobSpearEquipTable` | `JAVA` / `MODDED` | 怪物携带名单：JAVA 原版名单（铁/金矛），MODDED 本模组概率表 + 随机材质。 |
+| `mobSpearDropChance` | `JAVA` / `MODDED` | 怪物矛掉落率：JAVA 8.5%（抢夺每级 +1%），MODDED 固定 15%。 |
+| `minAttackRange` | `JAVA` / `MODDED` | 最小攻击距离：JAVA 2 格（怪物按 mobFactor 减半）；MODDED 归零，贴脸也能出手。 |
+| `chargeStrength` | `JAVA` / `BEDROCK` | 蓄力基线是否吃攻击力修饰符（力量/虚弱药水）。JAVA 不吃（原版 [MC-302778](https://bugs.mojang.com/browse/MC-302778)）；BEDROCK 吃。 |
+| `jabToChargeDelay` | `JAVA` / `BEDROCK` | 戳刺命中后重新举矛蓄力的间隔：JAVA 0 tick；BEDROCK 该矛的使用冷却（木 13、铁 19、下界合金 23 tick）。 |
+| `movingTargetAssist` | `JAVA` / `MODDED` | 移动靶补偿（[MC-310857](https://bugs.mojang.com/browse/MC-310857)）：JAVA 按服务器真实位置判定；MODDED 按客户端看到的位置回退 3 tick。 |
+
+另有两条**不提供配置项**的固定规则：
+
+- **击落骑手所需的速度阈值写死为 Java 版数据**（木 14 / 金 13 / 石 13 / 铜 12 / 铁 11 / 钻 10 / 下界合金 9 格每秒）——这是原版 Java 版唯一可信的一套数值，基岩版对齐后与此相同。
+- 判定层差异凡能复刻的都做成了开关（例如 `chargeRepeatHit` 对应基岩版的 0.5 秒重连间隔）；**引擎/渲染层**差异不在复刻范围（基岩版火焰附加点燃蜡烛/营火/TNT、蓄力暴击粒子）。
+
+`jabDamage = "BEDROCK"` 时，多出来的 1 点伤害加在攻击力属性上，因此**属性面板与戳刺会一起 +1**；蓄力是否也 +1 取决于 `chargeStrength`（`BEDROCK` 时蓄力基线也吃攻击力修饰符）。
+
+## 与原版的差异
+
+以下几处是本模组有意与 Java 原版不同（能做成开关的都已在上一节列出），其余行为默认按原版还原：
+
+- **蓄力伤害基线**：原版是固定 1 点（空手伤害）加相对速度倍数；本模组始终以武器攻击力为基线，`chargeStrength` 只决定力量/虚弱这类修饰符算不算。
+- **戳刺速度加成**：原版戳刺只看武器攻击力，不随移动速度增加；本模组默认不加（`jabSpeedBonus = "MODDED"` 才启用）。
+- **同目标接触冷却**：原版一次蓄力对同一目标只结算一次，戳刺也没有额外冷却；本模组默认就是原版行为，`chargeRepeatHit` / `jabRepeatHit` 的 `MODDED` 档才加 10 tick 冷却。
+- **最小攻击距离归零**：原版 2 格内打不到；`minAttackRange = "MODDED"` 时归零，可以贴脸捅。
+- **戳刺后摇**：原版 Java 版戳完能立刻再举矛；`jabToChargeDelay = "BEDROCK"` 时按该矛的使用冷却补上这段后摇。
+- **移动靶补偿**：原版按服务器位置判定（打移动靶要留提前量）；`movingTargetAssist = "MODDED"` 时按客户端看到的位置回退 3 tick。
+- **怪物携带长矛**：原版只有僵尸/尸壳/僵尸村民/僵尸马骑手带铁矛、猪灵/僵尸猪灵带金矛；本模组默认走原版名单，概率表与随机材质属于 `MODDED` 档（`mobSpearEquipTable`、`mobSpearDropChance`）。
 
 ---
 
@@ -226,6 +296,8 @@ MIT License
 | 六把原版材质矛 | `#spearcore:spears` |
 | 全部七把矛 | `#spearcore:spear` |
 | 原版矛标签 | `#minecraft:spears` |
+| 近战武器归类 | `#minecraft:swords`（自动连带进入 `#minecraft:tools` 与 `#forge:tools`） |
+| 猪灵喜爱 | `#minecraft:piglin_loved`（仅金矛） |
 | 伤害类型 | `spearcore:spear` |
 | 突进附魔 | `spearcore:lunge`（`supported_items` 即 `#spearcore:spear`，最高 3 级） |
 | 玩家属性 | `spearcore:spear_stab_multiplier`（戳刺伤害倍率，默认 1.0）、`spearcore:spear_charge_multiplier`（冲锋伤害倍率，默认 1.0） |
@@ -261,8 +333,8 @@ public class MySpearItem extends ConfiguredSpearItem {
                                   SpearCondition.ofRelativeSpeed(225, 4.6F),
             /* forwardMovement */ 0.38f, /* minRange */ 2.0f, /* maxRange */ 4.5f,
             /* 创造模式距离 */ 2.0f, 6.5f,
-            /* hitboxMargin2 */ 0.125f, /* mobFactor */ 0.5f,
-            /* dealsKnockback */ true, /* dismounts */ false));
+            /* hitboxMargin2 */ 0.25f, /* mobFactor */ 0.5f,
+            /* dealsKnockback */ true, /* dismounts */ true));
     }
 }
 ```
@@ -338,7 +410,7 @@ StartupEvents.registry('item', event => {
 ### 自己构建与验证
 
 ```bash
-./gradlew build              # 产物：build/libs/spearcore-1.20.1-forge-3.0.0.jar
+./gradlew build              # 产物：build/libs/spearcore-1.20.1-forge-3.2.0.jar
 ./gradlew runServer          # 无头启动；启动自检会打印"已注册 7 把长矛"
 ./gradlew runGameTestServer  # 由游戏本体判定的自动化测试
 ```
@@ -467,7 +539,7 @@ A new **Lunge** enchantment, up to level 3, applicable only to spears:
 
 - **A stab pushes you forward**, further at higher levels.
 - Cost: **1 durability** per stab, plus **hunger** that scales with the level (level 3 is expensive).
-- It does **not** trigger when your hunger is below 8 (under half a drumstick).
+- It does **not** trigger when your hunger is below 6 (the JAVA rule; with `behavior.lunge = MODDED` it is blocked at hunger ≤7).
 - It does **not** trigger while riding, elytra flying, or in water.
 
 Combined with the "faster means more damage" rule, Lunge lets you build up your own speed — it is the spear's signature enchantment.
@@ -476,7 +548,16 @@ Combined with the "faster means more damage" rule, Lunge lets you build up your 
 
 ## Mobs use spears too
 
-Some hostile mobs spawn already holding a spear, and they use spear AI (approach, charge, retreat):
+Who carries a spear, how often, and how often it drops are all controlled by config options. The default is `JAVA`, i.e. vanilla behaviour:
+
+| Mob | Carries | Chance |
+|---|---|---|
+| Zombie / husk / zombie villager | iron spear | ~5% |
+| Piglin / zombified piglin | golden spear | ~5% |
+
+Vanilla never published the exact chance, so 5% is the commonly cited approximation. Zombie horsemen and camel husk jockeys are ordinary zombies riding a mount, so their riders are covered too.
+
+With `behavior.mobSpearEquipTable = MODDED` you get this mod's original table instead:
 
 | Mob | Chance |
 |---|---|
@@ -486,15 +567,19 @@ Some hostile mobs spawn already holding a spear, and they use spear AI (approach
 | Zombie / zombie villager / pillager | 8% |
 | Drowned | 6% |
 | Skeleton / stray | 5% |
-| Piglin brute | always, with a golden spear |
+| Piglin / piglin brute / zombified piglin | always, with a golden spear |
 
-So do not assume you are the only one who can charge — **a vindicator charging with a spear genuinely hurts**.
+The drop chance of that spear is controlled by `behavior.mobSpearDropChance`: `JAVA` (default) = **8.5%**, plus 1% per Looting level (11.5% at Looting III); `MODDED` = fixed 15%.
+
+So do not assume you are the only one who can charge — **in MODDED mode, a vindicator charging with a spear genuinely hurts**.
 
 ---
 
 ## Configuration
 
-The config file is `config/spearcore-common.toml`:
+The config file is `config/spearcore-common.toml`.
+
+### Master switches
 
 ```toml
 # Whether the vanilla-material spears are enabled (wood, stone, iron, gold, diamond, netherite)
@@ -503,9 +588,8 @@ enableVanillaSpears = true
 # Whether the copper spear is enabled
 enableCopperSpear = true
 
-# Slow the attacker down on hit (horizontal speed x0.6) and cancel sprinting
-# Default off: keep your speed and your sprint through the hit
-slowDownAttackerOnHit = false
+# When Punchy is installed, drive its spear charge animation from this mod's per-material stages
+punchyStageBridge = true
 ```
 
 The first two switches (both **on by default**) control:
@@ -515,12 +599,69 @@ The first two switches (both **on by default**) control:
 
 **Turning them off changes nothing else**: crafting, `/give` and every normal way of obtaining them still work. The items always exist — they are simply hidden from the creative tabs and never handed to mobs.
 
-The third switch, `slowDownAttackerOnHit`, is about **you, right after a hit**:
+### Behaviour switches (`[behavior]`)
 
-- `false` (default): you keep your horizontal speed and your sprint, so you can chain charges;
-- `true`: on impact your own horizontal speed is cut to 60% and sprinting is cancelled — the vanilla "you have to build up speed again" feel.
+One option per detail, **all defaulting to `JAVA`** (= vanilla Java Edition behaviour). Each option only lists the versions whose behaviour actually differs; a version that matches Java is never offered as a duplicate.
 
-It affects **only the attacker's own momentum**; the knockback dealt to the target is unchanged.
+```toml
+[behavior]
+jabDamage = "JAVA"
+jabSpeedBonus = "JAVA"
+jabCooldown = "JAVA"
+chargeHitboxMargin = "JAVA"
+chargeRepeatHit = "JAVA"
+jabRepeatHit = "JAVA"
+durability = "JAVA"
+creativeMaxRange = "JAVA"
+offhandCharging = "JAVA"
+lunge = "JAVA"
+hitSlowDown = "JAVA"
+mobSpearEquipTable = "JAVA"
+mobSpearDropChance = "JAVA"
+minAttackRange = "JAVA"
+chargeStrength = "JAVA"
+jabToChargeDelay = "JAVA"
+movingTargetAssist = "JAVA"
+```
+
+| Option | Values (first is default) | Meaning |
+|---|---|---|
+| `jabDamage` | `JAVA` / `BEDROCK` | Stab damage. JAVA: wood/gold 1, stone/copper 2, iron 3, diamond 4, netherite 5; BEDROCK: +1 per tier. |
+| `jabSpeedBonus` | `JAVA` / `MODDED` | Whether a stab adds `floor(speed × multiplier)`. Vanilla (both editions) does not; MODDED does. |
+| `jabCooldown` | `JAVA` / `BEDROCK` | JAVA: wait for the vanilla attack cooldown bar; BEDROCK: use the item's use-cooldown, **shared by every spear in the inventory**. |
+| `chargeHitboxMargin` | `JAVA` / `MODDED` | Extra hitbox inflation while charging: JAVA 0.125, MODDED 0.25. |
+| `chargeRepeatHit` | `JAVA` / `BEDROCK` | Re-hitting during a charge: JAVA once per target per charge; BEDROCK once per 10 ticks (0.5s) per target. |
+| `jabRepeatHit` | `JAVA` / `MODDED` | Re-stabbing: JAVA no extra cooldown; MODDED skips a target for 10 ticks. |
+| `durability` | `JAVA` / `BEDROCK` / `MODDED` | Durability. JAVA: 59/131/190/250/32/1561/2031; BEDROCK: +1 per tier; MODDED: this mod's old table (copper 195, gold 59). |
+| `creativeMaxRange` | `JAVA` / `BEDROCK` | Creative attack range cap: JAVA 6.5, BEDROCK 7.5. |
+| `offhandCharging` | `JAVA` / `BEDROCK` | Charging from the off hand. JAVA allows it; BEDROCK does not. |
+| `lunge` | `JAVA` / `MODDED` | Lunge strength and hunger gate. JAVA: 0.458 / blocked below hunger 6; MODDED: 0.65 / blocked at hunger ≤7. |
+| `hitSlowDown` | `JAVA` / `MODDED` | On hit, cut the attacker's own horizontal speed to 60% and cancel sprinting. JAVA has it; MODDED does not. |
+| `mobSpearEquipTable` | `JAVA` / `MODDED` | Mob loadout: JAVA vanilla list (iron/golden spears), MODDED this mod's chances + random materials. |
+| `mobSpearDropChance` | `JAVA` / `MODDED` | Mob spear drop chance: JAVA 8.5% (+1% per Looting level), MODDED fixed 15%. |
+| `minAttackRange` | `JAVA` / `MODDED` | Minimum attack range: JAVA 2 blocks (halved for mobs); MODDED 0 — you can poke at point-blank range. |
+| `chargeStrength` | `JAVA` / `BEDROCK` | Whether the charge baseline takes attack-damage modifiers (Strength/Weakness). JAVA does not ([MC-302778](https://bugs.mojang.com/browse/MC-302778)); BEDROCK does. |
+| `jabToChargeDelay` | `JAVA` / `BEDROCK` | Delay before you can start another charge after a jab: JAVA 0 ticks; BEDROCK the spear's use-cooldown (wood 13, iron 19, netherite 23 ticks). |
+| `movingTargetAssist` | `JAVA` / `MODDED` | Moving-target compensation ([MC-310857](https://bugs.mojang.com/browse/MC-310857)): JAVA judges at the server-side position; MODDED rewinds the hitbox 3 ticks to what the client sees. |
+
+Two rules are **deliberately not configurable**:
+
+- **The rider-dismount speed thresholds are hard-wired to the Java Edition data** (wood 14 / gold 13 / stone 13 / copper 12 / iron 11 / diamond 10 / netherite 9 blocks per second) — that is the only trustworthy vanilla set, and Bedrock was aligned to it.
+- Every judgable version difference was turned into a switch where possible (e.g. `chargeRepeatHit` mirrors Bedrock's 0.5 s re-hit interval); **engine / rendering** differences are out of scope (Bedrock's Fire Aspect igniting candles/campfires/TNT, charge crit particles).
+
+With `jabDamage = "BEDROCK"` the extra point goes onto the attack-damage attribute, so the **tooltip and the stab gain +1 together**; whether the charge gains it too depends on `chargeStrength` (with `BEDROCK` the charge baseline also takes modifiers).
+
+## Deviations from vanilla
+
+These are the places where this mod intentionally differs from Java Edition vanilla (each has a switch in the previous section); everything else defaults to vanilla behaviour:
+
+- **Charge damage baseline**: vanilla uses a fixed baseline of 1 (bare-hand damage) plus the relative-speed multiplier; this mod always uses the weapon's attack damage as the baseline, and `chargeStrength` only decides whether modifiers such as Strength/Weakness count.
+- **Stab speed bonus**: vanilla stab damage only uses the weapon's attack damage and never scales with movement speed; this mod does not add it by default (`jabSpeedBonus = "MODDED"` enables it).
+- **Per-target contact cooldown**: vanilla resolves a charge against each target once and has no extra stab cooldown; this mod defaults to that, and the `MODDED` settings of `chargeRepeatHit` / `jabRepeatHit` add a 10-tick cooldown.
+- **Zero minimum range**: vanilla cannot hit anything closer than 2 blocks; `minAttackRange = "MODDED"` removes that limit.
+- **Jab recovery**: vanilla Java lets you charge again immediately after a jab; `jabToChargeDelay = "BEDROCK"` adds the spear's use-cooldown as recovery.
+- **Moving-target assist**: vanilla judges at the server-side position (you must lead moving targets); `movingTargetAssist = "MODDED"` rewinds 3 ticks to the position the client sees.
+- **Mob spears**: vanilla only has zombies/husks/zombie villagers/zombie horsemen with iron spears and piglins/zombified piglins with golden spears; this mod defaults to that list, and the chance table + random materials are the `MODDED` setting (`mobSpearEquipTable`, `mobSpearDropChance`).
 
 ---
 
@@ -564,6 +705,8 @@ Everything public you can hook into from another mod, a datapack, or a KubeJS sc
 | The six vanilla-material spears | `#spearcore:spears` |
 | All seven spears | `#spearcore:spear` |
 | Vanilla spear tag | `#minecraft:spears` |
+| Melee weapon tag | `#minecraft:swords` (which also pulls them into `#minecraft:tools` and `#forge:tools`) |
+| Piglin loved | `#minecraft:piglin_loved` (golden spear only) |
 | Damage type | `spearcore:spear` |
 | Lunge enchantment | `spearcore:lunge` (`supported_items` is `#spearcore:spear`, max level 3) |
 | Player attributes | `spearcore:spear_stab_multiplier` (stab damage multiplier, default 1.0), `spearcore:spear_charge_multiplier` (charge damage multiplier, default 1.0) |
@@ -600,8 +743,8 @@ public class MySpearItem extends ConfiguredSpearItem {
                                          SpearCondition.ofRelativeSpeed(225, 4.6F),
             /* forwardMovement */ 0.38f, /* minRange */ 2.0f, /* maxRange */ 4.5f,
             /* creative ranges */ 2.0f, 6.5f,
-            /* hitboxMargin2 */ 0.125f, /* mobFactor */ 0.5f,
-            /* dealsKnockback */ true, /* dismounts */ false));
+            /* hitboxMargin2 */ 0.25f, /* mobFactor */ 0.5f,
+            /* dealsKnockback */ true, /* dismounts */ true));
     }
 }
 ```
@@ -676,7 +819,7 @@ These APIs do not line up between 1.21.1/NeoForge and 1.20.1/Forge (all already 
 ### Building and verifying
 
 ```bash
-./gradlew build              # output: build/libs/spearcore-1.20.1-forge-3.0.0.jar
+./gradlew build              # output: build/libs/spearcore-1.20.1-forge-3.2.0.jar
 ./gradlew runServer          # headless boot; the startup check prints "已注册 7 把长矛"
 ./gradlew runGameTestServer  # automated tests judged by the game itself
 ```

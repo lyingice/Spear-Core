@@ -6,6 +6,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.spearcore.SpearcoreMod;
 import net.minecraft.spearcore.init.SpearStats;
 import net.minecraft.spearcore.util.SpearCondition;
+import net.minecraft.spearcore.util.SpearRules;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -21,7 +22,6 @@ import com.google.common.collect.Multimap;
 import java.util.UUID;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraftforge.common.ForgeMod;
 
 public abstract class BaseSpearItem extends SpearItem {
 
@@ -114,23 +114,23 @@ public abstract class BaseSpearItem extends SpearItem {
 
     // ========== 属性修饰符 ==========
 
-    private static final java.util.UUID SPEAR_RANGE_UUID =
-            java.util.UUID.fromString("7c9a1e2b-6f43-4d18-9a05-2b8f1c3d4e56");
-
     private static Multimap<Attribute, AttributeModifier> buildAttributeModifiers(SpearStats.Stats stats) {
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 
+        // 基岩版戳刺伤害每级 +1：加在属性上，属性面板与实际伤害保持一致。
         builder.put(Attributes.ATTACK_DAMAGE,
                 new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier",
-                        stats.attackDamageBonus(), AttributeModifier.Operation.ADDITION));
+                        stats.attackDamageBonus() + SpearRules.jabDamageBonus(),
+                        AttributeModifier.Operation.ADDITION));
 
         builder.put(Attributes.ATTACK_SPEED,
                 new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier",
                         stats.getAttackSpeedModifier(), AttributeModifier.Operation.ADDITION));
 
-        builder.put(ForgeMod.ENTITY_REACH.get(),
-                new AttributeModifier(SPEAR_RANGE_UUID, "Spear reach",
-                        1.5, AttributeModifier.Operation.ADDITION));
+        // 这里故意不再挂 ENTITY_REACH（历史上挂过 +1.5）。
+        // 原版长矛的射程来自攻击范围数据（2~4.5），玩家交互距离仍是 3.0；
+        // SpearItem#effectiveMaxRange 会把「持有者 reach 超出 3.0 的部分」加到射程上，
+        // 所以整合包的攻击距离加成照样生效；这在物品上再挂一份就会算两遍（曾经变成 6.0 格）。
 
         return builder.build();
     }
@@ -141,6 +141,16 @@ public abstract class BaseSpearItem extends SpearItem {
             return super.getDefaultAttributeModifiers(slot);
         }
         return buildAttributeModifiers(SpearStats.get(getSelfItem()));
+    }
+
+    /**
+     * 耐久按配置在运行时解析：物品构造期配置接口可能还没加载，所以只能在这里算。
+     * 物品栏耐久条与工具提示都会经过 ItemStack#getMaxDamage()，因此会同步变化。
+     */
+    @Override
+    public int getMaxDamage(ItemStack stack) {
+        SpearStats.Stats stats = SpearStats.get(getSelfItem());
+        return SpearRules.durability(stats.materialName(), stats.durability());
     }
 
     // ========== SpearItem 抽象方法实现 ==========
@@ -228,7 +238,7 @@ public abstract class BaseSpearItem extends SpearItem {
     public float getMaxRange() { return maxRange; }
 
     @Override
-    public float getHitboxMargin() { return hitboxMargin; }
+    public float getHitboxMargin() { return SpearRules.hitboxMargin(hitboxMargin); }
 
     @Override
     public float getHitboxMargin2() { return hitboxMargin2; }
@@ -243,7 +253,7 @@ public abstract class BaseSpearItem extends SpearItem {
     public float getMinCreativeRange() { return minCreativeRange; }
 
     @Override
-    public float getMaxCreativeRange() { return maxCreativeRange; }
+    public float getMaxCreativeRange() { return SpearRules.creativeMaxRange(maxCreativeRange); }
 
     @Override
     public float getMobFactor() { return mobFactor; }

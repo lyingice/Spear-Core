@@ -35,6 +35,7 @@ public class SpearSprintHandler {
     public static void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
 
+        // 原版蓄力（举矛）本来就能疾跑，这里只负责按疾跑键 / 双击 W 放行。
         Minecraft mc = Minecraft.getInstance();
         LocalPlayer player = mc.player;
         if (player == null) {
